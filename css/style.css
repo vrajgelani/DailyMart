@@ -1850,3 +1850,72 @@ input {
         gap: 5px;
     }
 }
+
+/* =========================================================
+   DAY 2 - PART 17
+   SEARCH PAGE
+========================================================= */
+
+.search-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.search-page-header {
+    margin-bottom: 30px;
+}
+
+.search-page-header h1 {
+    margin-bottom: 8px;
+}
+
+.search-query-text {
+    color: #64748b;
+    margin: 0;
+}
+
+.search-results-section {
+    width: 100%;
+}
+
+.search-empty-state {
+    text-align: center;
+    padding: 60px 25px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+    background: #f8fafc;
+}
+
+.search-empty-state h2 {
+    margin-bottom: 10px;
+}
+
+.search-empty-state p {
+    margin-bottom: 22px;
+    color: #64748b;
+}
+
+.search-empty-state.hidden {
+    display: none;
+}
+
+.search-results {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(220px, 1fr)
+    );
+    gap: 20px;
+}
+
+@media (max-width: 700px) {
+
+    .search-page {
+        padding: 35px 15px;
+    }
+
+    .search-empty-state {
+        padding: 45px 20px;
+    }
+}

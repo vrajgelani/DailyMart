@@ -70,10 +70,14 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     const searchForm =
-        document.getElementById("searchForm");
+        document.getElementById(
+            "searchForm"
+        );
 
     const searchInput =
-        document.getElementById("searchInput");
+        document.getElementById(
+            "searchInput"
+        );
 
 
     if (
@@ -93,20 +97,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 if (query === "") {
+
                     return;
                 }
 
 
                 window.location.href =
                     "search.html?q=" +
-                    encodeURIComponent(query);
+                    encodeURIComponent(
+                        query
+                    );
             }
         );
     }
 
 
     /* =========================================================
-       SEARCH PAGE
+       SEARCH RESULTS PAGE
     ========================================================= */
 
     const searchQueryText =
@@ -114,8 +121,22 @@ document.addEventListener("DOMContentLoaded", function () {
             "searchQueryText"
         );
 
+    const searchEmptyState =
+        document.getElementById(
+            "searchEmptyState"
+        );
 
-    if (searchQueryText) {
+    const searchResults =
+        document.getElementById(
+            "searchResults"
+        );
+
+
+    if (
+        searchQueryText ||
+        searchEmptyState ||
+        searchResults
+    ) {
 
         const urlParams =
             new URLSearchParams(
@@ -127,17 +148,47 @@ document.addEventListener("DOMContentLoaded", function () {
             urlParams.get("q");
 
 
-        if (query) {
+        if (
+            searchQueryText
+        ) {
 
-            searchQueryText.textContent =
-                'Showing results for "' +
-                query +
-                '".';
+            if (query) {
 
-        } else {
+                searchQueryText.textContent =
+                    'Showing results for "' +
+                    query +
+                    '".';
 
-            searchQueryText.textContent =
-                "Search for grocery items.";
+            } else {
+
+                searchQueryText.textContent =
+                    "Search for grocery items.";
+            }
+        }
+
+
+        /*
+            Product data will come from Admin/Backend later.
+
+            No fake products are created here.
+        */
+
+        if (
+            searchEmptyState
+        ) {
+
+            searchEmptyState.classList.remove(
+                "hidden"
+            );
+        }
+
+
+        if (
+            searchResults
+        ) {
+
+            searchResults.innerHTML =
+                "";
         }
     }
 
@@ -169,18 +220,23 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentUser) {
 
         if (loginLink) {
+
             loginLink.classList.add(
                 "hidden"
             );
         }
 
+
         if (registerLink) {
+
             registerLink.classList.add(
                 "hidden"
             );
         }
 
+
         if (profileLink) {
+
             profileLink.classList.remove(
                 "hidden"
             );
@@ -189,18 +245,23 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
 
         if (loginLink) {
+
             loginLink.classList.remove(
                 "hidden"
             );
         }
 
+
         if (registerLink) {
+
             registerLink.classList.remove(
                 "hidden"
             );
         }
 
+
         if (profileLink) {
+
             profileLink.classList.add(
                 "hidden"
             );
@@ -285,6 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     !emailInput ||
                     !passwordInput
                 ) {
+
                     return;
                 }
 
@@ -377,6 +439,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     !emailInput ||
                     !passwordInput
                 ) {
+
                     return;
                 }
 
@@ -535,6 +598,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (!addressList) {
+
             return;
         }
 
@@ -741,6 +805,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     !cityInput ||
                     !pincodeInput
                 ) {
+
                     return;
                 }
 
@@ -794,13 +859,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     id: Date.now(),
 
-                    name: name,
+                    name:
+                        name,
 
-                    address: address,
+                    address:
+                        address,
 
-                    city: city,
+                    city:
+                        city,
 
-                    pincode: pincode
+                    pincode:
+                        pincode
                 };
 
 
@@ -861,6 +930,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (!paymentList) {
+
             return;
         }
 
@@ -1109,6 +1179,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ) {
 
                     if (!upiInput) {
+
                         return;
                     }
 
@@ -1136,7 +1207,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const newMethod = {
 
-                    id: Date.now(),
+                    id:
+                        Date.now(),
 
                     type:
                         selectedType,
@@ -1510,6 +1582,7 @@ document.addEventListener("DOMContentLoaded", function () {
             !cartItemsContainer &&
             !cartEmptyState
         ) {
+
             return;
         }
 
@@ -1578,6 +1651,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (!cartItemsContainer) {
+
             return;
         }
 
@@ -1864,6 +1938,7 @@ document.addEventListener("DOMContentLoaded", function () {
             index < 0 ||
             index >= cartItems.length
         ) {
+
             return;
         }
 
@@ -1907,6 +1982,7 @@ document.addEventListener("DOMContentLoaded", function () {
             index < 0 ||
             index >= cartItems.length
         ) {
+
             return;
         }
 
@@ -1950,6 +2026,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (
                     cartItems.length === 0
                 ) {
+
                     return;
                 }
 
@@ -2056,6 +2133,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function updatePlaceOrderButton() {
 
         if (!placeOrderButton) {
+
             return;
         }
 
@@ -2124,6 +2202,7 @@ document.addEventListener("DOMContentLoaded", function () {
             !checkoutAddressList &&
             !checkoutPaymentList
         ) {
+
             return;
         }
 
@@ -2260,7 +2339,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* -----------------------------------------------------
-           ADDRESS SELECTION
+           ADDRESS
         ----------------------------------------------------- */
 
         if (
@@ -2452,7 +2531,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* -----------------------------------------------------
-           PAYMENT SELECTION
+           PAYMENT
         ----------------------------------------------------- */
 
         if (
@@ -2800,7 +2879,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const newOrder = {
 
-                    id: orderId,
+                    id:
+                        orderId,
 
                     date:
                         new Date().toISOString(),
@@ -2819,6 +2899,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         ),
 
                     address: {
+
                         name:
                             selectedAddress.name,
 
@@ -2833,6 +2914,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     },
 
                     payment: {
+
                         type:
                             selectedPayment.type,
 
@@ -2863,14 +2945,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-                /* Empty cart */
-
                 saveCartItems(
                     []
                 );
 
-
-                /* Clear checkout selections */
 
                 localStorage.removeItem(
                     "dailymartSelectedAddress"
@@ -2916,6 +2994,7 @@ document.addEventListener("DOMContentLoaded", function () {
             !ordersEmptyState &&
             !ordersList
         ) {
+
             return;
         }
 
@@ -2958,6 +3037,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (!ordersList) {
+
             return;
         }
 
@@ -2978,8 +3058,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 card.className =
                     "order-card";
 
-
-                /* Header */
 
                 const header =
                     document.createElement(
@@ -3070,8 +3148,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     header
                 );
 
-
-                /* Items */
 
                 const itemsContainer =
                     document.createElement(
@@ -3184,8 +3260,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     itemsContainer
                 );
 
-
-                /* Details */
 
                 const details =
                     document.createElement(
