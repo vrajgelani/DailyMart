@@ -1,11 +1,13 @@
 /* =========================================
    DAILYMart
    CUSTOMER FRONTEND
-   DAY 1 - PART 1
+   DAY 1 - PART 2
 ========================================= */
 
 
-/* RESET */
+/* =========================================
+   RESET
+========================================= */
 
 * {
     margin: 0;
@@ -14,7 +16,9 @@
 }
 
 
-/* ROOT */
+/* =========================================
+   ROOT VARIABLES
+========================================= */
 
 :root {
 
@@ -34,10 +38,18 @@
 
     --white: #ffffff;
 
+    --footer-background: #111827;
+
+    --footer-text: #d1d5db;
+
+    --footer-border: #374151;
+
 }
 
 
-/* BODY */
+/* =========================================
+   BODY
+========================================= */
 
 body {
 
@@ -57,7 +69,9 @@ body {
 }
 
 
-/* CONTAINER */
+/* =========================================
+   CONTAINER
+========================================= */
 
 .container {
 
@@ -68,7 +82,9 @@ body {
 }
 
 
-/* HEADER */
+/* =========================================
+   HEADER
+========================================= */
 
 .site-header {
 
@@ -99,7 +115,9 @@ body {
 }
 
 
-/* LOGO */
+/* =========================================
+   HEADER LOGO
+========================================= */
 
 .logo-link {
 
@@ -127,7 +145,9 @@ body {
 }
 
 
-/* NAVIGATION */
+/* =========================================
+   NAVIGATION
+========================================= */
 
 .main-navigation {
 
@@ -165,7 +185,9 @@ body {
 }
 
 
-/* HEADER ACTIONS */
+/* =========================================
+   HEADER ACTIONS
+========================================= */
 
 .header-actions {
 
@@ -193,13 +215,20 @@ body {
     padding:
         9px 16px;
 
-    border-radius: 8px;
+    border-radius:
+        8px;
 
-    font-size: 14px;
+    font-size:
+        14px;
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    cursor: pointer;
+    cursor:
+        pointer;
+
+    transition:
+        0.2s ease;
 
 }
 
@@ -215,7 +244,9 @@ body {
 }
 
 
-/* WELCOME */
+/* =========================================
+   WELCOME SECTION
+========================================= */
 
 .welcome-section {
 
@@ -230,11 +261,14 @@ body {
 
 .welcome-content {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    align-items: flex-start;
+    align-items:
+        flex-start;
 
 }
 
@@ -244,27 +278,34 @@ body {
     color:
         var(--primary-color);
 
-    font-size: 15px;
+    font-size:
+        15px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    margin-bottom: 12px;
+    margin-bottom:
+        12px;
 
 }
 
 
 .welcome-section h1 {
 
-    max-width: 760px;
+    max-width:
+        760px;
 
     font-size:
         clamp(38px, 6vw, 68px);
 
-    line-height: 1.05;
+    line-height:
+        1.05;
 
-    letter-spacing: -2px;
+    letter-spacing:
+        -2px;
 
-    margin-bottom: 22px;
+    margin-bottom:
+        22px;
 
 }
 
@@ -279,17 +320,21 @@ body {
 
 .welcome-text {
 
-    max-width: 600px;
+    max-width:
+        600px;
 
     color:
         var(--secondary-text);
 
-    font-size: 18px;
+    font-size:
+        18px;
 
 }
 
 
-/* PRODUCTS */
+/* =========================================
+   PRODUCTS SECTION
+========================================= */
 
 .products-section {
 
@@ -301,16 +346,19 @@ body {
 
 .section-heading {
 
-    margin-bottom: 30px;
+    margin-bottom:
+        30px;
 
 }
 
 
 .section-heading h2 {
 
-    font-size: 32px;
+    font-size:
+        32px;
 
-    margin-bottom: 8px;
+    margin-bottom:
+        8px;
 
 }
 
@@ -323,41 +371,53 @@ body {
 }
 
 
-/* EMPTY PRODUCTS */
+/* =========================================
+   EMPTY PRODUCTS
+========================================= */
 
 .empty-products {
 
-    min-height: 260px;
+    min-height:
+        260px;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    text-align: center;
+    text-align:
+        center;
 
     border:
         1px dashed
         var(--border-color);
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
     background:
         var(--light-background);
 
-    padding: 40px;
+    padding:
+        40px;
 
 }
 
 
 .empty-products h3 {
 
-    font-size: 22px;
+    font-size:
+        22px;
 
-    margin-bottom: 8px;
+    margin-bottom:
+        8px;
 
 }
 
@@ -367,41 +427,244 @@ body {
     color:
         var(--secondary-text);
 
-    max-width: 500px;
+    max-width:
+        500px;
 
 }
 
 
-/* FOOTER */
+/* =========================================
+   FOOTER
+========================================= */
 
 .site-footer {
 
-    margin-top: 40px;
+    margin-top:
+        40px;
 
-    padding:
-        28px 0;
-
-    border-top:
-        1px solid
-        var(--border-color);
-
-    text-align: center;
+    background:
+        var(--footer-background);
 
     color:
-        var(--secondary-text);
-
-    font-size: 14px;
+        var(--white);
 
 }
 
 
-/* TABLET */
+/* =========================================
+   FOOTER MAIN
+========================================= */
+
+.footer-container {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1fr 1.3fr;
+
+    gap:
+        50px;
+
+    padding:
+        60px 0;
+
+}
+
+
+/* =========================================
+   FOOTER BRAND
+========================================= */
+
+.footer-brand {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+}
+
+
+.footer-logo-link {
+
+    display:
+        inline-flex;
+
+    margin-bottom:
+        18px;
+
+}
+
+
+.footer-logo-image {
+
+    width:
+        145px;
+
+    height:
+        auto;
+
+    max-height:
+        52px;
+
+    object-fit:
+        contain;
+
+}
+
+
+.footer-brand p {
+
+    max-width:
+        270px;
+
+    color:
+        var(--footer-text);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* =========================================
+   FOOTER COLUMNS
+========================================= */
+
+.footer-column {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    gap:
+        10px;
+
+}
+
+
+.footer-column h3 {
+
+    font-size:
+        17px;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.footer-column a {
+
+    color:
+        var(--footer-text);
+
+    text-decoration:
+        none;
+
+    font-size:
+        14px;
+
+    transition:
+        color 0.2s ease;
+
+}
+
+
+.footer-column a:hover {
+
+    color:
+        var(--white);
+
+}
+
+
+.footer-column p {
+
+    color:
+        var(--footer-text);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.6;
+
+}
+
+
+/* =========================================
+   FOOTER BOTTOM
+========================================= */
+
+.footer-bottom {
+
+    border-top:
+        1px solid
+        var(--footer-border);
+
+    padding:
+        20px 0;
+
+}
+
+
+.footer-bottom p {
+
+    color:
+        #9ca3af;
+
+    font-size:
+        13px;
+
+    text-align:
+        center;
+
+}
+
+
+/* =========================================
+   TABLET FOOTER
+========================================= */
+
+@media (max-width: 900px) {
+
+    .footer-container {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap:
+            40px;
+
+    }
+
+}
+
+
+/* =========================================
+   TABLET HEADER
+========================================= */
 
 @media (max-width: 800px) {
 
     .header-container {
 
-        flex-wrap: wrap;
+        flex-wrap:
+            wrap;
 
         padding:
             14px 0;
@@ -411,13 +674,17 @@ body {
 
     .main-navigation {
 
-        order: 3;
+        order:
+            3;
 
-        width: 100%;
+        width:
+            100%;
 
-        justify-content: center;
+        justify-content:
+            center;
 
-        gap: 20px;
+        gap:
+            20px;
 
     }
 
@@ -432,36 +699,43 @@ body {
 
     .welcome-section h1 {
 
-        letter-spacing: -1px;
+        letter-spacing:
+            -1px;
 
     }
 
 }
 
 
-/* MOBILE */
+/* =========================================
+   MOBILE
+========================================= */
 
 @media (max-width: 500px) {
 
     .header-container {
 
-        gap: 15px;
+        gap:
+            15px;
 
     }
 
 
     .logo-image {
 
-        width: 125px;
+        width:
+            125px;
 
-        max-height: 45px;
+        max-height:
+            45px;
 
     }
 
 
     .header-actions {
 
-        gap: 6px;
+        gap:
+            6px;
 
     }
 
@@ -476,21 +750,25 @@ body {
 
     .main-navigation {
 
-        gap: 14px;
+        gap:
+            14px;
 
         justify-content:
             flex-start;
 
-        overflow-x: auto;
+        overflow-x:
+            auto;
 
     }
 
 
     .main-navigation a {
 
-        font-size: 14px;
+        font-size:
+            14px;
 
-        white-space: nowrap;
+        white-space:
+            nowrap;
 
     }
 
@@ -505,14 +783,16 @@ body {
 
     .welcome-section h1 {
 
-        font-size: 40px;
+        font-size:
+            40px;
 
     }
 
 
     .welcome-text {
 
-        font-size: 16px;
+        font-size:
+            16px;
 
     }
 
@@ -521,6 +801,20 @@ body {
 
         padding:
             55px 0;
+
+    }
+
+
+    .footer-container {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            35px;
+
+        padding:
+            45px 0;
 
     }
 
