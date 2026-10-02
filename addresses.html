@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Search - DailyMart</title>
+    <title>Manage Addresses - DailyMart</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -88,48 +88,153 @@
     </header>
 
 
-    <!-- ================= SEARCH ================= -->
+    <!-- ================= ADDRESSES ================= -->
     <main>
 
-        <section class="search-results-section">
+        <section class="addresses-section">
 
             <div class="section-heading">
 
                 <p class="section-label">
-                    DailyMart Search
+                    My Account
                 </p>
 
                 <h1>
-                    Search Results
+                    Manage Addresses
                 </h1>
 
-                <p
-                    class="search-query-text"
-                    id="searchQueryText"
-                >
-                    Search for products and daily essentials.
+                <p class="page-description">
+                    Add and manage your delivery addresses.
                 </p>
 
             </div>
 
 
-            <div class="search-empty-state">
+            <!-- ADD ADDRESS FORM -->
+            <div class="address-form-card">
 
                 <h2>
-                    No Items Available
+                    Add New Address
                 </h2>
 
-                <p>
-                    No products are currently available for this search.
-                    Products will appear here when they are added.
-                </p>
+                <form id="addressForm" class="address-form">
 
-                <a
-                    href="categories.html"
-                    class="primary-button"
+                    <div class="form-group">
+
+                        <label for="addressName">
+                            Address Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="addressName"
+                            placeholder="Example: Home"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="addressLine">
+                            Address
+                        </label>
+
+                        <textarea
+                            id="addressLine"
+                            rows="3"
+                            placeholder="Enter your complete address"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="address-form-grid">
+
+                        <div class="form-group">
+
+                            <label for="addressCity">
+                                City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="addressCity"
+                                placeholder="Enter city"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="addressPincode">
+                                Pincode
+                            </label>
+
+                            <input
+                                type="text"
+                                id="addressPincode"
+                                placeholder="Enter pincode"
+                                inputmode="numeric"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Save Address
+                    </button>
+
+                    <p
+                        id="addressMessage"
+                        class="form-message"
+                    ></p>
+
+                </form>
+
+            </div>
+
+
+            <!-- SAVED ADDRESSES -->
+            <div class="saved-addresses-section">
+
+                <div class="saved-addresses-heading">
+
+                    <h2>
+                        Saved Addresses
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="savedAddresses"
+                    class="saved-addresses-list"
                 >
-                    Browse Categories
-                </a>
+
+                    <div class="saved-address-empty">
+
+                        <h3>
+                            No Addresses Saved
+                        </h3>
+
+                        <p>
+                            Add an address above for delivery.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
