@@ -1572,3 +1572,129 @@ input {
     }
 
 }
+
+/* =========================================================
+   DAY 2 - PART 15
+   CHECKOUT SELECTION
+========================================================= */
+
+.checkout-address-card,
+.checkout-payment-card {
+    position: relative;
+    border: 2px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 14px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                transform 0.2s ease;
+}
+
+.checkout-address-card:hover,
+.checkout-payment-card:hover {
+    border-color: #16a34a;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+    transform: translateY(-1px);
+}
+
+.checkout-address-card.selected,
+.checkout-payment-card.selected {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+    background: #f0fdf4;
+}
+
+.checkout-address-card h3,
+.checkout-payment-card h3 {
+    margin: 0 0 8px;
+    font-size: 17px;
+}
+
+.checkout-address-card p,
+.checkout-payment-card p {
+    margin: 5px 0;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.checkout-selection-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #16a34a;
+}
+
+.checkout-selected-badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #16a34a;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.checkout-section {
+    margin-bottom: 24px;
+}
+
+.checkout-section h2 {
+    margin-bottom: 14px;
+}
+
+.checkout-empty-state {
+    padding: 24px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.checkout-empty-state.hidden {
+    display: none;
+}
+
+.checkout-address-list,
+.checkout-payment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.checkout-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 16px;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.checkout-item span {
+    color: #475569;
+}
+
+.checkout-item strong {
+    color: #111827;
+}
+
+.checkout-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+
+    .checkout-item {
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+
+    .checkout-address-card,
+    .checkout-payment-card {
+        padding: 15px;
+    }
+}

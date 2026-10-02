@@ -139,19 +139,13 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     const loginLink =
-        document.getElementById(
-            "loginLink"
-        );
+        document.getElementById("loginLink");
 
     const registerLink =
-        document.getElementById(
-            "registerLink"
-        );
+        document.getElementById("registerLink");
 
     const profileLink =
-        document.getElementById(
-            "profileLink"
-        );
+        document.getElementById("profileLink");
 
 
     const currentUser =
@@ -161,41 +155,29 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentUser) {
 
         if (loginLink) {
-            loginLink.classList.add(
-                "hidden"
-            );
+            loginLink.classList.add("hidden");
         }
 
         if (registerLink) {
-            registerLink.classList.add(
-                "hidden"
-            );
+            registerLink.classList.add("hidden");
         }
 
         if (profileLink) {
-            profileLink.classList.remove(
-                "hidden"
-            );
+            profileLink.classList.remove("hidden");
         }
 
     } else {
 
         if (loginLink) {
-            loginLink.classList.remove(
-                "hidden"
-            );
+            loginLink.classList.remove("hidden");
         }
 
         if (registerLink) {
-            registerLink.classList.remove(
-                "hidden"
-            );
+            registerLink.classList.remove("hidden");
         }
 
         if (profileLink) {
-            profileLink.classList.add(
-                "hidden"
-            );
+            profileLink.classList.add("hidden");
         }
     }
 
@@ -222,9 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     if (
-        protectedPages.includes(
-            currentPage
-        ) &&
+        protectedPages.includes(currentPage) &&
         !currentUser
     ) {
 
@@ -378,8 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     passwordInput.value;
 
 
-                let registeredUser =
-                    null;
+                let registeredUser = null;
 
 
                 try {
@@ -409,10 +388,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 if (
-                    email !==
-                        registeredUser.email ||
-                    password !==
-                        registeredUser.password
+                    email !== registeredUser.email ||
+                    password !== registeredUser.password
                 ) {
 
                     alert(
@@ -435,9 +412,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 localStorage.setItem(
                     "dailymartUser",
-                    JSON.stringify(
-                        sessionUser
-                    )
+                    JSON.stringify(sessionUser)
                 );
 
 
@@ -478,24 +453,21 @@ document.addEventListener("DOMContentLoaded", function () {
         if (profileName) {
 
             profileName.textContent =
-                currentUser.name ||
-                "User";
+                currentUser.name || "User";
         }
 
 
         if (profileEmail) {
 
             profileEmail.textContent =
-                currentUser.email ||
-                "";
+                currentUser.email || "";
         }
 
 
         if (welcomeName) {
 
             welcomeName.textContent =
-                currentUser.name ||
-                "User";
+                currentUser.name || "User";
         }
     }
 
@@ -539,18 +511,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (addresses.length === 0) {
 
             const emptyMessage =
-                document.createElement(
-                    "p"
-                );
+                document.createElement("p");
 
             emptyMessage.textContent =
                 "No addresses saved yet.";
 
-
             addressList.appendChild(
                 emptyMessage
             );
-
 
             return;
         }
@@ -560,36 +528,28 @@ document.addEventListener("DOMContentLoaded", function () {
             function (address) {
 
                 const card =
-                    document.createElement(
-                        "div"
-                    );
+                    document.createElement("div");
 
                 card.className =
                     "saved-address-card";
 
 
                 const title =
-                    document.createElement(
-                        "h3"
-                    );
+                    document.createElement("h3");
 
                 title.textContent =
                     address.name;
 
 
                 const addressText =
-                    document.createElement(
-                        "p"
-                    );
+                    document.createElement("p");
 
                 addressText.textContent =
                     address.address;
 
 
                 const cityText =
-                    document.createElement(
-                        "p"
-                    );
+                    document.createElement("p");
 
                 cityText.textContent =
                     address.city +
@@ -598,9 +558,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 const deleteButton =
-                    document.createElement(
-                        "button"
-                    );
+                    document.createElement("button");
 
                 deleteButton.type =
                     "button";
@@ -620,26 +578,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-                card.appendChild(
-                    title
-                );
+                card.appendChild(title);
+                card.appendChild(addressText);
+                card.appendChild(cityText);
+                card.appendChild(deleteButton);
 
-                card.appendChild(
-                    addressText
-                );
-
-                card.appendChild(
-                    cityText
-                );
-
-                card.appendChild(
-                    deleteButton
-                );
-
-
-                addressList.appendChild(
-                    card
-                );
+                addressList.appendChild(card);
             }
         );
     }
@@ -655,9 +599,7 @@ document.addEventListener("DOMContentLoaded", function () {
             addresses.filter(
                 function (address) {
 
-                    return (
-                        address.id !== id
-                    );
+                    return address.id !== id;
                 }
             );
 
@@ -750,9 +692,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 if (
-                    !/^\d{6}$/.test(
-                        pincode
-                    )
+                    !/^\d{6}$/.test(pincode)
                 ) {
 
                     alert(
@@ -849,24 +789,17 @@ document.addEventListener("DOMContentLoaded", function () {
         paymentList.innerHTML = "";
 
 
-        if (
-            paymentMethods.length === 0
-        ) {
+        if (paymentMethods.length === 0) {
 
             const emptyMessage =
-                document.createElement(
-                    "p"
-                );
-
+                document.createElement("p");
 
             emptyMessage.textContent =
                 "No payment methods saved yet.";
 
-
             paymentList.appendChild(
                 emptyMessage
             );
-
 
             return;
         }
@@ -876,29 +809,21 @@ document.addEventListener("DOMContentLoaded", function () {
             function (method) {
 
                 const card =
-                    document.createElement(
-                        "div"
-                    );
-
+                    document.createElement("div");
 
                 card.className =
                     "saved-payment-card";
 
 
                 const title =
-                    document.createElement(
-                        "h3"
-                    );
-
+                    document.createElement("h3");
 
                 title.textContent =
                     method.type;
 
 
                 const details =
-                    document.createElement(
-                        "p"
-                    );
+                    document.createElement("p");
 
 
                 if (
@@ -918,14 +843,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 const deleteButton =
-                    document.createElement(
-                        "button"
-                    );
-
+                    document.createElement("button");
 
                 deleteButton.type =
                     "button";
-
 
                 deleteButton.textContent =
                     "Delete";
@@ -942,22 +863,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-                card.appendChild(
-                    title
-                );
+                card.appendChild(title);
+                card.appendChild(details);
+                card.appendChild(deleteButton);
 
-                card.appendChild(
-                    details
-                );
-
-                card.appendChild(
-                    deleteButton
-                );
-
-
-                paymentList.appendChild(
-                    card
-                );
+                paymentList.appendChild(card);
             }
         );
     }
@@ -973,9 +883,7 @@ document.addEventListener("DOMContentLoaded", function () {
             methods.filter(
                 function (method) {
 
-                    return (
-                        method.id !== id
-                    );
+                    return method.id !== id;
                 }
             );
 
@@ -998,7 +906,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById(
             "paymentType"
         );
-
 
     const upiField =
         document.getElementById(
@@ -1091,7 +998,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         upiInput.value.trim();
 
 
-                    if (upiId === "") {
+                    if (
+                        upiId === ""
+                    ) {
 
                         alert(
                             "Please enter your UPI ID."
@@ -1195,8 +1104,6 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        /* Address */
-
         if (addressStatus) {
 
             const addresses =
@@ -1225,8 +1132,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-
-        /* Payment */
 
         if (paymentStatus) {
 
@@ -1257,16 +1162,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Orders */
-
         if (orderStatus) {
 
             orderStatus.textContent =
                 "No Orders Yet";
         }
 
-
-        /* Cart */
 
         if (cartStatus) {
 
@@ -1299,8 +1200,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Wishlist */
-
         if (wishlistStatus) {
 
             const wishlistItems =
@@ -1325,8 +1224,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Recently Viewed */
-
         if (
             recentlyViewedStatus
         ) {
@@ -1338,8 +1235,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (
-                recentlyViewedItems.length ===
-                0
+                recentlyViewedItems.length === 0
             ) {
 
                 recentlyViewedStatus.textContent =
@@ -1852,6 +1748,8 @@ document.addEventListener("DOMContentLoaded", function () {
         renderCart();
 
         updateProfileStatuses();
+
+        displayCheckoutData();
     }
 
 
@@ -1883,6 +1781,8 @@ document.addEventListener("DOMContentLoaded", function () {
         renderCart();
 
         updateProfileStatuses();
+
+        displayCheckoutData();
     }
 
 
@@ -1967,6 +1867,111 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
+    const selectedAddressStorageKey =
+        "dailymartSelectedAddress";
+
+
+    const selectedPaymentStorageKey =
+        "dailymartSelectedPayment";
+
+
+    function getSelectedAddressId() {
+
+        return localStorage.getItem(
+            selectedAddressStorageKey
+        );
+    }
+
+
+    function getSelectedPaymentId() {
+
+        return localStorage.getItem(
+            selectedPaymentStorageKey
+        );
+    }
+
+
+    function setSelectedAddressId(id) {
+
+        localStorage.setItem(
+            selectedAddressStorageKey,
+            String(id)
+        );
+    }
+
+
+    function setSelectedPaymentId(id) {
+
+        localStorage.setItem(
+            selectedPaymentStorageKey,
+            String(id)
+        );
+    }
+
+
+    function updatePlaceOrderButton() {
+
+        if (!placeOrderButton) {
+            return;
+        }
+
+
+        const cartItems =
+            getCartItems();
+
+
+        const addresses =
+            getSavedAddresses();
+
+
+        const paymentMethods =
+            getSavedPaymentMethods();
+
+
+        const selectedAddressId =
+            getSelectedAddressId();
+
+
+        const selectedPaymentId =
+            getSelectedPaymentId();
+
+
+        const addressSelected =
+            addresses.some(
+                function (address) {
+
+                    return (
+                        String(address.id) ===
+                        String(
+                            selectedAddressId
+                        )
+                    );
+                }
+            );
+
+
+        const paymentSelected =
+            paymentMethods.some(
+                function (method) {
+
+                    return (
+                        String(method.id) ===
+                        String(
+                            selectedPaymentId
+                        )
+                    );
+                }
+            );
+
+
+        placeOrderButton.disabled = !(
+            cartItems.length > 0 &&
+            addressSelected &&
+            paymentSelected
+        );
+    }
+
+
     function displayCheckoutData() {
 
         if (
@@ -1999,6 +2004,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             checkoutItemsContainer.innerHTML =
                 "";
+
 
             if (
                 cartItems.length === 0
@@ -2110,7 +2116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* -----------------------------------------------------
-           ADDRESS
+           ADDRESS SELECTION
         ----------------------------------------------------- */
 
         if (
@@ -2146,6 +2152,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
+                let selectedAddressId =
+                    getSelectedAddressId();
+
+
+                const selectedAddressExists =
+                    addresses.some(
+                        function (address) {
+
+                            return (
+                                String(address.id) ===
+                                String(
+                                    selectedAddressId
+                                )
+                            );
+                        }
+                    );
+
+
+                if (
+                    !selectedAddressExists
+                ) {
+
+                    selectedAddressId = null;
+
+                    localStorage.removeItem(
+                        selectedAddressStorageKey
+                    );
+                }
+
+
                 addresses.forEach(
                     function (address) {
 
@@ -2157,6 +2193,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         card.className =
                             "checkout-address-card";
+
+
+                        if (
+                            String(address.id) ===
+                            String(
+                                selectedAddressId
+                            )
+                        ) {
+
+                            card.classList.add(
+                                "selected"
+                            );
+                        }
 
 
                         const title =
@@ -2206,6 +2255,47 @@ document.addEventListener("DOMContentLoaded", function () {
                         );
 
 
+                        if (
+                            String(address.id) ===
+                            String(
+                                selectedAddressId
+                            )
+                        ) {
+
+                            const badge =
+                                document.createElement(
+                                    "span"
+                                );
+
+
+                            badge.className =
+                                "checkout-selected-badge";
+
+
+                            badge.textContent =
+                                "Selected";
+
+
+                            card.appendChild(
+                                badge
+                            );
+                        }
+
+
+                        card.addEventListener(
+                            "click",
+                            function () {
+
+                                setSelectedAddressId(
+                                    address.id
+                                );
+
+
+                                displayCheckoutData();
+                            }
+                        );
+
+
                         checkoutAddressList.appendChild(
                             card
                         );
@@ -2216,7 +2306,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         /* -----------------------------------------------------
-           PAYMENT
+           PAYMENT SELECTION
         ----------------------------------------------------- */
 
         if (
@@ -2252,6 +2342,38 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
+                let selectedPaymentId =
+                    getSelectedPaymentId();
+
+
+                const selectedPaymentExists =
+                    paymentMethods.some(
+                        function (method) {
+
+                            return (
+                                String(method.id) ===
+                                String(
+                                    selectedPaymentId
+                                )
+                            );
+                        }
+                    );
+
+
+                if (
+                    !selectedPaymentExists
+                ) {
+
+                    selectedPaymentId =
+                        null;
+
+
+                    localStorage.removeItem(
+                        selectedPaymentStorageKey
+                    );
+                }
+
+
                 paymentMethods.forEach(
                     function (method) {
 
@@ -2263,6 +2385,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         card.className =
                             "checkout-payment-card";
+
+
+                        if (
+                            String(method.id) ===
+                            String(
+                                selectedPaymentId
+                            )
+                        ) {
+
+                            card.classList.add(
+                                "selected"
+                            );
+                        }
 
 
                         const title =
@@ -2305,6 +2440,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         card.appendChild(
                             details
+                        );
+
+
+                        if (
+                            String(method.id) ===
+                            String(
+                                selectedPaymentId
+                            )
+                        ) {
+
+                            const badge =
+                                document.createElement(
+                                    "span"
+                                );
+
+
+                            badge.className =
+                                "checkout-selected-badge";
+
+
+                            badge.textContent =
+                                "Selected";
+
+
+                            card.appendChild(
+                                badge
+                            );
+                        }
+
+
+                        card.addEventListener(
+                            "click",
+                            function () {
+
+                                setSelectedPaymentId(
+                                    method.id
+                                );
+
+
+                                displayCheckoutData();
+                            }
                         );
 
 
@@ -2367,22 +2543,44 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /*
-            Place Order stays disabled for now.
-
-            Actual order creation will be connected
-            in a later part with backend/order logic.
-        */
-
-        if (placeOrderButton) {
-
-            placeOrderButton.disabled =
-                true;
-        }
+        updatePlaceOrderButton();
     }
 
 
     displayCheckoutData();
+
+
+    /* =========================================================
+       PLACE ORDER
+    ========================================================= */
+
+    if (placeOrderButton) {
+
+        placeOrderButton.addEventListener(
+            "click",
+            function () {
+
+                updatePlaceOrderButton();
+
+
+                if (
+                    placeOrderButton.disabled
+                ) {
+                    return;
+                }
+
+
+                /*
+                    Actual order creation will be added
+                    in the next checkout/order part.
+                */
+
+                alert(
+                    "Order placement will be connected in the next step."
+                );
+            }
+        );
+    }
 
 
     /* =========================================================
