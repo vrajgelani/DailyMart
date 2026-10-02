@@ -3,216 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Cart - DailyMart</title>
-
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- Header -->
     <header class="site-header">
-
         <div class="header-container">
 
             <a href="index.html" class="logo-link">
                 <img
                     src="assets/images/dailymart-logo.png"
-                    alt="DailyMart Logo"
+                    alt="DailyMart"
                     class="site-logo"
                 >
             </a>
 
             <form class="search-form" id="searchForm">
-
                 <input
                     type="search"
                     id="searchInput"
-                    placeholder="Search for groceries and daily essentials"
+                    placeholder="Search for groceries..."
+                    aria-label="Search for groceries"
                 >
-
-                <button type="submit">
-                    Search
-                </button>
-
+                <button type="submit">Search</button>
             </form>
 
-            <nav class="main-nav">
+            <nav class="main-nav" aria-label="Main Navigation">
+                <a href="index.html">Home</a>
+                <a href="categories.html">Categories</a>
+                <a href="orders.html">Orders</a>
 
-                <a href="index.html" class="nav-link">
-                    Home
-                </a>
+                <a href="login.html" id="loginLink">Login</a>
+                <a href="register.html" id="registerLink">Register</a>
+                <a href="profile.html" id="profileLink" class="hidden">Profile</a>
 
-                <a href="index.html#categories" class="nav-link">
-                    Categories
-                </a>
-
-                <a href="orders.html" class="nav-link">
-                    Orders
-                </a>
-
-                <a href="login.html" class="nav-link auth-login-link" id="loginNavLink">
-                    Login
-                </a>
-
-                <a href="register.html" class="nav-link auth-register-link" id="registerNavLink">
-                    Register
-                </a>
-
-                <a href="profile.html" class="nav-link profile-nav-link hidden" id="profileNavLink">
-                    Profile
-                </a>
-
+                <a href="cart.html" class="active">Cart</a>
             </nav>
 
-            <a href="cart.html" class="cart-button active-cart">
-                Cart
-            </a>
-
         </div>
-
     </header>
 
 
-    <!-- ================= CART ================= -->
-    <main>
+    <!-- Cart Main Section -->
+    <main class="cart-page">
 
-        <section class="cart-section">
-
-            <div class="section-heading">
-
-                <p class="section-label">
-                    Shopping Cart
-                </p>
-
-                <h1>
-                    Your Cart
-                </h1>
-
-            </div>
+        <div class="cart-page-header">
+            <h1>Your Cart</h1>
+            <p>Review your items before checkout.</p>
+        </div>
 
 
-            <div class="cart-empty-state" id="cartEmptyState">
+        <div class="cart-layout">
 
-                <div class="cart-empty-content">
+            <!-- Cart Items -->
+            <section class="cart-items-section">
 
-                    <h2>
-                        Your Cart is Empty
-                    </h2>
-
-                    <p>
-                        No items have been added to your cart yet.
-                    </p>
+                <div id="cartEmptyState" class="cart-empty-state hidden">
+                    <h2>Your Cart is Empty</h2>
+                    <p>No items have been added to your cart yet.</p>
 
                     <a href="index.html" class="primary-button">
                         Continue Shopping
                     </a>
-
                 </div>
 
-            </div>
 
-        </section>
+                <div id="cartItemsContainer"></div>
+
+            </section>
+
+
+            <!-- Cart Summary -->
+            <aside class="cart-summary">
+
+                <h2>Order Summary</h2>
+
+                <div class="cart-summary-row">
+                    <span>Subtotal</span>
+                    <strong id="cartSubtotal">₹0</strong>
+                </div>
+
+                <div class="cart-summary-row">
+                    <span>Delivery</span>
+                    <strong id="cartDelivery">₹0</strong>
+                </div>
+
+                <div class="cart-summary-divider"></div>
+
+                <div class="cart-summary-row cart-total-row">
+                    <span>Total</span>
+                    <strong id="cartTotal">₹0</strong>
+                </div>
+
+                <button
+                    type="button"
+                    id="checkoutButton"
+                    class="checkout-button"
+                    disabled
+                >
+                    Proceed to Checkout
+                </button>
+
+            </aside>
+
+        </div>
 
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- Footer -->
     <footer class="site-footer">
 
         <div class="footer-container">
 
             <div class="footer-brand">
-
                 <img
                     src="assets/images/dailymart-logo.png"
-                    alt="DailyMart Logo"
+                    alt="DailyMart"
                     class="footer-logo"
                 >
 
                 <p>
-                    Everything You Need, Every Day.
+                    Fresh groceries and everyday essentials,
+                    delivered to your doorstep.
                 </p>
-
             </div>
 
 
             <div class="footer-column">
+                <h3>Quick Links</h3>
 
-                <h3>
-                    Quick Links
-                </h3>
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="categories.html">
-                    Categories
-                </a>
-
-                <a href="login.html">
-                    Login
-                </a>
-
-                <a href="register.html">
-                    Register
-                </a>
-
+                <a href="index.html">Home</a>
+                <a href="categories.html">Categories</a>
+                <a href="orders.html">Orders</a>
+                <a href="profile.html">Profile</a>
+                <a href="cart.html">Cart</a>
             </div>
 
 
             <div class="footer-column">
+                <h3>Customer Care</h3>
 
-                <h3>
-                    Customer Care
-                </h3>
-
-                <a href="#">
-                    Help Center
-                </a>
-
-                <a href="#">
-                    Orders
-                </a>
-
-                <a href="#">
-                    Returns
-                </a>
-
+                <p>Email: support@dailymart.example</p>
+                <p>Phone: +91 00000 00000</p>
             </div>
 
 
             <div class="footer-column">
+                <h3>Address</h3>
 
-                <h3>
-                    Contact Us
-                </h3>
-
-                <p>
-                    Email: support@dailymart.example
-                </p>
-
-                <p>
-                    Phone: +91 00000 00000
-                </p>
-
-                <p>
-                    Address: DailyMart Store, Gujarat, India
-                </p>
-
+                <p>DailyMart Store</p>
+                <p>Gujarat, India</p>
             </div>
 
         </div>
 
 
         <div class="footer-bottom">
-
             <p>
-                © 2026 DailyMart. All Rights Reserved.
+                © 2026 DailyMart. All rights reserved.
             </p>
-
         </div>
 
     </footer>

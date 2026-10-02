@@ -1,870 +1,457 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================
+    /* =========================================================
+       COMMON HELPERS
+    ========================================================= */
+
+    function getLocalStorageArray(key) {
+        let data = [];
+
+        try {
+            data = JSON.parse(localStorage.getItem(key) || "[]");
+        } catch (error) {
+            data = [];
+        }
+
+        return Array.isArray(data) ? data : [];
+    }
+
+
+    function saveLocalStorageArray(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+
+    function getCurrentUser() {
+        try {
+            return JSON.parse(
+                localStorage.getItem("dailymartUser") || "null"
+            );
+        } catch (error) {
+            return null;
+        }
+    }
+
+
+    /* =========================================================
        SEARCH
-    ========================= */
+    ========================================================= */
 
-    const searchForm =
-        document.getElementById("searchForm");
+    const searchForm = document.getElementById("searchForm");
+    const searchInput = document.getElementById("searchInput");
 
-    if (searchForm) {
+    if (searchForm && searchInput) {
 
         searchForm.addEventListener("submit", function (event) {
 
             event.preventDefault();
 
-            const searchInput =
-                document.getElementById("searchInput");
+            const query = searchInput.value.trim();
 
-            if (!searchInput) {
+            if (query === "") {
                 return;
             }
-
-            const searchValue =
-                searchInput.value.trim();
-
-            if (searchValue === "") {
-                searchInput.focus();
-                return;
-            }
-
-            const encodedQuery =
-                encodeURIComponent(searchValue);
 
             window.location.href =
-                "search.html?q=" + encodedQuery;
-
+                "search.html?q=" + encodeURIComponent(query);
         });
-
     }
 
 
-    /* =========================
-       SEARCH QUERY DISPLAY
-    ========================= */
+    /* =========================================================
+       SEARCH PAGE
+    ========================================================= */
 
     const searchQueryText =
         document.getElementById("searchQueryText");
 
     if (searchQueryText) {
 
-        const urlParams =
-            new URLSearchParams(
-                window.location.search
-            );
+        const urlParams = new URLSearchParams(
+            window.location.search
+        );
 
-        const searchQuery =
-            urlParams.get("q");
+        const query = urlParams.get("q");
 
-        if (searchQuery) {
-
+        if (query) {
             searchQueryText.textContent =
-                'Showing results for "' +
-                searchQuery +
-                '".';
-
+                'Showing results for "' + query + '".';
         } else {
-
             searchQueryText.textContent =
-                "Search for products and daily essentials.";
-
+                "Search for grocery items.";
         }
-
     }
 
 
-    /* =========================
-       AUTH NAVIGATION
-    ========================= */
+    /* =========================================================
+       AUTH HEADER
+    ========================================================= */
 
-    const loginNavLink =
-        document.getElementById("loginNavLink");
+    const loginLink = document.getElementById("loginLink");
+    const registerLink = document.getElementById("registerLink");
+    const profileLink = document.getElementById("profileLink");
 
-    const registerNavLink =
-        document.getElementById("registerNavLink");
+    const currentUser = getCurrentUser();
 
-    const profileNavLink =
-        document.getElementById("profileNavLink");
+    if (currentUser) {
 
-
-    const loggedInUser =
-        localStorage.getItem("dailymartUser");
-
-
-    if (loggedInUser) {
-
-        if (loginNavLink) {
-            loginNavLink.classList.add("hidden");
+        if (loginLink) {
+            loginLink.classList.add("hidden");
         }
 
-        if (registerNavLink) {
-            registerNavLink.classList.add("hidden");
+        if (registerLink) {
+            registerLink.classList.add("hidden");
         }
 
-        if (profileNavLink) {
-            profileNavLink.classList.remove("hidden");
+        if (profileLink) {
+            profileLink.classList.remove("hidden");
         }
 
     } else {
 
-        if (loginNavLink) {
-            loginNavLink.classList.remove("hidden");
+        if (loginLink) {
+            loginLink.classList.remove("hidden");
         }
 
-        if (registerNavLink) {
-            registerNavLink.classList.remove("hidden");
+        if (registerLink) {
+            registerLink.classList.remove("hidden");
         }
 
-        if (profileNavLink) {
-            profileNavLink.classList.add("hidden");
+        if (profileLink) {
+            profileLink.classList.add("hidden");
         }
-
     }
 
 
-    /* =========================
-       ORDERS LOGIN PROTECTION
-    ========================= */
+    /* =========================================================
+       PROTECTED PAGES
+    ========================================================= */
 
-    const ordersEmptyState =
-        document.getElementById("ordersEmptyState");
+    const protectedPages = [
+        "orders.html",
+        "profile.html",
+        "addresses.html",
+        "payment-methods.html",
+        "wishlist.html",
+        "recently-viewed.html"
+    ];
 
-    if (ordersEmptyState) {
-
-        const currentUser =
-            localStorage.getItem("dailymartUser");
-
-        if (!currentUser) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
-    }
-
-
-    /* =========================
-       ADDRESS LOGIN PROTECTION
-    ========================= */
-
-    const addressForm =
-        document.getElementById("addressForm");
-
-    const savedAddresses =
-        document.getElementById("savedAddresses");
-
+    const currentPage =
+        window.location.pathname.split("/").pop();
 
     if (
-        addressForm ||
-        savedAddresses
+        protectedPages.includes(currentPage) &&
+        !currentUser
     ) {
-
-        const currentUser =
-            localStorage.getItem("dailymartUser");
-
-        if (!currentUser) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
+        window.location.href = "login.html";
+        return;
     }
 
 
-    /* =========================
-       PAYMENT LOGIN PROTECTION
-    ========================= */
-
-    const paymentMethodForm =
-        document.getElementById(
-            "paymentMethodForm"
-        );
-
-    const savedPaymentMethods =
-        document.getElementById(
-            "savedPaymentMethods"
-        );
-
-
-    if (
-        paymentMethodForm ||
-        savedPaymentMethods
-    ) {
-
-        const currentUser =
-            localStorage.getItem("dailymartUser");
-
-        if (!currentUser) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
-    }
-
-
-    /* =========================
-       WISHLIST LOGIN PROTECTION
-    ========================= */
-
-    const wishlistEmptyState =
-        document.getElementById(
-            "wishlistEmptyState"
-        );
-
-    if (wishlistEmptyState) {
-
-        const currentUser =
-            localStorage.getItem(
-                "dailymartUser"
-            );
-
-        if (!currentUser) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
-    }
-
-
-    /* =========================
+    /* =========================================================
        REGISTER
-    ========================= */
+    ========================================================= */
 
     const registerForm =
-        document.getElementById(
-            "registerForm"
-        );
-
+        document.getElementById("registerForm");
 
     if (registerForm) {
 
-        registerForm.addEventListener(
-            "submit",
-            function (event) {
+        registerForm.addEventListener("submit", function (event) {
 
-                event.preventDefault();
+            event.preventDefault();
 
+            const nameInput =
+                document.getElementById("registerName");
 
-                const name =
-                    document
-                        .getElementById(
-                            "registerName"
-                        )
-                        .value
-                        .trim();
+            const emailInput =
+                document.getElementById("registerEmail");
 
+            const passwordInput =
+                document.getElementById("registerPassword");
 
-                const email =
-                    document
-                        .getElementById(
-                            "registerEmail"
-                        )
-                        .value
-                        .trim();
-
-
-                const password =
-                    document
-                        .getElementById(
-                            "registerPassword"
-                        )
-                        .value;
-
-
-                const confirmPassword =
-                    document
-                        .getElementById(
-                            "registerConfirmPassword"
-                        )
-                        .value;
-
-
-                const message =
-                    document.getElementById(
-                        "registerMessage"
-                    );
-
-
-                if (
-                    password !==
-                    confirmPassword
-                ) {
-
-                    message.textContent =
-                        "Passwords do not match.";
-
-                    message.style.color =
-                        "#dc2626";
-
-                    return;
-
-                }
-
-
-                if (
-                    password.length < 6
-                ) {
-
-                    message.textContent =
-                        "Password must contain at least 6 characters.";
-
-                    message.style.color =
-                        "#dc2626";
-
-                    return;
-
-                }
-
-
-                const user = {
-
-                    name: name,
-
-                    email: email,
-
-                    password: password
-
-                };
-
-
-                localStorage.setItem(
-                    "dailymartRegisteredUser",
-                    JSON.stringify(user)
-                );
-
-
-                message.textContent =
-                    "Registration successful. Please login.";
-
-                message.style.color =
-                    "#16a34a";
-
-
-                registerForm.reset();
-
-
-                setTimeout(
-                    function () {
-
-                        window.location.href =
-                            "login.html";
-
-                    },
-                    1000
-                );
-
+            if (
+                !nameInput ||
+                !emailInput ||
+                !passwordInput
+            ) {
+                return;
             }
-        );
 
+            const name =
+                nameInput.value.trim();
+
+            const email =
+                emailInput.value.trim();
+
+            const password =
+                passwordInput.value;
+
+            if (
+                name === "" ||
+                email === "" ||
+                password === ""
+            ) {
+                alert("Please fill all fields.");
+                return;
+            }
+
+            const registeredUser = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+            localStorage.setItem(
+                "dailymartRegisteredUser",
+                JSON.stringify(registeredUser)
+            );
+
+            alert(
+                "Registration successful. Please login."
+            );
+
+            window.location.href = "login.html";
+        });
     }
 
 
-    /* =========================
+    /* =========================================================
        LOGIN
-    ========================= */
+    ========================================================= */
 
     const loginForm =
-        document.getElementById(
-            "loginForm"
-        );
-
+        document.getElementById("loginForm");
 
     if (loginForm) {
 
-        loginForm.addEventListener(
-            "submit",
-            function (event) {
+        loginForm.addEventListener("submit", function (event) {
 
-                event.preventDefault();
+            event.preventDefault();
 
+            const emailInput =
+                document.getElementById("loginEmail");
 
-                const email =
-                    document
-                        .getElementById(
-                            "loginEmail"
-                        )
-                        .value
-                        .trim();
+            const passwordInput =
+                document.getElementById("loginPassword");
 
+            if (
+                !emailInput ||
+                !passwordInput
+            ) {
+                return;
+            }
 
-                const password =
-                    document
-                        .getElementById(
-                            "loginPassword"
-                        )
-                        .value;
+            const email =
+                emailInput.value.trim();
 
+            const password =
+                passwordInput.value;
 
-                const message =
-                    document.getElementById(
-                        "loginMessage"
-                    );
+            let registeredUser = null;
 
-
-                const registeredUser =
+            try {
+                registeredUser = JSON.parse(
                     localStorage.getItem(
                         "dailymartRegisteredUser"
-                    );
-
-
-                if (!registeredUser) {
-
-                    message.textContent =
-                        "Account not found. Please register first.";
-
-                    message.style.color =
-                        "#dc2626";
-
-                    return;
-
-                }
-
-
-                let user;
-
-
-                try {
-
-                    user =
-                        JSON.parse(
-                            registeredUser
-                        );
-
-                } catch (error) {
-
-                    message.textContent =
-                        "Account data is invalid. Please register again.";
-
-                    message.style.color =
-                        "#dc2626";
-
-                    return;
-
-                }
-
-
-                if (
-                    email === user.email &&
-                    password === user.password
-                ) {
-
-                    localStorage.setItem(
-                        "dailymartUser",
-                        JSON.stringify({
-
-                            name:
-                                user.name,
-
-                            email:
-                                user.email
-
-                        })
-                    );
-
-
-                    message.textContent =
-                        "Login successful. Redirecting...";
-
-                    message.style.color =
-                        "#16a34a";
-
-
-                    setTimeout(
-                        function () {
-
-                            window.location.href =
-                                "profile.html";
-
-                        },
-                        800
-                    );
-
-                } else {
-
-                    message.textContent =
-                        "Invalid email or password.";
-
-                    message.style.color =
-                        "#dc2626";
-
-                }
-
+                    ) || "null"
+                );
+            } catch (error) {
+                registeredUser = null;
             }
-        );
 
+            if (!registeredUser) {
+                alert(
+                    "No registered account found. Please register first."
+                );
+                return;
+            }
+
+            if (
+                email !== registeredUser.email ||
+                password !== registeredUser.password
+            ) {
+                alert(
+                    "Invalid email or password."
+                );
+                return;
+            }
+
+            const sessionUser = {
+                name: registeredUser.name,
+                email: registeredUser.email
+            };
+
+            localStorage.setItem(
+                "dailymartUser",
+                JSON.stringify(sessionUser)
+            );
+
+            alert("Login successful.");
+
+            window.location.href = "profile.html";
+        });
     }
 
 
-    /* =========================
+    /* =========================================================
        PROFILE
-    ========================= */
+    ========================================================= */
 
     const profileName =
-        document.getElementById(
-            "profileName"
-        );
+        document.getElementById("profileName");
 
     const profileEmail =
-        document.getElementById(
-            "profileEmail"
-        );
+        document.getElementById("profileEmail");
 
-    const profileWelcomeName =
-        document.getElementById(
-            "profileWelcomeName"
-        );
+    const welcomeName =
+        document.getElementById("welcomeName");
 
-
-    if (
-        profileName ||
-        profileEmail ||
-        profileWelcomeName
-    ) {
-
-        const currentUser =
-            localStorage.getItem(
-                "dailymartUser"
-            );
-
-
-        if (!currentUser) {
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
-
-        let user;
-
-
-        try {
-
-            user =
-                JSON.parse(
-                    currentUser
-                );
-
-        } catch (error) {
-
-            localStorage.removeItem(
-                "dailymartUser"
-            );
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
+    if (currentUser) {
 
         if (profileName) {
-
             profileName.textContent =
-                user.name || "User";
-
+                currentUser.name || "User";
         }
-
 
         if (profileEmail) {
-
             profileEmail.textContent =
-                user.email ||
-                "user@example.com";
-
+                currentUser.email || "";
         }
 
-
-        if (profileWelcomeName) {
-
-            profileWelcomeName.textContent =
-                user.name || "User";
-
+        if (welcomeName) {
+            welcomeName.textContent =
+                currentUser.name || "User";
         }
-
     }
 
 
-    /* =========================
-       ADDRESS STORAGE
-    ========================= */
+    /* =========================================================
+       ADDRESS MANAGEMENT
+    ========================================================= */
 
     const addressStorageKey =
         "dailymartAddresses";
 
 
     function getSavedAddresses() {
-
-        try {
-
-            const addresses =
-                JSON.parse(
-                    localStorage.getItem(
-                        addressStorageKey
-                    ) || "[]"
-                );
-
-
-            if (
-                Array.isArray(
-                    addresses
-                )
-            ) {
-
-                return addresses;
-
-            }
-
-
-            return [];
-
-        } catch (error) {
-
-            return [];
-
-        }
-
+        return getLocalStorageArray(
+            addressStorageKey
+        );
     }
 
 
     function displayAddresses() {
 
         const addressList =
-            document.getElementById(
-                "savedAddresses"
-            );
-
+            document.getElementById("addressList");
 
         if (!addressList) {
-
             return;
-
         }
-
 
         const addresses =
             getSavedAddresses();
-
 
         addressList.innerHTML = "";
 
+        if (addresses.length === 0) {
 
-        if (
-            addresses.length === 0
-        ) {
+            const emptyMessage =
+                document.createElement("p");
 
-            const emptyState =
-                document.createElement(
-                    "div"
-                );
-
-
-            emptyState.className =
-                "saved-address-empty";
-
-
-            const heading =
-                document.createElement(
-                    "h3"
-                );
-
-
-            heading.textContent =
-                "No Addresses Saved";
-
-
-            const paragraph =
-                document.createElement(
-                    "p"
-                );
-
-
-            paragraph.textContent =
-                "Add an address above for delivery.";
-
-
-            emptyState.appendChild(
-                heading
-            );
-
-            emptyState.appendChild(
-                paragraph
-            );
-
+            emptyMessage.textContent =
+                "No addresses saved yet.";
 
             addressList.appendChild(
-                emptyState
+                emptyMessage
             );
 
-
             return;
-
         }
 
+        addresses.forEach(function (address) {
 
-        addresses.forEach(
-            function (address) {
+            const card =
+                document.createElement("div");
 
-                const card =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                card.className =
-                    "saved-address-card";
+            card.className =
+                "saved-address-card";
 
 
-                const heading =
-                    document.createElement(
-                        "h3"
-                    );
+            const title =
+                document.createElement("h3");
+
+            title.textContent =
+                address.name;
 
 
-                heading.textContent =
-                    address.name;
+            const addressText =
+                document.createElement("p");
+
+            addressText.textContent =
+                address.address;
 
 
-                const addressText =
-                    document.createElement(
-                        "p"
-                    );
+            const cityText =
+                document.createElement("p");
+
+            cityText.textContent =
+                address.city +
+                " - " +
+                address.pincode;
 
 
-                addressText.textContent =
-                    address.address;
+            const deleteButton =
+                document.createElement("button");
 
+            deleteButton.type = "button";
 
-                const cityPincode =
-                    document.createElement(
-                        "p"
-                    );
+            deleteButton.textContent =
+                "Delete";
 
-
-                cityPincode.className =
-                    "address-city-pincode";
-
-
-                cityPincode.textContent =
-                    address.city +
-                    " - " +
-                    address.pincode;
-
-
-                const deleteButton =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                deleteButton.type =
-                    "button";
-
-
-                deleteButton.className =
-                    "delete-address-button";
-
-
-                deleteButton.textContent =
-                    "Delete";
-
-
-                deleteButton.addEventListener(
-                    "click",
-                    function () {
-
-                        deleteAddress(
-                            address.id
-                        );
-
-                    }
-                );
-
-
-                card.appendChild(
-                    heading
-                );
-
-                card.appendChild(
-                    addressText
-                );
-
-                card.appendChild(
-                    cityPincode
-                );
-
-                card.appendChild(
-                    deleteButton
-                );
-
-
-                addressList.appendChild(
-                    card
-                );
-
-            }
-        );
-
-    }
-
-
-    function deleteAddress(
-        addressId
-    ) {
-
-        const addresses =
-            getSavedAddresses();
-
-
-        const updatedAddresses =
-            addresses.filter(
-                function (address) {
-
-                    return (
-                        address.id !==
-                        addressId
-                    );
-
+            deleteButton.addEventListener(
+                "click",
+                function () {
+                    deleteAddress(address.id);
                 }
             );
 
 
-        localStorage.setItem(
-            addressStorageKey,
-            JSON.stringify(
-                updatedAddresses
-            )
-        );
+            card.appendChild(title);
+            card.appendChild(addressText);
+            card.appendChild(cityText);
+            card.appendChild(deleteButton);
 
-
-        displayAddresses();
-
-        updateProfileStatuses();
-
+            addressList.appendChild(card);
+        });
     }
 
 
-    if (addressForm) {
+    function deleteAddress(id) {
+
+        const addresses =
+            getSavedAddresses();
+
+        const updatedAddresses =
+            addresses.filter(function (address) {
+                return address.id !== id;
+            });
+
+        saveLocalStorageArray(
+            addressStorageKey,
+            updatedAddresses
+        );
 
         displayAddresses();
+        updateProfileStatuses();
+    }
 
+
+    const addressForm =
+        document.getElementById("addressForm");
+
+    if (addressForm) {
 
         addressForm.addEventListener(
             "submit",
@@ -872,63 +459,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
+                const nameInput =
+                    document.getElementById("addressName");
 
-                const addressName =
-                    document
-                        .getElementById(
-                            "addressName"
-                        )
-                        .value
-                        .trim();
+                const addressInput =
+                    document.getElementById("addressText");
 
+                const cityInput =
+                    document.getElementById("addressCity");
 
-                const addressLine =
-                    document
-                        .getElementById(
-                            "addressLine"
-                        )
-                        .value
-                        .trim();
-
-
-                const city =
-                    document
-                        .getElementById(
-                            "addressCity"
-                        )
-                        .value
-                        .trim();
-
-
-                const pincode =
-                    document
-                        .getElementById(
-                            "addressPincode"
-                        )
-                        .value
-                        .trim();
-
-
-                const message =
-                    document.getElementById(
-                        "addressMessage"
-                    );
+                const pincodeInput =
+                    document.getElementById("addressPincode");
 
 
                 if (
-                    !/^[0-9]{6}$/.test(
-                        pincode
-                    )
+                    !nameInput ||
+                    !addressInput ||
+                    !cityInput ||
+                    !pincodeInput
                 ) {
-
-                    message.textContent =
-                        "Please enter a valid 6-digit pincode.";
-
-                    message.style.color =
-                        "#dc2626";
-
                     return;
+                }
 
+
+                const name =
+                    nameInput.value.trim();
+
+                const address =
+                    addressInput.value.trim();
+
+                const city =
+                    cityInput.value.trim();
+
+                const pincode =
+                    pincodeInput.value.trim();
+
+
+                if (
+                    name === "" ||
+                    address === "" ||
+                    city === ""
+                ) {
+                    alert(
+                        "Please fill all address fields."
+                    );
+                    return;
+                }
+
+
+                if (!/^\d{6}$/.test(pincode)) {
+                    alert(
+                        "Please enter a valid 6-digit pincode."
+                    );
+                    return;
                 }
 
 
@@ -936,426 +519,247 @@ document.addEventListener("DOMContentLoaded", function () {
                     getSavedAddresses();
 
 
-                addresses.push({
-
-                    id:
-                        Date.now().toString(),
-
-                    name:
-                        addressName,
-
-                    address:
-                        addressLine,
-
-                    city:
-                        city,
-
-                    pincode:
-                        pincode
-
-                });
+                const newAddress = {
+                    id: Date.now(),
+                    name: name,
+                    address: address,
+                    city: city,
+                    pincode: pincode
+                };
 
 
-                localStorage.setItem(
+                addresses.push(newAddress);
+
+
+                saveLocalStorageArray(
                     addressStorageKey,
-                    JSON.stringify(
-                        addresses
-                    )
+                    addresses
                 );
-
-
-                message.textContent =
-                    "Address saved successfully.";
-
-                message.style.color =
-                    "#16a34a";
 
 
                 addressForm.reset();
 
-
                 displayAddresses();
-
                 updateProfileStatuses();
 
+
+                alert(
+                    "Address saved successfully."
+                );
             }
         );
-
     }
 
 
-    /* =========================
+    displayAddresses();
+
+
+    /* =========================================================
        PAYMENT METHODS
-    ========================= */
+    ========================================================= */
 
     const paymentStorageKey =
         "dailymartPaymentMethods";
 
 
-    const paymentType =
-        document.getElementById(
-            "paymentType"
-        );
-
-
-    const upiField =
-        document.getElementById(
-            "upiField"
-        );
-
-
-    const upiId =
-        document.getElementById(
-            "upiId"
-        );
-
-
     function getSavedPaymentMethods() {
-
-        try {
-
-            const methods =
-                JSON.parse(
-                    localStorage.getItem(
-                        paymentStorageKey
-                    ) || "[]"
-                );
-
-
-            if (
-                Array.isArray(
-                    methods
-                )
-            ) {
-
-                return methods;
-
-            }
-
-
-            return [];
-
-        } catch (error) {
-
-            return [];
-
-        }
-
+        return getLocalStorageArray(
+            paymentStorageKey
+        );
     }
 
 
     function displayPaymentMethods() {
 
         const paymentList =
-            document.getElementById(
-                "savedPaymentMethods"
-            );
-
+            document.getElementById("paymentList");
 
         if (!paymentList) {
-
             return;
-
         }
 
-
-        const methods =
+        const paymentMethods =
             getSavedPaymentMethods();
-
 
         paymentList.innerHTML = "";
 
 
-        if (
-            methods.length === 0
-        ) {
+        if (paymentMethods.length === 0) {
 
-            const emptyState =
-                document.createElement(
-                    "div"
-                );
+            const emptyMessage =
+                document.createElement("p");
 
-
-            emptyState.className =
-                "saved-payment-empty";
-
-
-            const heading =
-                document.createElement(
-                    "h3"
-                );
-
-
-            heading.textContent =
-                "No Payment Methods Saved";
-
-
-            const paragraph =
-                document.createElement(
-                    "p"
-                );
-
-
-            paragraph.textContent =
-                "Add a payment method above to save it.";
-
-
-            emptyState.appendChild(
-                heading
-            );
-
-            emptyState.appendChild(
-                paragraph
-            );
-
+            emptyMessage.textContent =
+                "No payment methods saved yet.";
 
             paymentList.appendChild(
-                emptyState
+                emptyMessage
             );
 
-
             return;
-
         }
 
 
-        methods.forEach(
-            function (method) {
+        paymentMethods.forEach(function (method) {
 
-                const card =
-                    document.createElement(
-                        "div"
-                    );
+            const card =
+                document.createElement("div");
 
-
-                card.className =
-                    "saved-payment-card";
+            card.className =
+                "saved-payment-card";
 
 
-                const heading =
-                    document.createElement(
-                        "h3"
-                    );
+            const title =
+                document.createElement("h3");
+
+            title.textContent =
+                method.type;
 
 
-                heading.textContent =
-                    method.type;
+            const details =
+                document.createElement("p");
 
 
-                const details =
-                    document.createElement(
-                        "p"
-                    );
-
-
-                if (
-                    method.type === "UPI"
-                ) {
-
-                    details.textContent =
-                        method.upi;
-
-                } else {
-
-                    details.textContent =
-                        "Pay when your order is delivered.";
-
-                }
-
-
-                const deleteButton =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                deleteButton.type =
-                    "button";
-
-
-                deleteButton.className =
-                    "delete-payment-button";
-
-
-                deleteButton.textContent =
-                    "Delete";
-
-
-                deleteButton.addEventListener(
-                    "click",
-                    function () {
-
-                        deletePaymentMethod(
-                            method.id
-                        );
-
-                    }
-                );
-
-
-                card.appendChild(
-                    heading
-                );
-
-                card.appendChild(
-                    details
-                );
-
-                card.appendChild(
-                    deleteButton
-                );
-
-
-                paymentList.appendChild(
-                    card
-                );
-
+            if (
+                method.type === "UPI" &&
+                method.upiId
+            ) {
+                details.textContent =
+                    "UPI ID: " + method.upiId;
+            } else {
+                details.textContent =
+                    "Cash payment on delivery";
             }
-        );
 
+
+            const deleteButton =
+                document.createElement("button");
+
+            deleteButton.type = "button";
+
+            deleteButton.textContent =
+                "Delete";
+
+
+            deleteButton.addEventListener(
+                "click",
+                function () {
+
+                    deletePaymentMethod(
+                        method.id
+                    );
+                }
+            );
+
+
+            card.appendChild(title);
+            card.appendChild(details);
+            card.appendChild(deleteButton);
+
+            paymentList.appendChild(card);
+        });
     }
 
 
-    function deletePaymentMethod(
-        paymentId
-    ) {
+    function deletePaymentMethod(id) {
 
         const methods =
             getSavedPaymentMethods();
 
-
         const updatedMethods =
-            methods.filter(
-                function (method) {
-
-                    return (
-                        method.id !==
-                        paymentId
-                    );
-
-                }
-            );
+            methods.filter(function (method) {
+                return method.id !== id;
+            });
 
 
-        localStorage.setItem(
+        saveLocalStorageArray(
             paymentStorageKey,
-            JSON.stringify(
-                updatedMethods
-            )
+            updatedMethods
         );
 
 
         displayPaymentMethods();
-
         updateProfileStatuses();
-
     }
 
 
-    if (paymentType) {
+    const paymentType =
+        document.getElementById("paymentType");
+
+    const upiField =
+        document.getElementById("upiField");
+
+
+    if (paymentType && upiField) {
 
         paymentType.addEventListener(
             "change",
             function () {
 
-                if (
-                    paymentType.value ===
-                    "UPI"
-                ) {
-
-                    if (upiField) {
-
-                        upiField.classList.remove(
-                            "hidden"
-                        );
-
-                    }
-
-
-                    if (upiId) {
-
-                        upiId.required =
-                            true;
-
-                    }
-
+                if (paymentType.value === "UPI") {
+                    upiField.classList.remove(
+                        "hidden"
+                    );
                 } else {
-
-                    if (upiField) {
-
-                        upiField.classList.add(
-                            "hidden"
-                        );
-
-                    }
-
-
-                    if (upiId) {
-
-                        upiId.required =
-                            false;
-
-                        upiId.value =
-                            "";
-
-                    }
-
+                    upiField.classList.add(
+                        "hidden"
+                    );
                 }
-
             }
         );
-
     }
 
 
-    if (paymentMethodForm) {
+    const paymentForm =
+        document.getElementById("paymentForm");
 
-        displayPaymentMethods();
 
+    if (paymentForm) {
 
-        paymentMethodForm.addEventListener(
+        paymentForm.addEventListener(
             "submit",
             function (event) {
 
                 event.preventDefault();
 
 
-                const message =
-                    document.getElementById(
-                        "paymentMessage"
-                    );
-
-
                 const selectedType =
-                    paymentType.value;
+                    paymentType
+                        ? paymentType.value
+                        : "";
 
 
-                if (!selectedType) {
+                const upiInput =
+                    document.getElementById("upiId");
 
-                    message.textContent =
-                        "Please select a payment type.";
 
-                    message.style.color =
-                        "#dc2626";
-
+                if (selectedType === "") {
+                    alert(
+                        "Please select a payment method."
+                    );
                     return;
-
                 }
 
 
-                if (
-                    selectedType === "UPI" &&
-                    upiId.value.trim() === ""
-                ) {
+                let upiId = "";
 
-                    message.textContent =
-                        "Please enter your UPI ID.";
 
-                    message.style.color =
-                        "#dc2626";
+                if (selectedType === "UPI") {
 
-                    return;
+                    if (!upiInput) {
+                        return;
+                    }
 
+                    upiId =
+                        upiInput.value.trim();
+
+
+                    if (upiId === "") {
+                        alert(
+                            "Please enter your UPI ID."
+                        );
+                        return;
+                    }
                 }
 
 
@@ -1363,70 +767,50 @@ document.addEventListener("DOMContentLoaded", function () {
                     getSavedPaymentMethods();
 
 
-                methods.push({
-
-                    id:
-                        Date.now().toString(),
-
-                    type:
-                        selectedType,
-
-                    upi:
-                        selectedType === "UPI"
-                            ? upiId.value.trim()
-                            : ""
-
-                });
+                const newMethod = {
+                    id: Date.now(),
+                    type: selectedType,
+                    upiId: upiId
+                };
 
 
-                localStorage.setItem(
+                methods.push(newMethod);
+
+
+                saveLocalStorageArray(
                     paymentStorageKey,
-                    JSON.stringify(
-                        methods
-                    )
+                    methods
                 );
 
 
-                message.textContent =
-                    "Payment method saved successfully.";
-
-                message.style.color =
-                    "#16a34a";
-
-
-                paymentMethodForm.reset();
+                paymentForm.reset();
 
 
                 if (upiField) {
-
                     upiField.classList.add(
                         "hidden"
                     );
-
-                }
-
-
-                if (upiId) {
-
-                    upiId.required =
-                        false;
-
                 }
 
 
                 displayPaymentMethods();
-
                 updateProfileStatuses();
 
+
+                alert(
+                    "Payment method saved successfully."
+                );
             }
         );
-
     }
 
 
-    /* =========================
+    displayPaymentMethods();
+
+
+    /* =========================================================
        PROFILE STATUS
-    ========================= */
+    ========================================================= */
 
     function updateProfileStatuses() {
 
@@ -1435,53 +819,45 @@ document.addEventListener("DOMContentLoaded", function () {
                 "addressStatus"
             );
 
-
         const paymentStatus =
             document.getElementById(
                 "paymentStatus"
             );
-
 
         const orderStatus =
             document.getElementById(
                 "orderStatus"
             );
 
-
         const cartStatus =
             document.getElementById(
                 "cartStatus"
             );
-
 
         const wishlistStatus =
             document.getElementById(
                 "wishlistStatus"
             );
 
+        const recentlyViewedStatus =
+            document.getElementById(
+                "recentlyViewedStatus"
+            );
 
-        /* =========================
-           ADDRESS COUNT
-        ========================= */
+
+        /* Address */
 
         if (addressStatus) {
 
             const addresses =
                 getSavedAddresses();
 
-
-            if (
-                addresses.length ===
-                0
-            ) {
+            if (addresses.length === 0) {
 
                 addressStatus.textContent =
                     "No Addresses Saved";
 
-            } else if (
-                addresses.length ===
-                1
-            ) {
+            } else if (addresses.length === 1) {
 
                 addressStatus.textContent =
                     "1 Address Saved";
@@ -1491,34 +867,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 addressStatus.textContent =
                     addresses.length +
                     " Addresses Saved";
-
             }
-
         }
 
 
-        /* =========================
-           PAYMENT COUNT
-        ========================= */
+        /* Payment */
 
         if (paymentStatus) {
 
             const methods =
                 getSavedPaymentMethods();
 
-
-            if (
-                methods.length ===
-                0
-            ) {
+            if (methods.length === 0) {
 
                 paymentStatus.textContent =
-                    "No Payment Methods Saved";
+                    "No Payment Methods";
 
-            } else if (
-                methods.length ===
-                1
-            ) {
+            } else if (methods.length === 1) {
 
                 paymentStatus.textContent =
                     "1 Method Saved";
@@ -1528,74 +893,575 @@ document.addEventListener("DOMContentLoaded", function () {
                 paymentStatus.textContent =
                     methods.length +
                     " Methods Saved";
-
             }
-
         }
 
 
-        /* =========================
-           ORDER STATUS
-        ========================= */
+        /* Orders */
 
         if (orderStatus) {
 
             orderStatus.textContent =
                 "No Orders Yet";
-
         }
 
 
-        /* =========================
-           CART STATUS
-        ========================= */
+        /* Cart */
 
         if (cartStatus) {
 
-            cartStatus.textContent =
-                "Cart is Empty";
+            const cartItems =
+                getLocalStorageArray(
+                    "dailymartCart"
+                );
 
+
+            if (cartItems.length === 0) {
+
+                cartStatus.textContent =
+                    "Cart is Empty";
+
+            } else if (cartItems.length === 1) {
+
+                cartStatus.textContent =
+                    "1 Item in Cart";
+
+            } else {
+
+                cartStatus.textContent =
+                    cartItems.length +
+                    " Items in Cart";
+            }
         }
 
 
-        /* =========================
-           WISHLIST STATUS
-        ========================= */
+        /* Wishlist */
 
         if (wishlistStatus) {
 
-            wishlistStatus.textContent =
-                "Wishlist is Empty";
+            const wishlistItems =
+                getLocalStorageArray(
+                    "dailymartWishlist"
+                );
 
+
+            if (wishlistItems.length === 0) {
+
+                wishlistStatus.textContent =
+                    "Wishlist is Empty";
+
+            } else {
+
+                wishlistStatus.textContent =
+                    wishlistItems.length +
+                    " Items in Wishlist";
+            }
         }
 
+
+        /* Recently Viewed */
+
+        if (recentlyViewedStatus) {
+
+            const recentlyViewedItems =
+                getLocalStorageArray(
+                    "dailymartRecentlyViewed"
+                );
+
+
+            if (
+                recentlyViewedItems.length === 0
+            ) {
+
+                recentlyViewedStatus.textContent =
+                    "No Recently Viewed Items";
+
+            } else {
+
+                recentlyViewedStatus.textContent =
+                    recentlyViewedItems.length +
+                    " Recently Viewed";
+            }
+        }
     }
 
 
-    /* =========================
-       PROFILE STATUS ON PAGE LOAD
-    ========================= */
+    updateProfileStatuses();
 
-    if (
+
+    /* =========================================================
+       CART
+    ========================================================= */
+
+    const cartItemsContainer =
         document.getElementById(
-            "addressStatus"
-        ) ||
+            "cartItemsContainer"
+        );
+
+    const cartEmptyState =
         document.getElementById(
-            "paymentStatus"
-        ) ||
+            "cartEmptyState"
+        );
+
+    const cartSubtotal =
         document.getElementById(
-            "wishlistStatus"
-        )
+            "cartSubtotal"
+        );
+
+    const cartDelivery =
+        document.getElementById(
+            "cartDelivery"
+        );
+
+    const cartTotal =
+        document.getElementById(
+            "cartTotal"
+        );
+
+    const checkoutButton =
+        document.getElementById(
+            "checkoutButton"
+        );
+
+
+    function getCartItems() {
+
+        return getLocalStorageArray(
+            "dailymartCart"
+        );
+    }
+
+
+    function saveCartItems(items) {
+
+        saveLocalStorageArray(
+            "dailymartCart",
+            items
+        );
+    }
+
+
+    function getItemPrice(item) {
+
+        const price =
+            Number(item.price);
+
+        if (
+            Number.isFinite(price) &&
+            price >= 0
+        ) {
+            return price;
+        }
+
+        return 0;
+    }
+
+
+    function getItemQuantity(item) {
+
+        const quantity =
+            Number(item.quantity);
+
+        if (
+            Number.isInteger(quantity) &&
+            quantity > 0
+        ) {
+            return quantity;
+        }
+
+        return 1;
+    }
+
+
+    function getItemName(item) {
+
+        if (
+            typeof item.name === "string" &&
+            item.name.trim() !== ""
+        ) {
+            return item.name;
+        }
+
+        return "Grocery Item";
+    }
+
+
+    function getItemId(item, index) {
+
+        if (
+            item.id !== undefined &&
+            item.id !== null
+        ) {
+            return String(item.id);
+        }
+
+        if (
+            item.productId !== undefined &&
+            item.productId !== null
+        ) {
+            return String(item.productId);
+        }
+
+        return "cart-item-" + index;
+    }
+
+
+    function renderCart() {
+
+        if (
+            !cartItemsContainer &&
+            !cartEmptyState
+        ) {
+            return;
+        }
+
+
+        const cartItems =
+            getCartItems();
+
+
+        if (cartItems.length === 0) {
+
+            if (cartEmptyState) {
+                cartEmptyState.classList.remove(
+                    "hidden"
+                );
+            }
+
+            if (cartItemsContainer) {
+                cartItemsContainer.innerHTML = "";
+            }
+
+            if (cartSubtotal) {
+                cartSubtotal.textContent = "₹0";
+            }
+
+            if (cartDelivery) {
+                cartDelivery.textContent = "₹0";
+            }
+
+            if (cartTotal) {
+                cartTotal.textContent = "₹0";
+            }
+
+            if (checkoutButton) {
+                checkoutButton.disabled = true;
+            }
+
+            return;
+        }
+
+
+        if (cartEmptyState) {
+            cartEmptyState.classList.add(
+                "hidden"
+            );
+        }
+
+
+        if (!cartItemsContainer) {
+            return;
+        }
+
+
+        cartItemsContainer.innerHTML = "";
+
+
+        let subtotal = 0;
+
+
+        cartItems.forEach(function (item, index) {
+
+            const price =
+                getItemPrice(item);
+
+            const quantity =
+                getItemQuantity(item);
+
+            const itemTotal =
+                price * quantity;
+
+            subtotal += itemTotal;
+
+
+            const itemCard =
+                document.createElement("div");
+
+            itemCard.className =
+                "cart-item";
+
+
+            const itemInfo =
+                document.createElement("div");
+
+            itemInfo.className =
+                "cart-item-info";
+
+
+            const itemName =
+                document.createElement("h3");
+
+            itemName.textContent =
+                getItemName(item);
+
+
+            const priceText =
+                document.createElement("p");
+
+            priceText.textContent =
+                "₹" +
+                price.toFixed(2) +
+                " each";
+
+
+            itemInfo.appendChild(itemName);
+            itemInfo.appendChild(priceText);
+
+
+            const quantityControls =
+                document.createElement("div");
+
+            quantityControls.className =
+                "cart-quantity-controls";
+
+
+            const decreaseButton =
+                document.createElement("button");
+
+            decreaseButton.type = "button";
+
+            decreaseButton.textContent = "−";
+
+
+            const quantityText =
+                document.createElement("span");
+
+            quantityText.textContent =
+                quantity;
+
+
+            const increaseButton =
+                document.createElement("button");
+
+            increaseButton.type = "button";
+
+            increaseButton.textContent = "+";
+
+
+            const removeButton =
+                document.createElement("button");
+
+            removeButton.type = "button";
+
+            removeButton.textContent =
+                "Remove";
+
+
+            decreaseButton.addEventListener(
+                "click",
+                function () {
+
+                    updateCartQuantity(
+                        index,
+                        quantity - 1
+                    );
+                }
+            );
+
+
+            increaseButton.addEventListener(
+                "click",
+                function () {
+
+                    updateCartQuantity(
+                        index,
+                        quantity + 1
+                    );
+                }
+            );
+
+
+            removeButton.addEventListener(
+                "click",
+                function () {
+
+                    removeCartItem(index);
+                }
+            );
+
+
+            quantityControls.appendChild(
+                decreaseButton
+            );
+
+            quantityControls.appendChild(
+                quantityText
+            );
+
+            quantityControls.appendChild(
+                increaseButton
+            );
+
+            quantityControls.appendChild(
+                removeButton
+            );
+
+
+            const itemTotalText =
+                document.createElement("strong");
+
+            itemTotalText.textContent =
+                "₹" +
+                itemTotal.toFixed(2);
+
+
+            itemCard.appendChild(itemInfo);
+            itemCard.appendChild(
+                quantityControls
+            );
+            itemCard.appendChild(
+                itemTotalText
+            );
+
+
+            cartItemsContainer.appendChild(
+                itemCard
+            );
+        });
+
+
+        /*
+            Delivery calculation is intentionally simple
+            for the frontend foundation.
+
+            Real delivery rules can be connected
+            to backend/admin settings later.
+        */
+
+        const delivery =
+            subtotal > 0 ? 0 : 0;
+
+
+        const total =
+            subtotal + delivery;
+
+
+        if (cartSubtotal) {
+            cartSubtotal.textContent =
+                "₹" + subtotal.toFixed(2);
+        }
+
+
+        if (cartDelivery) {
+            cartDelivery.textContent =
+                "₹" + delivery.toFixed(2);
+        }
+
+
+        if (cartTotal) {
+            cartTotal.textContent =
+                "₹" + total.toFixed(2);
+        }
+
+
+        if (checkoutButton) {
+            checkoutButton.disabled =
+                false;
+        }
+    }
+
+
+    function updateCartQuantity(
+        index,
+        newQuantity
     ) {
 
-        updateProfileStatuses();
+        const cartItems =
+            getCartItems();
 
+
+        if (
+            index < 0 ||
+            index >= cartItems.length
+        ) {
+            return;
+        }
+
+
+        if (newQuantity <= 0) {
+
+            cartItems.splice(index, 1);
+
+        } else {
+
+            cartItems[index].quantity =
+                newQuantity;
+        }
+
+
+        saveCartItems(cartItems);
+
+        renderCart();
+        updateProfileStatuses();
     }
 
 
-    /* =========================
+    function removeCartItem(index) {
+
+        const cartItems =
+            getCartItems();
+
+
+        if (
+            index < 0 ||
+            index >= cartItems.length
+        ) {
+            return;
+        }
+
+
+        cartItems.splice(index, 1);
+
+
+        saveCartItems(cartItems);
+
+        renderCart();
+        updateProfileStatuses();
+    }
+
+
+    renderCart();
+
+
+    /* =========================================================
+       CHECKOUT BUTTON
+    ========================================================= */
+
+    if (checkoutButton) {
+
+        checkoutButton.addEventListener(
+            "click",
+            function () {
+
+                const cartItems =
+                    getCartItems();
+
+
+                if (cartItems.length === 0) {
+                    return;
+                }
+
+
+                window.location.href =
+                    "checkout.html";
+            }
+        );
+    }
+
+
+    /* =========================================================
        LOGOUT
-    ========================= */
+    ========================================================= */
 
     const logoutButton =
         document.getElementById(
@@ -1613,13 +1479,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     "dailymartUser"
                 );
 
+                alert(
+                    "You have been logged out."
+                );
 
                 window.location.href =
                     "index.html";
-
             }
         );
-
     }
 
 });
