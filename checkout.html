@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout - DailyMart</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+
+        <div class="header-container">
+
+            <a href="index.html" class="logo-link">
+                <img
+                    src="assets/images/dailymart-logo.png"
+                    alt="DailyMart"
+                    class="site-logo"
+                >
+            </a>
+
+
+            <form class="search-form" id="searchForm">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search for groceries..."
+                    aria-label="Search for groceries"
+                >
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+
+            <nav class="main-nav" aria-label="Main Navigation">
+
+                <a href="index.html">Home</a>
+
+                <a href="categories.html">
+                    Categories
+                </a>
+
+                <a href="orders.html">
+                    Orders
+                </a>
+
+                <a href="login.html" id="loginLink">
+                    Login
+                </a>
+
+                <a href="register.html" id="registerLink">
+                    Register
+                </a>
+
+                <a
+                    href="profile.html"
+                    id="profileLink"
+                    class="hidden"
+                >
+                    Profile
+                </a>
+
+                <a href="cart.html">
+                    Cart
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- Checkout -->
+    <main class="checkout-page">
+
+        <div class="checkout-page-header">
+
+            <h1>Checkout</h1>
+
+            <p>
+                Review your order details before placing your order.
+            </p>
+
+        </div>
+
+
+        <div class="checkout-layout">
+
+            <!-- Left Side -->
+            <section class="checkout-main">
+
+                <!-- Delivery Address -->
+                <div class="checkout-section">
+
+                    <h2>Delivery Address</h2>
+
+                    <div
+                        id="checkoutAddressEmpty"
+                        class="checkout-empty-state"
+                    >
+
+                        <h3>
+                            No Address Available
+                        </h3>
+
+                        <p>
+                            Please add a delivery address
+                            before placing your order.
+                        </p>
+
+                        <a
+                            href="addresses.html"
+                            class="primary-button"
+                        >
+                            Manage Addresses
+                        </a>
+
+                    </div>
+
+                    <div
+                        id="checkoutAddressList"
+                        class="checkout-address-list"
+                    ></div>
+
+                </div>
+
+
+                <!-- Payment Method -->
+                <div class="checkout-section">
+
+                    <h2>Payment Method</h2>
+
+                    <div
+                        id="checkoutPaymentEmpty"
+                        class="checkout-empty-state"
+                    >
+
+                        <h3>
+                            No Payment Method Available
+                        </h3>
+
+                        <p>
+                            Please add a payment method
+                            before placing your order.
+                        </p>
+
+                        <a
+                            href="payment-methods.html"
+                            class="primary-button"
+                        >
+                            Manage Payment Methods
+                        </a>
+
+                    </div>
+
+                    <div
+                        id="checkoutPaymentList"
+                        class="checkout-payment-list"
+                    ></div>
+
+                </div>
+
+
+                <!-- Order Items -->
+                <div class="checkout-section">
+
+                    <h2>Your Items</h2>
+
+                    <div
+                        id="checkoutItemsContainer"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Right Side -->
+            <aside class="checkout-summary">
+
+                <h2>Order Summary</h2>
+
+                <div class="cart-summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="checkoutSubtotal">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <div class="cart-summary-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <strong id="checkoutDelivery">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <div class="cart-summary-divider"></div>
+
+
+                <div class="cart-summary-row cart-total-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="checkoutTotal">
+                        ₹0
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="placeOrderButton"
+                    class="checkout-button"
+                    disabled
+                >
+                    Place Order
+                </button>
+
+
+                <a
+                    href="cart.html"
+                    class="back-to-cart-link"
+                >
+                    ← Back to Cart
+                </a>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <img
+                    src="assets/images/dailymart-logo.png"
+                    alt="DailyMart"
+                    class="footer-logo"
+                >
+
+                <p>
+                    Fresh groceries and everyday essentials,
+                    delivered to your doorstep.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="categories.html">
+                    Categories
+                </a>
+
+                <a href="orders.html">
+                    Orders
+                </a>
+
+                <a href="profile.html">
+                    Profile
+                </a>
+
+                <a href="cart.html">
+                    Cart
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Customer Care
+                </h3>
+
+                <p>
+                    Email: support@dailymart.example
+                </p>
+
+                <p>
+                    Phone: +91 00000 00000
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Address
+                </h3>
+
+                <p>
+                    DailyMart Store
+                </p>
+
+                <p>
+                    Gujarat, India
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 DailyMart. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/main.js"></script>
+
+</body>
+</html>

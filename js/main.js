@@ -5,10 +5,13 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     function getLocalStorageArray(key) {
+
         let data = [];
 
         try {
-            data = JSON.parse(localStorage.getItem(key) || "[]");
+            data = JSON.parse(
+                localStorage.getItem(key) || "[]"
+            );
         } catch (error) {
             data = [];
         }
@@ -18,18 +21,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function saveLocalStorageArray(key, data) {
-        localStorage.setItem(key, JSON.stringify(data));
+
+        localStorage.setItem(
+            key,
+            JSON.stringify(data)
+        );
     }
 
 
     function getCurrentUser() {
+
         try {
+
             return JSON.parse(
-                localStorage.getItem("dailymartUser") || "null"
+                localStorage.getItem(
+                    "dailymartUser"
+                ) || "null"
             );
+
         } catch (error) {
+
             return null;
         }
+    }
+
+
+    function formatPrice(amount) {
+
+        const value = Number(amount);
+
+        if (
+            !Number.isFinite(value) ||
+            value < 0
+        ) {
+            return "₹0.00";
+        }
+
+        return "₹" + value.toFixed(2);
     }
 
 
@@ -37,24 +65,36 @@ document.addEventListener("DOMContentLoaded", function () {
        SEARCH
     ========================================================= */
 
-    const searchForm = document.getElementById("searchForm");
-    const searchInput = document.getElementById("searchInput");
+    const searchForm =
+        document.getElementById("searchForm");
 
-    if (searchForm && searchInput) {
+    const searchInput =
+        document.getElementById("searchInput");
 
-        searchForm.addEventListener("submit", function (event) {
 
-            event.preventDefault();
+    if (
+        searchForm &&
+        searchInput
+    ) {
 
-            const query = searchInput.value.trim();
+        searchForm.addEventListener(
+            "submit",
+            function (event) {
 
-            if (query === "") {
-                return;
+                event.preventDefault();
+
+                const query =
+                    searchInput.value.trim();
+
+                if (query === "") {
+                    return;
+                }
+
+                window.location.href =
+                    "search.html?q=" +
+                    encodeURIComponent(query);
             }
-
-            window.location.href =
-                "search.html?q=" + encodeURIComponent(query);
-        });
+        );
     }
 
 
@@ -63,20 +103,31 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     const searchQueryText =
-        document.getElementById("searchQueryText");
+        document.getElementById(
+            "searchQueryText"
+        );
+
 
     if (searchQueryText) {
 
-        const urlParams = new URLSearchParams(
-            window.location.search
-        );
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
 
-        const query = urlParams.get("q");
+        const query =
+            urlParams.get("q");
+
 
         if (query) {
+
             searchQueryText.textContent =
-                'Showing results for "' + query + '".';
+                'Showing results for "' +
+                query +
+                '".';
+
         } else {
+
             searchQueryText.textContent =
                 "Search for grocery items.";
         }
@@ -87,38 +138,64 @@ document.addEventListener("DOMContentLoaded", function () {
        AUTH HEADER
     ========================================================= */
 
-    const loginLink = document.getElementById("loginLink");
-    const registerLink = document.getElementById("registerLink");
-    const profileLink = document.getElementById("profileLink");
+    const loginLink =
+        document.getElementById(
+            "loginLink"
+        );
 
-    const currentUser = getCurrentUser();
+    const registerLink =
+        document.getElementById(
+            "registerLink"
+        );
+
+    const profileLink =
+        document.getElementById(
+            "profileLink"
+        );
+
+
+    const currentUser =
+        getCurrentUser();
+
 
     if (currentUser) {
 
         if (loginLink) {
-            loginLink.classList.add("hidden");
+            loginLink.classList.add(
+                "hidden"
+            );
         }
 
         if (registerLink) {
-            registerLink.classList.add("hidden");
+            registerLink.classList.add(
+                "hidden"
+            );
         }
 
         if (profileLink) {
-            profileLink.classList.remove("hidden");
+            profileLink.classList.remove(
+                "hidden"
+            );
         }
 
     } else {
 
         if (loginLink) {
-            loginLink.classList.remove("hidden");
+            loginLink.classList.remove(
+                "hidden"
+            );
         }
 
         if (registerLink) {
-            registerLink.classList.remove("hidden");
+            registerLink.classList.remove(
+                "hidden"
+            );
         }
 
         if (profileLink) {
-            profileLink.classList.add("hidden");
+            profileLink.classList.add(
+                "hidden"
+            );
         }
     }
 
@@ -133,17 +210,27 @@ document.addEventListener("DOMContentLoaded", function () {
         "addresses.html",
         "payment-methods.html",
         "wishlist.html",
-        "recently-viewed.html"
+        "recently-viewed.html",
+        "checkout.html"
     ];
 
+
     const currentPage =
-        window.location.pathname.split("/").pop();
+        window.location.pathname
+            .split("/")
+            .pop();
+
 
     if (
-        protectedPages.includes(currentPage) &&
+        protectedPages.includes(
+            currentPage
+        ) &&
         !currentUser
     ) {
-        window.location.href = "login.html";
+
+        window.location.href =
+            "login.html";
+
         return;
     }
 
@@ -153,66 +240,96 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     const registerForm =
-        document.getElementById("registerForm");
+        document.getElementById(
+            "registerForm"
+        );
+
 
     if (registerForm) {
 
-        registerForm.addEventListener("submit", function (event) {
+        registerForm.addEventListener(
+            "submit",
+            function (event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const nameInput =
-                document.getElementById("registerName");
 
-            const emailInput =
-                document.getElementById("registerEmail");
+                const nameInput =
+                    document.getElementById(
+                        "registerName"
+                    );
 
-            const passwordInput =
-                document.getElementById("registerPassword");
+                const emailInput =
+                    document.getElementById(
+                        "registerEmail"
+                    );
 
-            if (
-                !nameInput ||
-                !emailInput ||
-                !passwordInput
-            ) {
-                return;
+                const passwordInput =
+                    document.getElementById(
+                        "registerPassword"
+                    );
+
+
+                if (
+                    !nameInput ||
+                    !emailInput ||
+                    !passwordInput
+                ) {
+                    return;
+                }
+
+
+                const name =
+                    nameInput.value.trim();
+
+                const email =
+                    emailInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+
+                if (
+                    name === "" ||
+                    email === "" ||
+                    password === ""
+                ) {
+
+                    alert(
+                        "Please fill all fields."
+                    );
+
+                    return;
+                }
+
+
+                const registeredUser = {
+
+                    name: name,
+
+                    email: email,
+
+                    password: password
+                };
+
+
+                localStorage.setItem(
+                    "dailymartRegisteredUser",
+                    JSON.stringify(
+                        registeredUser
+                    )
+                );
+
+
+                alert(
+                    "Registration successful. Please login."
+                );
+
+
+                window.location.href =
+                    "login.html";
             }
-
-            const name =
-                nameInput.value.trim();
-
-            const email =
-                emailInput.value.trim();
-
-            const password =
-                passwordInput.value;
-
-            if (
-                name === "" ||
-                email === "" ||
-                password === ""
-            ) {
-                alert("Please fill all fields.");
-                return;
-            }
-
-            const registeredUser = {
-                name: name,
-                email: email,
-                password: password
-            };
-
-            localStorage.setItem(
-                "dailymartRegisteredUser",
-                JSON.stringify(registeredUser)
-            );
-
-            alert(
-                "Registration successful. Please login."
-            );
-
-            window.location.href = "login.html";
-        });
+        );
     }
 
 
@@ -221,76 +338,118 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     const loginForm =
-        document.getElementById("loginForm");
+        document.getElementById(
+            "loginForm"
+        );
+
 
     if (loginForm) {
 
-        loginForm.addEventListener("submit", function (event) {
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const emailInput =
-                document.getElementById("loginEmail");
 
-            const passwordInput =
-                document.getElementById("loginPassword");
+                const emailInput =
+                    document.getElementById(
+                        "loginEmail"
+                    );
 
-            if (
-                !emailInput ||
-                !passwordInput
-            ) {
-                return;
-            }
+                const passwordInput =
+                    document.getElementById(
+                        "loginPassword"
+                    );
 
-            const email =
-                emailInput.value.trim();
 
-            const password =
-                passwordInput.value;
+                if (
+                    !emailInput ||
+                    !passwordInput
+                ) {
+                    return;
+                }
 
-            let registeredUser = null;
 
-            try {
-                registeredUser = JSON.parse(
-                    localStorage.getItem(
-                        "dailymartRegisteredUser"
-                    ) || "null"
+                const email =
+                    emailInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+
+                let registeredUser =
+                    null;
+
+
+                try {
+
+                    registeredUser =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "dailymartRegisteredUser"
+                            ) || "null"
+                        );
+
+                } catch (error) {
+
+                    registeredUser =
+                        null;
+                }
+
+
+                if (!registeredUser) {
+
+                    alert(
+                        "No registered account found. Please register first."
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    email !==
+                        registeredUser.email ||
+                    password !==
+                        registeredUser.password
+                ) {
+
+                    alert(
+                        "Invalid email or password."
+                    );
+
+                    return;
+                }
+
+
+                const sessionUser = {
+
+                    name:
+                        registeredUser.name,
+
+                    email:
+                        registeredUser.email
+                };
+
+
+                localStorage.setItem(
+                    "dailymartUser",
+                    JSON.stringify(
+                        sessionUser
+                    )
                 );
-            } catch (error) {
-                registeredUser = null;
-            }
 
-            if (!registeredUser) {
+
                 alert(
-                    "No registered account found. Please register first."
+                    "Login successful."
                 );
-                return;
+
+
+                window.location.href =
+                    "profile.html";
             }
-
-            if (
-                email !== registeredUser.email ||
-                password !== registeredUser.password
-            ) {
-                alert(
-                    "Invalid email or password."
-                );
-                return;
-            }
-
-            const sessionUser = {
-                name: registeredUser.name,
-                email: registeredUser.email
-            };
-
-            localStorage.setItem(
-                "dailymartUser",
-                JSON.stringify(sessionUser)
-            );
-
-            alert("Login successful.");
-
-            window.location.href = "profile.html";
-        });
+        );
     }
 
 
@@ -299,29 +458,44 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     const profileName =
-        document.getElementById("profileName");
+        document.getElementById(
+            "profileName"
+        );
 
     const profileEmail =
-        document.getElementById("profileEmail");
+        document.getElementById(
+            "profileEmail"
+        );
 
     const welcomeName =
-        document.getElementById("welcomeName");
+        document.getElementById(
+            "welcomeName"
+        );
+
 
     if (currentUser) {
 
         if (profileName) {
+
             profileName.textContent =
-                currentUser.name || "User";
+                currentUser.name ||
+                "User";
         }
+
 
         if (profileEmail) {
+
             profileEmail.textContent =
-                currentUser.email || "";
+                currentUser.email ||
+                "";
         }
 
+
         if (welcomeName) {
+
             welcomeName.textContent =
-                currentUser.name || "User";
+                currentUser.name ||
+                "User";
         }
     }
 
@@ -335,6 +509,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function getSavedAddresses() {
+
         return getLocalStorageArray(
             addressStorageKey
         );
@@ -344,87 +519,129 @@ document.addEventListener("DOMContentLoaded", function () {
     function displayAddresses() {
 
         const addressList =
-            document.getElementById("addressList");
+            document.getElementById(
+                "addressList"
+            );
+
 
         if (!addressList) {
             return;
         }
 
+
         const addresses =
             getSavedAddresses();
 
+
         addressList.innerHTML = "";
+
 
         if (addresses.length === 0) {
 
             const emptyMessage =
-                document.createElement("p");
+                document.createElement(
+                    "p"
+                );
 
             emptyMessage.textContent =
                 "No addresses saved yet.";
+
 
             addressList.appendChild(
                 emptyMessage
             );
 
+
             return;
         }
 
-        addresses.forEach(function (address) {
 
-            const card =
-                document.createElement("div");
+        addresses.forEach(
+            function (address) {
 
-            card.className =
-                "saved-address-card";
+                const card =
+                    document.createElement(
+                        "div"
+                    );
 
-
-            const title =
-                document.createElement("h3");
-
-            title.textContent =
-                address.name;
+                card.className =
+                    "saved-address-card";
 
 
-            const addressText =
-                document.createElement("p");
+                const title =
+                    document.createElement(
+                        "h3"
+                    );
 
-            addressText.textContent =
-                address.address;
-
-
-            const cityText =
-                document.createElement("p");
-
-            cityText.textContent =
-                address.city +
-                " - " +
-                address.pincode;
+                title.textContent =
+                    address.name;
 
 
-            const deleteButton =
-                document.createElement("button");
+                const addressText =
+                    document.createElement(
+                        "p"
+                    );
 
-            deleteButton.type = "button";
-
-            deleteButton.textContent =
-                "Delete";
-
-            deleteButton.addEventListener(
-                "click",
-                function () {
-                    deleteAddress(address.id);
-                }
-            );
+                addressText.textContent =
+                    address.address;
 
 
-            card.appendChild(title);
-            card.appendChild(addressText);
-            card.appendChild(cityText);
-            card.appendChild(deleteButton);
+                const cityText =
+                    document.createElement(
+                        "p"
+                    );
 
-            addressList.appendChild(card);
-        });
+                cityText.textContent =
+                    address.city +
+                    " - " +
+                    address.pincode;
+
+
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
+
+                deleteButton.type =
+                    "button";
+
+                deleteButton.textContent =
+                    "Delete";
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    function () {
+
+                        deleteAddress(
+                            address.id
+                        );
+                    }
+                );
+
+
+                card.appendChild(
+                    title
+                );
+
+                card.appendChild(
+                    addressText
+                );
+
+                card.appendChild(
+                    cityText
+                );
+
+                card.appendChild(
+                    deleteButton
+                );
+
+
+                addressList.appendChild(
+                    card
+                );
+            }
+        );
     }
 
 
@@ -433,23 +650,37 @@ document.addEventListener("DOMContentLoaded", function () {
         const addresses =
             getSavedAddresses();
 
+
         const updatedAddresses =
-            addresses.filter(function (address) {
-                return address.id !== id;
-            });
+            addresses.filter(
+                function (address) {
+
+                    return (
+                        address.id !== id
+                    );
+                }
+            );
+
 
         saveLocalStorageArray(
             addressStorageKey,
             updatedAddresses
         );
 
+
         displayAddresses();
+
+        displayCheckoutData();
+
         updateProfileStatuses();
     }
 
 
     const addressForm =
-        document.getElementById("addressForm");
+        document.getElementById(
+            "addressForm"
+        );
+
 
     if (addressForm) {
 
@@ -459,17 +690,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
+
                 const nameInput =
-                    document.getElementById("addressName");
+                    document.getElementById(
+                        "addressName"
+                    );
 
                 const addressInput =
-                    document.getElementById("addressText");
+                    document.getElementById(
+                        "addressText"
+                    );
 
                 const cityInput =
-                    document.getElementById("addressCity");
+                    document.getElementById(
+                        "addressCity"
+                    );
 
                 const pincodeInput =
-                    document.getElementById("addressPincode");
+                    document.getElementById(
+                        "addressPincode"
+                    );
 
 
                 if (
@@ -500,17 +740,25 @@ document.addEventListener("DOMContentLoaded", function () {
                     address === "" ||
                     city === ""
                 ) {
+
                     alert(
                         "Please fill all address fields."
                     );
+
                     return;
                 }
 
 
-                if (!/^\d{6}$/.test(pincode)) {
+                if (
+                    !/^\d{6}$/.test(
+                        pincode
+                    )
+                ) {
+
                     alert(
                         "Please enter a valid 6-digit pincode."
                     );
+
                     return;
                 }
 
@@ -520,15 +768,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 const newAddress = {
+
                     id: Date.now(),
+
                     name: name,
+
                     address: address,
+
                     city: city,
+
                     pincode: pincode
                 };
 
 
-                addresses.push(newAddress);
+                addresses.push(
+                    newAddress
+                );
 
 
                 saveLocalStorageArray(
@@ -539,7 +794,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 addressForm.reset();
 
+
                 displayAddresses();
+
+                displayCheckoutData();
+
                 updateProfileStatuses();
 
 
@@ -563,6 +822,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function getSavedPaymentMethods() {
+
         return getLocalStorageArray(
             paymentStorageKey
         );
@@ -572,92 +832,134 @@ document.addEventListener("DOMContentLoaded", function () {
     function displayPaymentMethods() {
 
         const paymentList =
-            document.getElementById("paymentList");
+            document.getElementById(
+                "paymentList"
+            );
+
 
         if (!paymentList) {
             return;
         }
 
+
         const paymentMethods =
             getSavedPaymentMethods();
+
 
         paymentList.innerHTML = "";
 
 
-        if (paymentMethods.length === 0) {
+        if (
+            paymentMethods.length === 0
+        ) {
 
             const emptyMessage =
-                document.createElement("p");
+                document.createElement(
+                    "p"
+                );
+
 
             emptyMessage.textContent =
                 "No payment methods saved yet.";
+
 
             paymentList.appendChild(
                 emptyMessage
             );
 
+
             return;
         }
 
 
-        paymentMethods.forEach(function (method) {
+        paymentMethods.forEach(
+            function (method) {
 
-            const card =
-                document.createElement("div");
-
-            card.className =
-                "saved-payment-card";
-
-
-            const title =
-                document.createElement("h3");
-
-            title.textContent =
-                method.type;
-
-
-            const details =
-                document.createElement("p");
-
-
-            if (
-                method.type === "UPI" &&
-                method.upiId
-            ) {
-                details.textContent =
-                    "UPI ID: " + method.upiId;
-            } else {
-                details.textContent =
-                    "Cash payment on delivery";
-            }
-
-
-            const deleteButton =
-                document.createElement("button");
-
-            deleteButton.type = "button";
-
-            deleteButton.textContent =
-                "Delete";
-
-
-            deleteButton.addEventListener(
-                "click",
-                function () {
-
-                    deletePaymentMethod(
-                        method.id
+                const card =
+                    document.createElement(
+                        "div"
                     );
+
+
+                card.className =
+                    "saved-payment-card";
+
+
+                const title =
+                    document.createElement(
+                        "h3"
+                    );
+
+
+                title.textContent =
+                    method.type;
+
+
+                const details =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                if (
+                    method.type === "UPI" &&
+                    method.upiId
+                ) {
+
+                    details.textContent =
+                        "UPI ID: " +
+                        method.upiId;
+
+                } else {
+
+                    details.textContent =
+                        "Cash payment on delivery";
                 }
-            );
 
 
-            card.appendChild(title);
-            card.appendChild(details);
-            card.appendChild(deleteButton);
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
 
-            paymentList.appendChild(card);
-        });
+
+                deleteButton.type =
+                    "button";
+
+
+                deleteButton.textContent =
+                    "Delete";
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    function () {
+
+                        deletePaymentMethod(
+                            method.id
+                        );
+                    }
+                );
+
+
+                card.appendChild(
+                    title
+                );
+
+                card.appendChild(
+                    details
+                );
+
+                card.appendChild(
+                    deleteButton
+                );
+
+
+                paymentList.appendChild(
+                    card
+                );
+            }
+        );
     }
 
 
@@ -666,10 +968,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const methods =
             getSavedPaymentMethods();
 
+
         const updatedMethods =
-            methods.filter(function (method) {
-                return method.id !== id;
-            });
+            methods.filter(
+                function (method) {
+
+                    return (
+                        method.id !== id
+                    );
+                }
+            );
 
 
         saveLocalStorageArray(
@@ -679,28 +987,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         displayPaymentMethods();
+
+        displayCheckoutData();
+
         updateProfileStatuses();
     }
 
 
     const paymentType =
-        document.getElementById("paymentType");
+        document.getElementById(
+            "paymentType"
+        );
+
 
     const upiField =
-        document.getElementById("upiField");
+        document.getElementById(
+            "upiField"
+        );
 
 
-    if (paymentType && upiField) {
+    if (
+        paymentType &&
+        upiField
+    ) {
 
         paymentType.addEventListener(
             "change",
             function () {
 
-                if (paymentType.value === "UPI") {
+                if (
+                    paymentType.value ===
+                    "UPI"
+                ) {
+
                     upiField.classList.remove(
                         "hidden"
                     );
+
                 } else {
+
                     upiField.classList.add(
                         "hidden"
                     );
@@ -711,7 +1036,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     const paymentForm =
-        document.getElementById("paymentForm");
+        document.getElementById(
+            "paymentForm"
+        );
 
 
     if (paymentForm) {
@@ -730,13 +1057,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 const upiInput =
-                    document.getElementById("upiId");
+                    document.getElementById(
+                        "upiId"
+                    );
 
 
-                if (selectedType === "") {
+                if (
+                    selectedType === ""
+                ) {
+
                     alert(
                         "Please select a payment method."
                     );
+
                     return;
                 }
 
@@ -744,20 +1077,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 let upiId = "";
 
 
-                if (selectedType === "UPI") {
+                if (
+                    selectedType ===
+                    "UPI"
+                ) {
 
                     if (!upiInput) {
                         return;
                     }
+
 
                     upiId =
                         upiInput.value.trim();
 
 
                     if (upiId === "") {
+
                         alert(
                             "Please enter your UPI ID."
                         );
+
                         return;
                     }
                 }
@@ -768,13 +1107,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 const newMethod = {
+
                     id: Date.now(),
-                    type: selectedType,
-                    upiId: upiId
+
+                    type:
+                        selectedType,
+
+                    upiId:
+                        upiId
                 };
 
 
-                methods.push(newMethod);
+                methods.push(
+                    newMethod
+                );
 
 
                 saveLocalStorageArray(
@@ -787,6 +1133,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 if (upiField) {
+
                     upiField.classList.add(
                         "hidden"
                     );
@@ -794,6 +1141,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 displayPaymentMethods();
+
+                displayCheckoutData();
+
                 updateProfileStatuses();
 
 
@@ -852,12 +1202,17 @@ document.addEventListener("DOMContentLoaded", function () {
             const addresses =
                 getSavedAddresses();
 
-            if (addresses.length === 0) {
+
+            if (
+                addresses.length === 0
+            ) {
 
                 addressStatus.textContent =
                     "No Addresses Saved";
 
-            } else if (addresses.length === 1) {
+            } else if (
+                addresses.length === 1
+            ) {
 
                 addressStatus.textContent =
                     "1 Address Saved";
@@ -878,12 +1233,17 @@ document.addEventListener("DOMContentLoaded", function () {
             const methods =
                 getSavedPaymentMethods();
 
-            if (methods.length === 0) {
+
+            if (
+                methods.length === 0
+            ) {
 
                 paymentStatus.textContent =
                     "No Payment Methods";
 
-            } else if (methods.length === 1) {
+            } else if (
+                methods.length === 1
+            ) {
 
                 paymentStatus.textContent =
                     "1 Method Saved";
@@ -916,12 +1276,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-            if (cartItems.length === 0) {
+            if (
+                cartItems.length === 0
+            ) {
 
                 cartStatus.textContent =
                     "Cart is Empty";
 
-            } else if (cartItems.length === 1) {
+            } else if (
+                cartItems.length === 1
+            ) {
 
                 cartStatus.textContent =
                     "1 Item in Cart";
@@ -945,7 +1309,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-            if (wishlistItems.length === 0) {
+            if (
+                wishlistItems.length === 0
+            ) {
 
                 wishlistStatus.textContent =
                     "Wishlist is Empty";
@@ -961,7 +1327,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* Recently Viewed */
 
-        if (recentlyViewedStatus) {
+        if (
+            recentlyViewedStatus
+        ) {
 
             const recentlyViewedItems =
                 getLocalStorageArray(
@@ -970,7 +1338,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (
-                recentlyViewedItems.length === 0
+                recentlyViewedItems.length ===
+                0
             ) {
 
                 recentlyViewedStatus.textContent =
@@ -1046,12 +1415,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const price =
             Number(item.price);
 
+
         if (
             Number.isFinite(price) &&
             price >= 0
         ) {
+
             return price;
         }
+
 
         return 0;
     }
@@ -1062,12 +1434,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const quantity =
             Number(item.quantity);
 
+
         if (
             Number.isInteger(quantity) &&
             quantity > 0
         ) {
+
             return quantity;
         }
+
 
         return 1;
     }
@@ -1076,33 +1451,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function getItemName(item) {
 
         if (
-            typeof item.name === "string" &&
+            typeof item.name ===
+                "string" &&
             item.name.trim() !== ""
         ) {
+
             return item.name;
         }
 
+
         return "Grocery Item";
-    }
-
-
-    function getItemId(item, index) {
-
-        if (
-            item.id !== undefined &&
-            item.id !== null
-        ) {
-            return String(item.id);
-        }
-
-        if (
-            item.productId !== undefined &&
-            item.productId !== null
-        ) {
-            return String(item.productId);
-        }
-
-        return "cart-item-" + index;
     }
 
 
@@ -1120,39 +1478,59 @@ document.addEventListener("DOMContentLoaded", function () {
             getCartItems();
 
 
-        if (cartItems.length === 0) {
+        if (
+            cartItems.length === 0
+        ) {
 
             if (cartEmptyState) {
+
                 cartEmptyState.classList.remove(
                     "hidden"
                 );
             }
 
+
             if (cartItemsContainer) {
-                cartItemsContainer.innerHTML = "";
+
+                cartItemsContainer.innerHTML =
+                    "";
             }
+
 
             if (cartSubtotal) {
-                cartSubtotal.textContent = "₹0";
+
+                cartSubtotal.textContent =
+                    "₹0";
             }
+
 
             if (cartDelivery) {
-                cartDelivery.textContent = "₹0";
+
+                cartDelivery.textContent =
+                    "₹0";
             }
+
 
             if (cartTotal) {
-                cartTotal.textContent = "₹0";
+
+                cartTotal.textContent =
+                    "₹0";
             }
 
+
             if (checkoutButton) {
-                checkoutButton.disabled = true;
+
+                checkoutButton.disabled =
+                    true;
             }
+
 
             return;
         }
 
 
         if (cartEmptyState) {
+
             cartEmptyState.classList.add(
                 "hidden"
             );
@@ -1164,207 +1542,269 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        cartItemsContainer.innerHTML = "";
+        cartItemsContainer.innerHTML =
+            "";
 
 
         let subtotal = 0;
 
 
-        cartItems.forEach(function (item, index) {
+        cartItems.forEach(
+            function (item, index) {
 
-            const price =
-                getItemPrice(item);
-
-            const quantity =
-                getItemQuantity(item);
-
-            const itemTotal =
-                price * quantity;
-
-            subtotal += itemTotal;
+                const price =
+                    getItemPrice(item);
 
 
-            const itemCard =
-                document.createElement("div");
-
-            itemCard.className =
-                "cart-item";
+                const quantity =
+                    getItemQuantity(item);
 
 
-            const itemInfo =
-                document.createElement("div");
-
-            itemInfo.className =
-                "cart-item-info";
+                const itemTotal =
+                    price * quantity;
 
 
-            const itemName =
-                document.createElement("h3");
-
-            itemName.textContent =
-                getItemName(item);
+                subtotal +=
+                    itemTotal;
 
 
-            const priceText =
-                document.createElement("p");
-
-            priceText.textContent =
-                "₹" +
-                price.toFixed(2) +
-                " each";
-
-
-            itemInfo.appendChild(itemName);
-            itemInfo.appendChild(priceText);
-
-
-            const quantityControls =
-                document.createElement("div");
-
-            quantityControls.className =
-                "cart-quantity-controls";
-
-
-            const decreaseButton =
-                document.createElement("button");
-
-            decreaseButton.type = "button";
-
-            decreaseButton.textContent = "−";
-
-
-            const quantityText =
-                document.createElement("span");
-
-            quantityText.textContent =
-                quantity;
-
-
-            const increaseButton =
-                document.createElement("button");
-
-            increaseButton.type = "button";
-
-            increaseButton.textContent = "+";
-
-
-            const removeButton =
-                document.createElement("button");
-
-            removeButton.type = "button";
-
-            removeButton.textContent =
-                "Remove";
-
-
-            decreaseButton.addEventListener(
-                "click",
-                function () {
-
-                    updateCartQuantity(
-                        index,
-                        quantity - 1
+                const itemCard =
+                    document.createElement(
+                        "div"
                     );
-                }
-            );
 
 
-            increaseButton.addEventListener(
-                "click",
-                function () {
+                itemCard.className =
+                    "cart-item";
 
-                    updateCartQuantity(
-                        index,
-                        quantity + 1
+
+                const itemInfo =
+                    document.createElement(
+                        "div"
                     );
-                }
-            );
 
 
-            removeButton.addEventListener(
-                "click",
-                function () {
-
-                    removeCartItem(index);
-                }
-            );
+                itemInfo.className =
+                    "cart-item-info";
 
 
-            quantityControls.appendChild(
-                decreaseButton
-            );
-
-            quantityControls.appendChild(
-                quantityText
-            );
-
-            quantityControls.appendChild(
-                increaseButton
-            );
-
-            quantityControls.appendChild(
-                removeButton
-            );
+                const itemName =
+                    document.createElement(
+                        "h3"
+                    );
 
 
-            const itemTotalText =
-                document.createElement("strong");
-
-            itemTotalText.textContent =
-                "₹" +
-                itemTotal.toFixed(2);
+                itemName.textContent =
+                    getItemName(item);
 
 
-            itemCard.appendChild(itemInfo);
-            itemCard.appendChild(
-                quantityControls
-            );
-            itemCard.appendChild(
-                itemTotalText
-            );
+                const priceText =
+                    document.createElement(
+                        "p"
+                    );
 
 
-            cartItemsContainer.appendChild(
-                itemCard
-            );
-        });
+                priceText.textContent =
+                    formatPrice(price) +
+                    " each";
 
 
-        /*
-            Delivery calculation is intentionally simple
-            for the frontend foundation.
+                itemInfo.appendChild(
+                    itemName
+                );
 
-            Real delivery rules can be connected
-            to backend/admin settings later.
-        */
 
-        const delivery =
-            subtotal > 0 ? 0 : 0;
+                itemInfo.appendChild(
+                    priceText
+                );
 
+
+                const quantityControls =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                quantityControls.className =
+                    "cart-quantity-controls";
+
+
+                const decreaseButton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                decreaseButton.type =
+                    "button";
+
+
+                decreaseButton.textContent =
+                    "−";
+
+
+                const quantityText =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                quantityText.textContent =
+                    quantity;
+
+
+                const increaseButton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                increaseButton.type =
+                    "button";
+
+
+                increaseButton.textContent =
+                    "+";
+
+
+                const removeButton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                removeButton.type =
+                    "button";
+
+
+                removeButton.textContent =
+                    "Remove";
+
+
+                decreaseButton.addEventListener(
+                    "click",
+                    function () {
+
+                        updateCartQuantity(
+                            index,
+                            quantity - 1
+                        );
+                    }
+                );
+
+
+                increaseButton.addEventListener(
+                    "click",
+                    function () {
+
+                        updateCartQuantity(
+                            index,
+                            quantity + 1
+                        );
+                    }
+                );
+
+
+                removeButton.addEventListener(
+                    "click",
+                    function () {
+
+                        removeCartItem(
+                            index
+                        );
+                    }
+                );
+
+
+                quantityControls.appendChild(
+                    decreaseButton
+                );
+
+
+                quantityControls.appendChild(
+                    quantityText
+                );
+
+
+                quantityControls.appendChild(
+                    increaseButton
+                );
+
+
+                quantityControls.appendChild(
+                    removeButton
+                );
+
+
+                const itemTotalText =
+                    document.createElement(
+                        "strong"
+                    );
+
+
+                itemTotalText.textContent =
+                    formatPrice(
+                        itemTotal
+                    );
+
+
+                itemCard.appendChild(
+                    itemInfo
+                );
+
+
+                itemCard.appendChild(
+                    quantityControls
+                );
+
+
+                itemCard.appendChild(
+                    itemTotalText
+                );
+
+
+                cartItemsContainer.appendChild(
+                    itemCard
+                );
+            }
+        );
+
+
+        const delivery = 0;
 
         const total =
             subtotal + delivery;
 
 
         if (cartSubtotal) {
+
             cartSubtotal.textContent =
-                "₹" + subtotal.toFixed(2);
+                formatPrice(
+                    subtotal
+                );
         }
 
 
         if (cartDelivery) {
+
             cartDelivery.textContent =
-                "₹" + delivery.toFixed(2);
+                formatPrice(
+                    delivery
+                );
         }
 
 
         if (cartTotal) {
+
             cartTotal.textContent =
-                "₹" + total.toFixed(2);
+                formatPrice(
+                    total
+                );
         }
 
 
         if (checkoutButton) {
+
             checkoutButton.disabled =
                 false;
         }
@@ -1388,9 +1828,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        if (newQuantity <= 0) {
+        if (
+            newQuantity <= 0
+        ) {
 
-            cartItems.splice(index, 1);
+            cartItems.splice(
+                index,
+                1
+            );
 
         } else {
 
@@ -1399,9 +1844,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        saveCartItems(cartItems);
+        saveCartItems(
+            cartItems
+        );
+
 
         renderCart();
+
         updateProfileStatuses();
     }
 
@@ -1420,12 +1869,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        cartItems.splice(index, 1);
+        cartItems.splice(
+            index,
+            1
+        );
 
 
-        saveCartItems(cartItems);
+        saveCartItems(
+            cartItems
+        );
+
 
         renderCart();
+
         updateProfileStatuses();
     }
 
@@ -1434,7 +1890,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-       CHECKOUT BUTTON
+       CART → CHECKOUT
     ========================================================= */
 
     if (checkoutButton) {
@@ -1447,7 +1903,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     getCartItems();
 
 
-                if (cartItems.length === 0) {
+                if (
+                    cartItems.length === 0
+                ) {
                     return;
                 }
 
@@ -1457,6 +1915,474 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
     }
+
+
+    /* =========================================================
+       CHECKOUT
+    ========================================================= */
+
+    const checkoutItemsContainer =
+        document.getElementById(
+            "checkoutItemsContainer"
+        );
+
+    const checkoutSubtotal =
+        document.getElementById(
+            "checkoutSubtotal"
+        );
+
+    const checkoutDelivery =
+        document.getElementById(
+            "checkoutDelivery"
+        );
+
+    const checkoutTotal =
+        document.getElementById(
+            "checkoutTotal"
+        );
+
+    const checkoutAddressEmpty =
+        document.getElementById(
+            "checkoutAddressEmpty"
+        );
+
+    const checkoutAddressList =
+        document.getElementById(
+            "checkoutAddressList"
+        );
+
+    const checkoutPaymentEmpty =
+        document.getElementById(
+            "checkoutPaymentEmpty"
+        );
+
+    const checkoutPaymentList =
+        document.getElementById(
+            "checkoutPaymentList"
+        );
+
+    const placeOrderButton =
+        document.getElementById(
+            "placeOrderButton"
+        );
+
+
+    function displayCheckoutData() {
+
+        if (
+            !checkoutItemsContainer &&
+            !checkoutSubtotal &&
+            !checkoutAddressList &&
+            !checkoutPaymentList
+        ) {
+            return;
+        }
+
+
+        const cartItems =
+            getCartItems();
+
+
+        const addresses =
+            getSavedAddresses();
+
+
+        const paymentMethods =
+            getSavedPaymentMethods();
+
+
+        /* -----------------------------------------------------
+           CART ITEMS
+        ----------------------------------------------------- */
+
+        if (checkoutItemsContainer) {
+
+            checkoutItemsContainer.innerHTML =
+                "";
+
+            if (
+                cartItems.length === 0
+            ) {
+
+                const emptyMessage =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                emptyMessage.textContent =
+                    "Your Cart is Empty.";
+
+
+                checkoutItemsContainer.appendChild(
+                    emptyMessage
+                );
+
+            } else {
+
+                cartItems.forEach(
+                    function (item) {
+
+                        const row =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        row.className =
+                            "checkout-item";
+
+
+                        const name =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        name.textContent =
+                            getItemName(
+                                item
+                            );
+
+
+                        const quantity =
+                            getItemQuantity(
+                                item
+                            );
+
+
+                        const price =
+                            getItemPrice(
+                                item
+                            );
+
+
+                        const details =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        details.textContent =
+                            "Qty: " +
+                            quantity +
+                            " × " +
+                            formatPrice(
+                                price
+                            );
+
+
+                        const total =
+                            document.createElement(
+                                "strong"
+                            );
+
+
+                        total.textContent =
+                            formatPrice(
+                                price *
+                                quantity
+                            );
+
+
+                        row.appendChild(
+                            name
+                        );
+
+
+                        row.appendChild(
+                            details
+                        );
+
+
+                        row.appendChild(
+                            total
+                        );
+
+
+                        checkoutItemsContainer.appendChild(
+                            row
+                        );
+                    }
+                );
+            }
+        }
+
+
+        /* -----------------------------------------------------
+           ADDRESS
+        ----------------------------------------------------- */
+
+        if (
+            checkoutAddressList
+        ) {
+
+            checkoutAddressList.innerHTML =
+                "";
+
+
+            if (
+                addresses.length === 0
+            ) {
+
+                if (
+                    checkoutAddressEmpty
+                ) {
+
+                    checkoutAddressEmpty.classList.remove(
+                        "hidden"
+                    );
+                }
+
+            } else {
+
+                if (
+                    checkoutAddressEmpty
+                ) {
+
+                    checkoutAddressEmpty.classList.add(
+                        "hidden"
+                    );
+                }
+
+
+                addresses.forEach(
+                    function (address) {
+
+                        const card =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        card.className =
+                            "checkout-address-card";
+
+
+                        const title =
+                            document.createElement(
+                                "h3"
+                            );
+
+
+                        title.textContent =
+                            address.name;
+
+
+                        const addressText =
+                            document.createElement(
+                                "p"
+                            );
+
+
+                        addressText.textContent =
+                            address.address;
+
+
+                        const locationText =
+                            document.createElement(
+                                "p"
+                            );
+
+
+                        locationText.textContent =
+                            address.city +
+                            " - " +
+                            address.pincode;
+
+
+                        card.appendChild(
+                            title
+                        );
+
+
+                        card.appendChild(
+                            addressText
+                        );
+
+
+                        card.appendChild(
+                            locationText
+                        );
+
+
+                        checkoutAddressList.appendChild(
+                            card
+                        );
+                    }
+                );
+            }
+        }
+
+
+        /* -----------------------------------------------------
+           PAYMENT
+        ----------------------------------------------------- */
+
+        if (
+            checkoutPaymentList
+        ) {
+
+            checkoutPaymentList.innerHTML =
+                "";
+
+
+            if (
+                paymentMethods.length === 0
+            ) {
+
+                if (
+                    checkoutPaymentEmpty
+                ) {
+
+                    checkoutPaymentEmpty.classList.remove(
+                        "hidden"
+                    );
+                }
+
+            } else {
+
+                if (
+                    checkoutPaymentEmpty
+                ) {
+
+                    checkoutPaymentEmpty.classList.add(
+                        "hidden"
+                    );
+                }
+
+
+                paymentMethods.forEach(
+                    function (method) {
+
+                        const card =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        card.className =
+                            "checkout-payment-card";
+
+
+                        const title =
+                            document.createElement(
+                                "h3"
+                            );
+
+
+                        title.textContent =
+                            method.type;
+
+
+                        const details =
+                            document.createElement(
+                                "p"
+                            );
+
+
+                        if (
+                            method.type ===
+                                "UPI" &&
+                            method.upiId
+                        ) {
+
+                            details.textContent =
+                                "UPI ID: " +
+                                method.upiId;
+
+                        } else {
+
+                            details.textContent =
+                                "Cash payment on delivery";
+                        }
+
+
+                        card.appendChild(
+                            title
+                        );
+
+
+                        card.appendChild(
+                            details
+                        );
+
+
+                        checkoutPaymentList.appendChild(
+                            card
+                        );
+                    }
+                );
+            }
+        }
+
+
+        /* -----------------------------------------------------
+           SUMMARY
+        ----------------------------------------------------- */
+
+        let subtotal = 0;
+
+
+        cartItems.forEach(
+            function (item) {
+
+                subtotal +=
+                    getItemPrice(item) *
+                    getItemQuantity(item);
+            }
+        );
+
+
+        const delivery = 0;
+
+        const total =
+            subtotal + delivery;
+
+
+        if (checkoutSubtotal) {
+
+            checkoutSubtotal.textContent =
+                formatPrice(
+                    subtotal
+                );
+        }
+
+
+        if (checkoutDelivery) {
+
+            checkoutDelivery.textContent =
+                formatPrice(
+                    delivery
+                );
+        }
+
+
+        if (checkoutTotal) {
+
+            checkoutTotal.textContent =
+                formatPrice(
+                    total
+                );
+        }
+
+
+        /*
+            Place Order stays disabled for now.
+
+            Actual order creation will be connected
+            in a later part with backend/order logic.
+        */
+
+        if (placeOrderButton) {
+
+            placeOrderButton.disabled =
+                true;
+        }
+    }
+
+
+    displayCheckoutData();
 
 
     /* =========================================================
@@ -1479,9 +2405,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     "dailymartUser"
                 );
 
+
                 alert(
                     "You have been logged out."
                 );
+
 
                 window.location.href =
                     "index.html";
