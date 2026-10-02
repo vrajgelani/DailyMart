@@ -71,6 +71,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================
+       ORDERS LOGIN PROTECTION
+    ========================= */
+
+    const ordersEmptyState = document.getElementById("ordersEmptyState");
+
+    if (ordersEmptyState) {
+
+        const currentUser = localStorage.getItem("dailymartUser");
+
+        if (!currentUser) {
+            window.location.href = "login.html";
+            return;
+        }
+    }
+
+
+    /* =========================
        REGISTER
     ========================= */
 
@@ -98,7 +115,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (password.length < 6) {
 
-                message.textContent = "Password must contain at least 6 characters.";
+                message.textContent =
+                    "Password must contain at least 6 characters.";
+
                 message.style.color = "#dc2626";
 
                 return;
@@ -115,7 +134,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 JSON.stringify(user)
             );
 
-            message.textContent = "Registration successful. Please login.";
+            message.textContent =
+                "Registration successful. Please login.";
+
             message.style.color = "#16a34a";
 
             registerForm.reset();
@@ -139,13 +160,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
             event.preventDefault();
 
-            const email = document.getElementById("loginEmail").value.trim();
-            const password = document.getElementById("loginPassword").value;
-            const message = document.getElementById("loginMessage");
+            const email =
+                document.getElementById("loginEmail").value.trim();
 
-            const registeredUser = localStorage.getItem(
-                "dailymartRegisteredUser"
-            );
+            const password =
+                document.getElementById("loginPassword").value;
+
+            const message =
+                document.getElementById("loginMessage");
+
+            const registeredUser =
+                localStorage.getItem("dailymartRegisteredUser");
 
             if (!registeredUser) {
 
@@ -201,7 +226,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (profileName || profileEmail) {
 
-        const currentUser = localStorage.getItem("dailymartUser");
+        const currentUser =
+            localStorage.getItem("dailymartUser");
 
         if (!currentUser) {
 
@@ -226,7 +252,8 @@ document.addEventListener("DOMContentLoaded", function () {
        LOGOUT
     ========================= */
 
-    const logoutButton = document.getElementById("logoutButton");
+    const logoutButton =
+        document.getElementById("logoutButton");
 
     if (logoutButton) {
 

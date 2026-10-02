@@ -832,3 +832,51 @@ input {
 
     color: #6b7280;
 }
+
+/* =========================
+   ORDERS PAGE
+========================= */
+
+.orders-section {
+    width: min(1100px, 92%);
+    margin: 55px auto 90px;
+}
+
+.orders-section h1 {
+    margin-top: 5px;
+    font-size: 36px;
+}
+
+.orders-empty-state {
+    margin-top: 28px;
+
+    min-height: 380px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    padding: 40px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.orders-empty-state h2 {
+    font-size: 28px;
+}
+
+.orders-empty-state p {
+    max-width: 600px;
+
+    margin: 10px 0 25px;
+
+    color: #6b7280;
+}

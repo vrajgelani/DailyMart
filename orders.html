@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Categories - DailyMart</title>
+    <title>My Orders - DailyMart</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -44,11 +44,11 @@
                     Home
                 </a>
 
-                <a href="categories.html" class="nav-link active">
+                <a href="categories.html" class="nav-link">
                     Categories
                 </a>
 
-                <a href="orders.html" class="nav-link">
+                <a href="orders.html" class="nav-link active">
                     Orders
                 </a>
 
@@ -87,41 +87,44 @@
     </header>
 
 
-    <!-- ================= MAIN ================= -->
+    <!-- ================= ORDERS ================= -->
     <main>
 
-        <section class="categories-page-section">
+        <section class="orders-section">
 
             <div class="section-heading">
 
                 <p class="section-label">
-                    Explore DailyMart
+                    Shopping History
                 </p>
 
                 <h1>
-                    All Categories
+                    My Orders
                 </h1>
 
                 <p class="page-description">
-                    Browse products by category when categories are available.
+                    View your DailyMart orders and order details here.
                 </p>
 
             </div>
 
 
-            <div class="categories-empty-state">
+            <div
+                class="orders-empty-state"
+                id="ordersEmptyState"
+            >
 
                 <h2>
-                    No Categories Available
+                    No Orders Yet
                 </h2>
 
                 <p>
-                    Categories will appear here when they are added by the
-                    DailyMart administrator.
+                    Your completed orders will appear here after you place
+                    an order.
                 </p>
 
                 <a href="index.html" class="primary-button">
-                    Back to Home
+                    Start Shopping
                 </a>
 
             </div>
@@ -186,7 +189,7 @@
                     Help Center
                 </a>
 
-                <a href="#">
+                <a href="orders.html">
                     Orders
                 </a>
 
