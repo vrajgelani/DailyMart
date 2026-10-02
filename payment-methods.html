@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Profile - DailyMart</title>
+    <title>Payment Methods - DailyMart</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -30,6 +30,7 @@
                     type="search"
                     id="searchInput"
                     placeholder="Search for groceries and daily essentials"
+                    autocomplete="off"
                 >
 
                 <button type="submit">
@@ -44,7 +45,7 @@
                     Home
                 </a>
 
-                <a href="index.html#categories" class="nav-link">
+                <a href="categories.html" class="nav-link">
                     Categories
                 </a>
 
@@ -52,15 +53,27 @@
                     Orders
                 </a>
 
-                <a href="login.html" class="nav-link auth-login-link" id="loginNavLink">
+                <a
+                    href="login.html"
+                    class="nav-link auth-login-link"
+                    id="loginNavLink"
+                >
                     Login
                 </a>
 
-                <a href="register.html" class="nav-link auth-register-link" id="registerNavLink">
+                <a
+                    href="register.html"
+                    class="nav-link auth-register-link"
+                    id="registerNavLink"
+                >
                     Register
                 </a>
 
-                <a href="profile.html" class="nav-link active profile-nav-link" id="profileNavLink">
+                <a
+                    href="profile.html"
+                    class="nav-link profile-nav-link hidden"
+                    id="profileNavLink"
+                >
                     Profile
                 </a>
 
@@ -75,76 +88,134 @@
     </header>
 
 
-    <!-- ================= PROFILE ================= -->
+    <!-- ================= PAYMENT METHODS ================= -->
     <main>
 
-        <section class="profile-section">
+        <section class="payment-methods-section">
 
-            <div class="profile-card">
+            <div class="section-heading">
 
                 <p class="section-label">
                     My Account
                 </p>
 
                 <h1>
-                    My Profile
+                    Payment Methods
                 </h1>
 
-                <div class="profile-details">
+                <p class="page-description">
+                    Manage the payment methods you want to use for
+                    DailyMart orders.
+                </p>
 
-                    <div class="profile-row">
+            </div>
 
-                        <span>
-                            Name
-                        </span>
 
-                        <strong id="profileName">
-                            User
-                        </strong>
+            <!-- ADD PAYMENT METHOD -->
+            <div class="payment-form-card">
+
+                <h2>
+                    Add Payment Method
+                </h2>
+
+                <form
+                    id="paymentMethodForm"
+                    class="payment-form"
+                >
+
+                    <div class="form-group">
+
+                        <label for="paymentType">
+                            Payment Type
+                        </label>
+
+                        <select
+                            id="paymentType"
+                            required
+                        >
+
+                            <option value="">
+                                Select payment type
+                            </option>
+
+                            <option value="UPI">
+                                UPI
+                            </option>
+
+                            <option value="Cash on Delivery">
+                                Cash on Delivery
+                            </option>
+
+                        </select>
 
                     </div>
 
 
-                    <div class="profile-row">
+                    <div
+                        class="form-group hidden"
+                        id="upiField"
+                    >
 
-                        <span>
-                            Email
-                        </span>
+                        <label for="upiId">
+                            UPI ID
+                        </label>
 
-                        <strong id="profileEmail">
-                            user@example.com
-                        </strong>
+                        <input
+                            type="text"
+                            id="upiId"
+                            placeholder="example@upi"
+                        >
 
                     </div>
 
-                </div>
-
-
-                <div class="profile-actions">
-
-                    <a href="#" class="profile-action-button">
-                        My Orders
-                    </a>
-
-                    <a href="addresses.html" class="profile-action-button">
-                        Manage Addresses
-                    </a>
-
-                    <a href="payment-methods.html" class="profile-action-button">
-                        Payment Methods
-                    </a>
 
                     <button
-                        type="button"
-                        id="logoutButton"
-                        class="logout-button"
+                        type="submit"
+                        class="primary-button"
                     >
-                        Logout
+                        Save Payment Method
                     </button>
+
+                    <p
+                        id="paymentMessage"
+                        class="form-message"
+                    ></p>
+
+                </form>
+
+            </div>
+
+
+            <!-- SAVED PAYMENT METHODS -->
+            <div class="saved-payment-section">
+
+                <div class="saved-payment-heading">
+
+                    <h2>
+                        Saved Payment Methods
+                    </h2>
 
                 </div>
 
-                <p id="profileMessage" class="form-message"></p>
+
+                <div
+                    id="savedPaymentMethods"
+                    class="saved-payment-list"
+                >
+
+                    <div class="saved-payment-empty">
+
+                        <h3>
+                            No Payment Methods Saved
+                        </h3>
+
+                        <p>
+                            Add a payment method above to save it.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -208,7 +279,7 @@
                     Help Center
                 </a>
 
-                <a href="#">
+                <a href="orders.html">
                     Orders
                 </a>
 

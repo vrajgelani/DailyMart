@@ -23,9 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 searchInput.value.trim();
 
             if (searchValue === "") {
-
                 searchInput.focus();
-
                 return;
             }
 
@@ -164,6 +162,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================
+       PAYMENT LOGIN PROTECTION
+    ========================= */
+
+    const paymentMethodForm =
+        document.getElementById("paymentMethodForm");
+
+    const savedPaymentMethods =
+        document.getElementById(
+            "savedPaymentMethods"
+        );
+
+
+    if (
+        paymentMethodForm ||
+        savedPaymentMethods
+    ) {
+
+        const currentUser =
+            localStorage.getItem("dailymartUser");
+
+        if (!currentUser) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+        }
+    }
+
+
+    /* =========================
        REGISTER
     ========================= */
 
@@ -197,7 +226,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const confirmPassword =
                     document
-                        .getElementById("registerConfirmPassword")
+                        .getElementById(
+                            "registerConfirmPassword"
+                        )
                         .value;
 
                 const message =
@@ -405,16 +436,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================
-       ADDRESS STORAGE KEY
+       ADDRESS STORAGE
     ========================= */
 
     const addressStorageKey =
         "dailymartAddresses";
 
-
-    /* =========================
-       DISPLAY ADDRESSES
-    ========================= */
 
     function displayAddresses() {
 
@@ -539,9 +566,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =========================
-       SAVE ADDRESS
-    ========================= */
+    function deleteAddress(addressId) {
+
+        const addresses =
+            JSON.parse(
+                localStorage.getItem(
+                    addressStorageKey
+                ) || "[]"
+            );
+
+
+        const updatedAddresses =
+            addresses.filter(function (address) {
+
+                return address.id !== addressId;
+
+            });
+
+
+        localStorage.setItem(
+            addressStorageKey,
+            JSON.stringify(updatedAddresses)
+        );
+
+
+        displayAddresses();
+    }
+
 
     if (addressForm) {
 
@@ -561,13 +612,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         .value
                         .trim();
 
-
                 const addressLine =
                     document
                         .getElementById("addressLine")
                         .value
                         .trim();
-
 
                 const city =
                     document
@@ -575,13 +624,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         .value
                         .trim();
 
-
                 const pincode =
                     document
                         .getElementById("addressPincode")
                         .value
                         .trim();
-
 
                 const message =
                     document.getElementById(
@@ -609,7 +656,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
 
-                const newAddress = {
+                addresses.push({
 
                     id:
                         Date.now().toString(),
@@ -625,10 +672,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     pincode:
                         pincode
-                };
-
-
-                addresses.push(newAddress);
+                });
 
 
                 localStorage.setItem(
@@ -646,7 +690,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 addressForm.reset();
 
-
                 displayAddresses();
             }
         );
@@ -654,34 +697,294 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================
-       DELETE ADDRESS
+       PAYMENT METHODS
     ========================= */
 
-    function deleteAddress(addressId) {
+    const paymentStorageKey =
+        "dailymartPaymentMethods";
 
-        const addresses =
+
+    const paymentType =
+        document.getElementById("paymentType");
+
+    const upiField =
+        document.getElementById("upiField");
+
+    const upiId =
+        document.getElementById("upiId");
+
+
+    function displayPaymentMethods() {
+
+        const paymentList =
+            document.getElementById(
+                "savedPaymentMethods"
+            );
+
+        if (!paymentList) {
+            return;
+        }
+
+
+        const methods =
             JSON.parse(
                 localStorage.getItem(
-                    addressStorageKey
+                    paymentStorageKey
                 ) || "[]"
             );
 
 
-        const updatedAddresses =
-            addresses.filter(function (address) {
+        paymentList.innerHTML = "";
 
-                return address.id !== addressId;
+
+        if (methods.length === 0) {
+
+            const emptyState =
+                document.createElement("div");
+
+            emptyState.className =
+                "saved-payment-empty";
+
+
+            const heading =
+                document.createElement("h3");
+
+            heading.textContent =
+                "No Payment Methods Saved";
+
+
+            const paragraph =
+                document.createElement("p");
+
+            paragraph.textContent =
+                "Add a payment method above to save it.";
+
+
+            emptyState.appendChild(heading);
+            emptyState.appendChild(paragraph);
+
+            paymentList.appendChild(emptyState);
+
+            return;
+        }
+
+
+        methods.forEach(function (method) {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "saved-payment-card";
+
+
+            const heading =
+                document.createElement("h3");
+
+            heading.textContent =
+                method.type;
+
+
+            const details =
+                document.createElement("p");
+
+
+            if (method.type === "UPI") {
+
+                details.textContent =
+                    method.upi;
+
+            } else {
+
+                details.textContent =
+                    "Pay when your order is delivered.";
+            }
+
+
+            const deleteButton =
+                document.createElement("button");
+
+            deleteButton.type =
+                "button";
+
+            deleteButton.className =
+                "delete-payment-button";
+
+            deleteButton.textContent =
+                "Delete";
+
+
+            deleteButton.addEventListener(
+                "click",
+                function () {
+
+                    deletePaymentMethod(method.id);
+
+                }
+            );
+
+
+            card.appendChild(heading);
+            card.appendChild(details);
+            card.appendChild(deleteButton);
+
+            paymentList.appendChild(card);
+        });
+    }
+
+
+    function deletePaymentMethod(paymentId) {
+
+        const methods =
+            JSON.parse(
+                localStorage.getItem(
+                    paymentStorageKey
+                ) || "[]"
+            );
+
+
+        const updatedMethods =
+            methods.filter(function (method) {
+
+                return method.id !== paymentId;
 
             });
 
 
         localStorage.setItem(
-            addressStorageKey,
-            JSON.stringify(updatedAddresses)
+            paymentStorageKey,
+            JSON.stringify(updatedMethods)
         );
 
 
-        displayAddresses();
+        displayPaymentMethods();
+    }
+
+
+    if (paymentType) {
+
+        paymentType.addEventListener(
+            "change",
+            function () {
+
+                if (paymentType.value === "UPI") {
+
+                    upiField.classList.remove("hidden");
+
+                    upiId.required = true;
+
+                } else {
+
+                    upiField.classList.add("hidden");
+
+                    upiId.required = false;
+
+                    upiId.value = "";
+                }
+            }
+        );
+    }
+
+
+    if (paymentMethodForm) {
+
+        displayPaymentMethods();
+
+
+        paymentMethodForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const message =
+                    document.getElementById(
+                        "paymentMessage"
+                    );
+
+
+                const selectedType =
+                    paymentType.value;
+
+
+                if (!selectedType) {
+
+                    message.textContent =
+                        "Please select a payment type.";
+
+                    message.style.color =
+                        "#dc2626";
+
+                    return;
+                }
+
+
+                if (
+                    selectedType === "UPI" &&
+                    upiId.value.trim() === ""
+                ) {
+
+                    message.textContent =
+                        "Please enter your UPI ID.";
+
+                    message.style.color =
+                        "#dc2626";
+
+                    return;
+                }
+
+
+                const methods =
+                    JSON.parse(
+                        localStorage.getItem(
+                            paymentStorageKey
+                        ) || "[]"
+                    );
+
+
+                const newMethod = {
+
+                    id:
+                        Date.now().toString(),
+
+                    type:
+                        selectedType,
+
+                    upi:
+                        selectedType === "UPI"
+                            ? upiId.value.trim()
+                            : ""
+                };
+
+
+                methods.push(newMethod);
+
+
+                localStorage.setItem(
+                    paymentStorageKey,
+                    JSON.stringify(methods)
+                );
+
+
+                message.textContent =
+                    "Payment method saved successfully.";
+
+                message.style.color =
+                    "#16a34a";
+
+
+                paymentMethodForm.reset();
+
+
+                upiField.classList.add("hidden");
+
+                upiId.required = false;
+
+
+                displayPaymentMethods();
+            }
+        );
     }
 
 
