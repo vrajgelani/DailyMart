@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DailyMart - Everything You Need, Every Day</title>
+    <title>Register - DailyMart</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
+    <!-- ================= HEADER ================= -->
     <header class="site-header">
 
         <div class="header-container">
@@ -29,7 +30,6 @@
                     type="search"
                     id="searchInput"
                     placeholder="Search for groceries and daily essentials"
-                    autocomplete="off"
                 >
 
                 <button type="submit">
@@ -40,11 +40,11 @@
 
             <nav class="main-nav">
 
-                <a href="index.html" class="nav-link active">
+                <a href="index.html" class="nav-link">
                     Home
                 </a>
 
-                <a href="#categories" class="nav-link">
+                <a href="index.html#categories" class="nav-link">
                     Categories
                 </a>
 
@@ -56,7 +56,7 @@
                     Login
                 </a>
 
-                <a href="register.html" class="nav-link auth-register-link" id="registerNavLink">
+                <a href="register.html" class="nav-link active auth-register-link" id="registerNavLink">
                     Register
                 </a>
 
@@ -75,126 +75,109 @@
     </header>
 
 
+    <!-- ================= REGISTER ================= -->
     <main>
 
-        <section class="hero-section">
+        <section class="auth-section">
 
-            <div class="hero-content">
+            <div class="auth-card">
 
-                <p class="hero-label">
-                    Welcome to DailyMart
+                <p class="section-label">
+                    Create Account
                 </p>
 
                 <h1>
-                    Everything You Need, Every Day.
+                    Register on DailyMart
                 </h1>
 
-                <p>
-                    Your everyday grocery and general store shopping,
-                    made simple.
+                <p class="auth-description">
+                    Create your account to start shopping.
                 </p>
 
-                <a href="#products" class="primary-button">
-                    Shop Now
-                </a>
 
-            </div>
+                <form id="registerForm" class="auth-form">
 
-        </section>
+                    <div class="form-group">
 
+                        <label for="registerName">
+                            Full Name
+                        </label>
 
-        <section class="content-section" id="categories">
+                        <input
+                            type="text"
+                            id="registerName"
+                            placeholder="Enter your full name"
+                            required
+                        >
 
-            <div class="section-heading">
-
-                <p class="section-label">
-                    Shop by Category
-                </p>
-
-                <h2>
-                    Categories
-                </h2>
-
-            </div>
-
-            <div class="empty-state">
-
-                <h3>
-                    No Categories Available
-                </h3>
-
-                <p>
-                    Categories will appear here when they are added.
-                </p>
-
-            </div>
-
-        </section>
+                    </div>
 
 
-        <section class="content-section" id="products">
+                    <div class="form-group">
 
-            <div class="section-heading">
+                        <label for="registerEmail">
+                            Email Address
+                        </label>
 
-                <p class="section-label">
-                    Daily Essentials
-                </p>
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            placeholder="Enter your email"
+                            required
+                        >
 
-                <h2>
-                    Products
-                </h2>
-
-            </div>
-
-            <div class="empty-state">
-
-                <h3>
-                    No Items Available
-                </h3>
-
-                <p>
-                    Products will appear here when they are added.
-                </p>
-
-            </div>
-
-        </section>
+                    </div>
 
 
-        <section class="features-section">
+                    <div class="form-group">
 
-            <div class="feature-card">
+                        <label for="registerPassword">
+                            Password
+                        </label>
 
-                <h3>
-                    Daily Essentials
-                </h3>
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            placeholder="Create a password"
+                            required
+                        >
 
-                <p>
-                    Find the products you need for everyday life.
-                </p>
+                    </div>
 
-            </div>
 
-            <div class="feature-card">
+                    <div class="form-group">
 
-                <h3>
-                    Easy Shopping
-                </h3>
+                        <label for="registerConfirmPassword">
+                            Confirm Password
+                        </label>
 
-                <p>
-                    Simple and convenient shopping experience.
-                </p>
+                        <input
+                            type="password"
+                            id="registerConfirmPassword"
+                            placeholder="Confirm your password"
+                            required
+                        >
 
-            </div>
+                    </div>
 
-            <div class="feature-card">
 
-                <h3>
-                    Simple Checkout
-                </h3>
+                    <button type="submit" class="primary-button auth-button">
+                        Register
+                    </button>
 
-                <p>
-                    A clean and straightforward checkout experience.
+                    <p id="registerMessage" class="form-message"></p>
+
+                </form>
+
+
+                <p class="auth-switch">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
                 </p>
 
             </div>
@@ -204,6 +187,7 @@
     </main>
 
 
+    <!-- ================= FOOTER ================= -->
     <footer class="site-footer">
 
         <div class="footer-container">
@@ -233,7 +217,7 @@
                     Home
                 </a>
 
-                <a href="#categories">
+                <a href="index.html#categories">
                     Categories
                 </a>
 

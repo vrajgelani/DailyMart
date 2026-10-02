@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DailyMart - Everything You Need, Every Day</title>
+    <title>Login - DailyMart</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
+    <!-- ================= HEADER ================= -->
     <header class="site-header">
 
         <div class="header-container">
@@ -29,7 +30,6 @@
                     type="search"
                     id="searchInput"
                     placeholder="Search for groceries and daily essentials"
-                    autocomplete="off"
                 >
 
                 <button type="submit">
@@ -40,11 +40,11 @@
 
             <nav class="main-nav">
 
-                <a href="index.html" class="nav-link active">
+                <a href="index.html" class="nav-link">
                     Home
                 </a>
 
-                <a href="#categories" class="nav-link">
+                <a href="index.html#categories" class="nav-link">
                     Categories
                 </a>
 
@@ -52,7 +52,7 @@
                     Orders
                 </a>
 
-                <a href="login.html" class="nav-link auth-login-link" id="loginNavLink">
+                <a href="login.html" class="nav-link active auth-login-link" id="loginNavLink">
                     Login
                 </a>
 
@@ -66,7 +66,7 @@
 
             </nav>
 
-            <a href="cart.html" class="cart-button">
+            <a href="#" class="cart-button">
                 Cart
             </a>
 
@@ -75,126 +75,77 @@
     </header>
 
 
+    <!-- ================= LOGIN ================= -->
     <main>
 
-        <section class="hero-section">
+        <section class="auth-section">
 
-            <div class="hero-content">
+            <div class="auth-card">
 
-                <p class="hero-label">
-                    Welcome to DailyMart
+                <p class="section-label">
+                    Welcome Back
                 </p>
 
                 <h1>
-                    Everything You Need, Every Day.
+                    Login to DailyMart
                 </h1>
 
-                <p>
-                    Your everyday grocery and general store shopping,
-                    made simple.
+                <p class="auth-description">
+                    Login to manage your DailyMart account.
                 </p>
 
-                <a href="#products" class="primary-button">
-                    Shop Now
-                </a>
 
-            </div>
+                <form id="loginForm" class="auth-form">
 
-        </section>
+                    <div class="form-group">
 
+                        <label for="loginEmail">
+                            Email Address
+                        </label>
 
-        <section class="content-section" id="categories">
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="Enter your email"
+                            required
+                        >
 
-            <div class="section-heading">
-
-                <p class="section-label">
-                    Shop by Category
-                </p>
-
-                <h2>
-                    Categories
-                </h2>
-
-            </div>
-
-            <div class="empty-state">
-
-                <h3>
-                    No Categories Available
-                </h3>
-
-                <p>
-                    Categories will appear here when they are added.
-                </p>
-
-            </div>
-
-        </section>
+                    </div>
 
 
-        <section class="content-section" id="products">
+                    <div class="form-group">
 
-            <div class="section-heading">
+                        <label for="loginPassword">
+                            Password
+                        </label>
 
-                <p class="section-label">
-                    Daily Essentials
-                </p>
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            required
+                        >
 
-                <h2>
-                    Products
-                </h2>
-
-            </div>
-
-            <div class="empty-state">
-
-                <h3>
-                    No Items Available
-                </h3>
-
-                <p>
-                    Products will appear here when they are added.
-                </p>
-
-            </div>
-
-        </section>
+                    </div>
 
 
-        <section class="features-section">
+                    <button type="submit" class="primary-button auth-button">
+                        Login
+                    </button>
 
-            <div class="feature-card">
+                    <p id="loginMessage" class="form-message"></p>
 
-                <h3>
-                    Daily Essentials
-                </h3>
+                </form>
 
-                <p>
-                    Find the products you need for everyday life.
-                </p>
 
-            </div>
+                <p class="auth-switch">
 
-            <div class="feature-card">
+                    Don't have an account?
 
-                <h3>
-                    Easy Shopping
-                </h3>
+                    <a href="register.html">
+                        Register
+                    </a>
 
-                <p>
-                    Simple and convenient shopping experience.
-                </p>
-
-            </div>
-
-            <div class="feature-card">
-
-                <h3>
-                    Simple Checkout
-                </h3>
-
-                <p>
-                    A clean and straightforward checkout experience.
                 </p>
 
             </div>
@@ -204,6 +155,7 @@
     </main>
 
 
+    <!-- ================= FOOTER ================= -->
     <footer class="site-footer">
 
         <div class="footer-container">
@@ -233,7 +185,7 @@
                     Home
                 </a>
 
-                <a href="#categories">
+                <a href="index.html#categories">
                     Categories
                 </a>
 
