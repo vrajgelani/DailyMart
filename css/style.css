@@ -1,0 +1,527 @@
+/* =========================================
+   DAILYMart
+   CUSTOMER FRONTEND
+   DAY 1 - PART 1
+========================================= */
+
+
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ROOT */
+
+:root {
+
+    --primary-color: #16a34a;
+
+    --primary-dark: #15803d;
+
+    --text-color: #171717;
+
+    --secondary-text: #737373;
+
+    --background-color: #ffffff;
+
+    --light-background: #f6f8f5;
+
+    --border-color: #e5e7eb;
+
+    --white: #ffffff;
+
+}
+
+
+/* BODY */
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        var(--background-color);
+
+    color:
+        var(--text-color);
+
+    line-height: 1.5;
+
+}
+
+
+/* CONTAINER */
+
+.container {
+
+    width: min(1200px, 92%);
+
+    margin: 0 auto;
+
+}
+
+
+/* HEADER */
+
+.site-header {
+
+    width: 100%;
+
+    background:
+        var(--white);
+
+    border-bottom:
+        1px solid
+        var(--border-color);
+
+}
+
+
+.header-container {
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+/* LOGO */
+
+.logo-link {
+
+    display: flex;
+
+    align-items: center;
+
+    text-decoration: none;
+
+}
+
+
+.logo-image {
+
+    display: block;
+
+    width: 155px;
+
+    height: auto;
+
+    max-height: 52px;
+
+    object-fit: contain;
+
+}
+
+
+/* NAVIGATION */
+
+.main-navigation {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+
+}
+
+
+.main-navigation a {
+
+    color:
+        var(--text-color);
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease;
+
+}
+
+
+.main-navigation a:hover {
+
+    color:
+        var(--primary-color);
+
+}
+
+
+/* HEADER ACTIONS */
+
+.header-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.header-button {
+
+    border:
+        1px solid
+        var(--border-color);
+
+    background:
+        var(--white);
+
+    color:
+        var(--text-color);
+
+    padding:
+        9px 16px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.header-button:hover {
+
+    border-color:
+        var(--primary-color);
+
+    color:
+        var(--primary-color);
+
+}
+
+
+/* WELCOME */
+
+.welcome-section {
+
+    background:
+        var(--light-background);
+
+    padding:
+        90px 0;
+
+}
+
+
+.welcome-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+}
+
+
+.welcome-label {
+
+    color:
+        var(--primary-color);
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    margin-bottom: 12px;
+
+}
+
+
+.welcome-section h1 {
+
+    max-width: 760px;
+
+    font-size:
+        clamp(38px, 6vw, 68px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.welcome-section h1 span {
+
+    color:
+        var(--primary-color);
+
+}
+
+
+.welcome-text {
+
+    max-width: 600px;
+
+    color:
+        var(--secondary-text);
+
+    font-size: 18px;
+
+}
+
+
+/* PRODUCTS */
+
+.products-section {
+
+    padding:
+        80px 0;
+
+}
+
+
+.section-heading {
+
+    margin-bottom: 30px;
+
+}
+
+
+.section-heading h2 {
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.section-heading p {
+
+    color:
+        var(--secondary-text);
+
+}
+
+
+/* EMPTY PRODUCTS */
+
+.empty-products {
+
+    min-height: 260px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        1px dashed
+        var(--border-color);
+
+    border-radius: 14px;
+
+    background:
+        var(--light-background);
+
+    padding: 40px;
+
+}
+
+
+.empty-products h3 {
+
+    font-size: 22px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.empty-products p {
+
+    color:
+        var(--secondary-text);
+
+    max-width: 500px;
+
+}
+
+
+/* FOOTER */
+
+.site-footer {
+
+    margin-top: 40px;
+
+    padding:
+        28px 0;
+
+    border-top:
+        1px solid
+        var(--border-color);
+
+    text-align: center;
+
+    color:
+        var(--secondary-text);
+
+    font-size: 14px;
+
+}
+
+
+/* TABLET */
+
+@media (max-width: 800px) {
+
+    .header-container {
+
+        flex-wrap: wrap;
+
+        padding:
+            14px 0;
+
+    }
+
+
+    .main-navigation {
+
+        order: 3;
+
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 20px;
+
+    }
+
+
+    .welcome-section {
+
+        padding:
+            65px 0;
+
+    }
+
+
+    .welcome-section h1 {
+
+        letter-spacing: -1px;
+
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+    .header-container {
+
+        gap: 15px;
+
+    }
+
+
+    .logo-image {
+
+        width: 125px;
+
+        max-height: 45px;
+
+    }
+
+
+    .header-actions {
+
+        gap: 6px;
+
+    }
+
+
+    .header-button {
+
+        padding:
+            8px 11px;
+
+    }
+
+
+    .main-navigation {
+
+        gap: 14px;
+
+        justify-content:
+            flex-start;
+
+        overflow-x: auto;
+
+    }
+
+
+    .main-navigation a {
+
+        font-size: 14px;
+
+        white-space: nowrap;
+
+    }
+
+
+    .welcome-section {
+
+        padding:
+            55px 0;
+
+    }
+
+
+    .welcome-section h1 {
+
+        font-size: 40px;
+
+    }
+
+
+    .welcome-text {
+
+        font-size: 16px;
+
+    }
+
+
+    .products-section {
+
+        padding:
+            55px 0;
+
+    }
+
+}
