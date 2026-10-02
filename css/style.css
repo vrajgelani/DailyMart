@@ -1259,3 +1259,153 @@ input {
     }
 
 }
+/* =========================
+   PROFILE DASHBOARD
+========================= */
+
+.profile-dashboard {
+    width: min(1100px, 92%);
+    margin: 55px auto 90px;
+}
+
+.profile-dashboard-header h1 {
+    margin-top: 5px;
+    font-size: 36px;
+}
+
+.profile-welcome {
+    margin-top: 7px;
+    color: #6b7280;
+}
+
+.profile-welcome strong {
+    color: #17201a;
+}
+
+.profile-info-card {
+    margin-top: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.profile-info-heading h2 {
+    font-size: 23px;
+    margin-bottom: 20px;
+}
+
+.profile-options-grid {
+    margin-top: 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.profile-option-card {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 185px;
+
+    padding: 25px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.profile-option-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #bbf7d0;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.07);
+}
+
+.profile-option-card h3 {
+    font-size: 20px;
+}
+
+.profile-option-card p {
+    margin-top: 7px;
+
+    color: #68716b;
+
+    flex: 1;
+}
+
+.profile-option-status {
+    display: inline-flex;
+    align-self: flex-start;
+
+    margin-top: 18px;
+
+    padding: 6px 10px;
+
+    border-radius: 6px;
+
+    background: #f0fdf4;
+    color: #15803d;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.profile-logout-section {
+    margin-top: 25px;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profile-logout-section .logout-button {
+    width: auto;
+    min-width: 140px;
+}
+
+
+/* =========================
+   PROFILE MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .profile-options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-info-card {
+        padding: 22px 20px;
+    }
+
+    .profile-option-card {
+        min-height: 160px;
+    }
+
+    .profile-logout-section {
+        justify-content: stretch;
+    }
+
+    .profile-logout-section .logout-button {
+        width: 100%;
+    }
+
+}

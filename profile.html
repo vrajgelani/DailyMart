@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Profile - DailyMart</title>
+    <title>My Profile - DailyMart</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -30,6 +30,7 @@
                     type="search"
                     id="searchInput"
                     placeholder="Search for groceries and daily essentials"
+                    autocomplete="off"
                 >
 
                 <button type="submit">
@@ -44,7 +45,7 @@
                     Home
                 </a>
 
-                <a href="index.html#categories" class="nav-link">
+                <a href="categories.html" class="nav-link">
                     Categories
                 </a>
 
@@ -52,15 +53,27 @@
                     Orders
                 </a>
 
-                <a href="login.html" class="nav-link auth-login-link" id="loginNavLink">
+                <a
+                    href="login.html"
+                    class="nav-link auth-login-link"
+                    id="loginNavLink"
+                >
                     Login
                 </a>
 
-                <a href="register.html" class="nav-link auth-register-link" id="registerNavLink">
+                <a
+                    href="register.html"
+                    class="nav-link auth-register-link"
+                    id="registerNavLink"
+                >
                     Register
                 </a>
 
-                <a href="profile.html" class="nav-link active profile-nav-link" id="profileNavLink">
+                <a
+                    href="profile.html"
+                    class="nav-link active profile-nav-link"
+                    id="profileNavLink"
+                >
                     Profile
                 </a>
 
@@ -78,17 +91,44 @@
     <!-- ================= PROFILE ================= -->
     <main>
 
-        <section class="profile-section">
+        <section class="profile-dashboard">
 
-            <div class="profile-card">
+            <!-- PROFILE HEADER -->
+            <div class="profile-dashboard-header">
 
-                <p class="section-label">
-                    My Account
-                </p>
+                <div>
 
-                <h1>
-                    My Profile
-                </h1>
+                    <p class="section-label">
+                        My Account
+                    </p>
+
+                    <h1>
+                        My Profile
+                    </h1>
+
+                    <p class="profile-welcome">
+                        Welcome back,
+                        <strong id="profileWelcomeName">
+                            User
+                        </strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- USER INFORMATION -->
+            <div class="profile-info-card">
+
+                <div class="profile-info-heading">
+
+                    <h2>
+                        Account Information
+                    </h2>
+
+                </div>
+
 
                 <div class="profile-details">
 
@@ -119,32 +159,160 @@
 
                 </div>
 
+            </div>
 
-                <div class="profile-actions">
 
-                    <a href="#" class="profile-action-button">
+            <!-- ACCOUNT OPTIONS -->
+            <div class="profile-options-grid">
+
+                <a
+                    href="orders.html"
+                    class="profile-option-card"
+                >
+
+                    <h3>
                         My Orders
-                    </a>
+                    </h3>
 
-                    <a href="addresses.html" class="profile-action-button">
-                        Manage Addresses
-                    </a>
+                    <p>
+                        View your completed and current orders.
+                    </p>
 
-                    <a href="payment-methods.html" class="profile-action-button">
-                        Payment Methods
-                    </a>
-
-                    <button
-                        type="button"
-                        id="logoutButton"
-                        class="logout-button"
+                    <span
+                        class="profile-option-status"
+                        id="orderStatus"
                     >
-                        Logout
-                    </button>
+                        No Orders Yet
+                    </span>
 
-                </div>
+                </a>
 
-                <p id="profileMessage" class="form-message"></p>
+
+                <a
+                    href="addresses.html"
+                    class="profile-option-card"
+                >
+
+                    <h3>
+                        Manage Addresses
+                    </h3>
+
+                    <p>
+                        Add or manage your delivery addresses.
+                    </p>
+
+                    <span
+                        class="profile-option-status"
+                        id="addressStatus"
+                    >
+                        No Addresses Saved
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="payment-methods.html"
+                    class="profile-option-card"
+                >
+
+                    <h3>
+                        Payment Methods
+                    </h3>
+
+                    <p>
+                        Manage your saved payment methods.
+                    </p>
+
+                    <span
+                        class="profile-option-status"
+                        id="paymentStatus"
+                    >
+                        No Payment Methods Saved
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="cart.html"
+                    class="profile-option-card"
+                >
+
+                    <h3>
+                        My Cart
+                    </h3>
+
+                    <p>
+                        View the products currently in your cart.
+                    </p>
+
+                    <span
+                        class="profile-option-status"
+                        id="cartStatus"
+                    >
+                        Cart is Empty
+                    </span>
+
+                </a>
+
+                <a
+    href="wishlist.html"
+    class="profile-option-card"
+>
+
+    <h3>
+        My Wishlist
+    </h3>
+
+    <p>
+        View your saved favourite products.
+    </p>
+
+    <span
+        class="profile-option-status"
+        id="wishlistStatus"
+    >
+        Wishlist is Empty
+    </span>
+
+</a>
+
+<a
+    href="recently-viewed.html"
+    class="profile-option-card"
+>
+
+    <h3>
+        Recently Viewed
+    </h3>
+
+    <p>
+        View products you recently viewed.
+    </p>
+
+    <span
+        class="profile-option-status"
+        id="recentlyViewedStatus"
+    >
+        No Recently Viewed Items
+    </span>
+
+</a>
+
+            </div>
+
+
+            <!-- LOGOUT -->
+            <div class="profile-logout-section">
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                    class="logout-button"
+                >
+                    Logout
+                </button>
 
             </div>
 
@@ -208,7 +376,7 @@
                     Help Center
                 </a>
 
-                <a href="#">
+                <a href="orders.html">
                     Orders
                 </a>
 

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Recently Viewed - DailyMart</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="site-header">
+
+        <div class="header-container">
+
+
+            <a
+                href="index.html"
+                class="logo-link"
+            >
+
+                <img
+                    src="assets/images/dailymart-logo.png"
+                    alt="DailyMart Logo"
+                    class="site-logo"
+                >
+
+            </a>
+
+
+            <form
+                class="search-form"
+                id="searchForm"
+            >
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search for groceries and daily essentials"
+                    autocomplete="off"
+                >
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+
+            <nav class="main-nav">
+
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+                    Home
+                </a>
+
+
+                <a
+                    href="categories.html"
+                    class="nav-link"
+                >
+                    Categories
+                </a>
+
+
+                <a
+                    href="orders.html"
+                    class="nav-link"
+                >
+                    Orders
+                </a>
+
+
+                <a
+                    href="login.html"
+                    class="nav-link auth-login-link"
+                    id="loginNavLink"
+                >
+                    Login
+                </a>
+
+
+                <a
+                    href="register.html"
+                    class="nav-link auth-register-link"
+                    id="registerNavLink"
+                >
+                    Register
+                </a>
+
+
+                <a
+                    href="profile.html"
+                    class="nav-link profile-nav-link"
+                    id="profileNavLink"
+                >
+                    Profile
+                </a>
+
+
+            </nav>
+
+
+            <a
+                href="cart.html"
+                class="cart-button"
+            >
+                Cart
+            </a>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= RECENTLY VIEWED ================= -->
+
+    <main>
+
+        <section class="profile-dashboard">
+
+
+            <div class="profile-dashboard-header">
+
+                <div>
+
+                    <p class="section-label">
+                        My Account
+                    </p>
+
+                    <h1>
+                        Recently Viewed
+                    </h1>
+
+                    <p class="profile-welcome">
+                        Products you viewed recently will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="profile-info-card">
+
+                <div class="profile-info-heading">
+
+                    <h2>
+                        Recently Viewed Products
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="recentlyViewedEmptyState"
+                    class="empty-state"
+                >
+
+                    <h2>
+                        No Recently Viewed Items
+                    </h2>
+
+                    <p>
+                        Products you view will appear here.
+                    </p>
+
+
+                    <a
+                        href="index.html"
+                        class="primary-button"
+                    >
+                        Continue Shopping
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="site-footer">
+
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <img
+                    src="assets/images/dailymart-logo.png"
+                    alt="DailyMart Logo"
+                    class="footer-logo"
+                >
+
+                <p>
+                    Everything You Need, Every Day.
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="categories.html">
+                    Categories
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+                <a href="register.html">
+                    Register
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Customer Care
+                </h3>
+
+                <a href="#">
+                    Help Center
+                </a>
+
+                <a href="orders.html">
+                    Orders
+                </a>
+
+                <a href="#">
+                    Returns
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Contact Us
+                </h3>
+
+                <p>
+                    Email: support@dailymart.example
+                </p>
+
+                <p>
+                    Phone: +91 00000 00000
+                </p>
+
+                <p>
+                    Address: DailyMart Store, Gujarat, India
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 DailyMart. All Rights Reserved.
+            </p>
+
+        </div>
+
+
+    </footer>
+
+
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
