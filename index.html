@@ -31,8 +31,6 @@
 
         <div class="container header-container">
 
-            <!-- DailyMart Logo -->
-
             <a
                 href="index.html"
                 class="logo-link"
@@ -48,14 +46,15 @@
             </a>
 
 
-            <!-- Navigation -->
-
             <nav
                 class="main-navigation"
                 aria-label="Main Navigation"
             >
 
-                <a href="index.html">
+                <a
+                    href="index.html"
+                    class="active"
+                >
                     Home
                 </a>
 
@@ -73,8 +72,6 @@
 
             </nav>
 
-
-            <!-- Header Actions -->
 
             <div class="header-actions">
 
@@ -101,52 +98,123 @@
 
 
     <!-- =================================
-         MAIN CONTENT
+         MAIN
     ================================== -->
 
     <main>
 
-        <!-- Welcome Section -->
+        <!-- HERO -->
 
-        <section class="welcome-section">
+        <section class="hero-section">
 
-            <div class="container welcome-content">
+            <div class="container hero-container">
 
-                <p class="welcome-label">
-                    Welcome to DailyMart
-                </p>
+                <div class="hero-content">
 
-
-                <h1>
-
-                    Everything You Need,
-
-                    <span>
-                        Every Day.
-                    </span>
-
-                </h1>
+                    <p class="hero-label">
+                        Welcome to DailyMart
+                    </p>
 
 
-                <p class="welcome-text">
+                    <h1>
 
-                    Your everyday grocery and essentials,
-                    all in one place.
+                        Everything You Need,
 
-                </p>
+                        <span>
+                            Every Day.
+                        </span>
+
+                    </h1>
+
+
+                    <p class="hero-description">
+
+                        Your everyday grocery and essentials,
+                        all in one place.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="#products"
+                            class="primary-button"
+                        >
+                            Shop Now
+                        </a>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </section>
 
 
-        <!-- Products Section -->
+        <!-- =================================
+             CATEGORIES
+        ================================== -->
 
-        <section class="products-section">
+        <section
+            class="categories-section"
+            id="categories"
+        >
 
             <div class="container">
 
                 <div class="section-heading">
+
+                    <p class="section-label">
+                        Shop by Category
+                    </p>
+
+                    <h2>
+                        Categories
+                    </h2>
+
+                    <p>
+                        Categories will appear here
+                        when they are available.
+                    </p>
+
+                </div>
+
+
+                <div class="empty-section">
+
+                    <h3>
+                        No Categories Available
+                    </h3>
+
+                    <p>
+                        Categories will be added later.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             PRODUCTS
+        ================================== -->
+
+        <section
+            class="products-section"
+            id="products"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <p class="section-label">
+                        Fresh &amp; Essential
+                    </p>
 
                     <h2>
                         Products
@@ -159,21 +227,87 @@
                 </div>
 
 
-                <!-- Empty Product State -->
-
-                <div class="empty-products">
+                <div class="empty-section">
 
                     <h3>
                         No Items Available
                     </h3>
 
-
                     <p>
-
                         Products will appear here
                         when they are added to DailyMart.
-
                     </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             WHY DAILYMART
+        ================================== -->
+
+        <section class="features-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <p class="section-label">
+                        DailyMart
+                    </p>
+
+                    <h2>
+                        Shopping Made Simple
+                    </h2>
+
+                </div>
+
+
+                <div class="features-grid">
+
+                    <article class="feature-card">
+
+                        <h3>
+                            Daily Essentials
+                        </h3>
+
+                        <p>
+                            Shop for everyday grocery
+                            and household essentials.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>
+                            Easy Shopping
+                        </h3>
+
+                        <p>
+                            Find products quickly and
+                            manage your cart easily.
+                        </p>
+
+                    </article>
+
+
+                    <article class="feature-card">
+
+                        <h3>
+                            Simple Checkout
+                        </h3>
+
+                        <p>
+                            A clean and convenient
+                            shopping experience.
+                        </p>
+
+                    </article>
 
                 </div>
 
@@ -192,9 +326,6 @@
 
         <div class="container footer-container">
 
-
-            <!-- Footer Brand -->
-
             <div class="footer-brand">
 
                 <a
@@ -212,16 +343,12 @@
 
 
                 <p>
-
                     Your everyday grocery and
                     essentials store.
-
                 </p>
 
             </div>
 
-
-            <!-- Quick Links -->
 
             <div class="footer-column">
 
@@ -229,21 +356,17 @@
                     Quick Links
                 </h3>
 
-
                 <a href="index.html">
                     Home
                 </a>
 
-
-                <a href="#">
+                <a href="#categories">
                     Categories
                 </a>
-
 
                 <a href="#">
                     Orders
                 </a>
-
 
                 <a href="#">
                     Profile
@@ -252,29 +375,23 @@
             </div>
 
 
-            <!-- Customer Care -->
-
             <div class="footer-column">
 
                 <h3>
                     Customer Care
                 </h3>
 
-
                 <a href="#">
                     Help Center
                 </a>
-
 
                 <a href="#">
                     Delivery Information
                 </a>
 
-
                 <a href="#">
                     Return Policy
                 </a>
-
 
                 <a href="#">
                     Privacy Policy
@@ -283,32 +400,26 @@
             </div>
 
 
-            <!-- Contact -->
-
             <div class="footer-column">
 
                 <h3>
                     Contact Us
                 </h3>
 
-
                 <p>
                     Email:
                     support@dailymart.example
                 </p>
-
 
                 <p>
                     Contact:
                     +91 00000 00000
                 </p>
 
-
                 <p>
                     Address:
                     DailyMart Store
                 </p>
-
 
                 <p>
                     Gujarat, India
@@ -318,8 +429,6 @@
 
         </div>
 
-
-        <!-- Footer Bottom -->
 
         <div class="footer-bottom">
 
