@@ -9,10 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
         let data = [];
 
         try {
+
             data = JSON.parse(
                 localStorage.getItem(key) || "[]"
             );
+
         } catch (error) {
+
             data = [];
         }
 
@@ -54,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             !Number.isFinite(value) ||
             value < 0
         ) {
+
             return "₹0.00";
         }
 
@@ -83,12 +87,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
+
                 const query =
                     searchInput.value.trim();
+
 
                 if (query === "") {
                     return;
                 }
+
 
                 window.location.href =
                     "search.html?q=" +
@@ -115,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 window.location.search
             );
 
+
         const query =
             urlParams.get("q");
 
@@ -139,13 +147,19 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     const loginLink =
-        document.getElementById("loginLink");
+        document.getElementById(
+            "loginLink"
+        );
 
     const registerLink =
-        document.getElementById("registerLink");
+        document.getElementById(
+            "registerLink"
+        );
 
     const profileLink =
-        document.getElementById("profileLink");
+        document.getElementById(
+            "profileLink"
+        );
 
 
     const currentUser =
@@ -155,29 +169,41 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentUser) {
 
         if (loginLink) {
-            loginLink.classList.add("hidden");
+            loginLink.classList.add(
+                "hidden"
+            );
         }
 
         if (registerLink) {
-            registerLink.classList.add("hidden");
+            registerLink.classList.add(
+                "hidden"
+            );
         }
 
         if (profileLink) {
-            profileLink.classList.remove("hidden");
+            profileLink.classList.remove(
+                "hidden"
+            );
         }
 
     } else {
 
         if (loginLink) {
-            loginLink.classList.remove("hidden");
+            loginLink.classList.remove(
+                "hidden"
+            );
         }
 
         if (registerLink) {
-            registerLink.classList.remove("hidden");
+            registerLink.classList.remove(
+                "hidden"
+            );
         }
 
         if (profileLink) {
-            profileLink.classList.add("hidden");
+            profileLink.classList.add(
+                "hidden"
+            );
         }
     }
 
@@ -187,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================================================= */
 
     const protectedPages = [
+
         "orders.html",
         "profile.html",
         "addresses.html",
@@ -194,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "wishlist.html",
         "recently-viewed.html",
         "checkout.html"
+
     ];
 
 
@@ -204,7 +232,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     if (
-        protectedPages.includes(currentPage) &&
+        protectedPages.includes(
+            currentPage
+        ) &&
         !currentUser
     ) {
 
@@ -358,7 +388,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     passwordInput.value;
 
 
-                let registeredUser = null;
+                let registeredUser =
+                    null;
 
 
                 try {
@@ -388,8 +419,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 if (
-                    email !== registeredUser.email ||
-                    password !== registeredUser.password
+                    email !==
+                        registeredUser.email ||
+                    password !==
+                        registeredUser.password
                 ) {
 
                     alert(
@@ -412,7 +445,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 localStorage.setItem(
                     "dailymartUser",
-                    JSON.stringify(sessionUser)
+                    JSON.stringify(
+                        sessionUser
+                    )
                 );
 
 
@@ -453,21 +488,24 @@ document.addEventListener("DOMContentLoaded", function () {
         if (profileName) {
 
             profileName.textContent =
-                currentUser.name || "User";
+                currentUser.name ||
+                "User";
         }
 
 
         if (profileEmail) {
 
             profileEmail.textContent =
-                currentUser.email || "";
+                currentUser.email ||
+                "";
         }
 
 
         if (welcomeName) {
 
             welcomeName.textContent =
-                currentUser.name || "User";
+                currentUser.name ||
+                "User";
         }
     }
 
@@ -505,20 +543,28 @@ document.addEventListener("DOMContentLoaded", function () {
             getSavedAddresses();
 
 
-        addressList.innerHTML = "";
+        addressList.innerHTML =
+            "";
 
 
-        if (addresses.length === 0) {
+        if (
+            addresses.length === 0
+        ) {
 
             const emptyMessage =
-                document.createElement("p");
+                document.createElement(
+                    "p"
+                );
+
 
             emptyMessage.textContent =
                 "No addresses saved yet.";
 
+
             addressList.appendChild(
                 emptyMessage
             );
+
 
             return;
         }
@@ -528,28 +574,40 @@ document.addEventListener("DOMContentLoaded", function () {
             function (address) {
 
                 const card =
-                    document.createElement("div");
+                    document.createElement(
+                        "div"
+                    );
+
 
                 card.className =
                     "saved-address-card";
 
 
                 const title =
-                    document.createElement("h3");
+                    document.createElement(
+                        "h3"
+                    );
+
 
                 title.textContent =
                     address.name;
 
 
                 const addressText =
-                    document.createElement("p");
+                    document.createElement(
+                        "p"
+                    );
+
 
                 addressText.textContent =
                     address.address;
 
 
                 const cityText =
-                    document.createElement("p");
+                    document.createElement(
+                        "p"
+                    );
+
 
                 cityText.textContent =
                     address.city +
@@ -558,10 +616,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 const deleteButton =
-                    document.createElement("button");
+                    document.createElement(
+                        "button"
+                    );
+
 
                 deleteButton.type =
                     "button";
+
 
                 deleteButton.textContent =
                     "Delete";
@@ -578,12 +640,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-                card.appendChild(title);
-                card.appendChild(addressText);
-                card.appendChild(cityText);
-                card.appendChild(deleteButton);
+                card.appendChild(
+                    title
+                );
 
-                addressList.appendChild(card);
+
+                card.appendChild(
+                    addressText
+                );
+
+
+                card.appendChild(
+                    cityText
+                );
+
+
+                card.appendChild(
+                    deleteButton
+                );
+
+
+                addressList.appendChild(
+                    card
+                );
             }
         );
     }
@@ -599,7 +678,9 @@ document.addEventListener("DOMContentLoaded", function () {
             addresses.filter(
                 function (address) {
 
-                    return address.id !== id;
+                    return (
+                        address.id !== id
+                    );
                 }
             );
 
@@ -692,7 +773,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 if (
-                    !/^\d{6}$/.test(pincode)
+                    !/^\d{6}$/.test(
+                        pincode
+                    )
                 ) {
 
                     alert(
@@ -786,20 +869,28 @@ document.addEventListener("DOMContentLoaded", function () {
             getSavedPaymentMethods();
 
 
-        paymentList.innerHTML = "";
+        paymentList.innerHTML =
+            "";
 
 
-        if (paymentMethods.length === 0) {
+        if (
+            paymentMethods.length === 0
+        ) {
 
             const emptyMessage =
-                document.createElement("p");
+                document.createElement(
+                    "p"
+                );
+
 
             emptyMessage.textContent =
                 "No payment methods saved yet.";
 
+
             paymentList.appendChild(
                 emptyMessage
             );
+
 
             return;
         }
@@ -809,21 +900,29 @@ document.addEventListener("DOMContentLoaded", function () {
             function (method) {
 
                 const card =
-                    document.createElement("div");
+                    document.createElement(
+                        "div"
+                    );
+
 
                 card.className =
                     "saved-payment-card";
 
 
                 const title =
-                    document.createElement("h3");
+                    document.createElement(
+                        "h3"
+                    );
+
 
                 title.textContent =
                     method.type;
 
 
                 const details =
-                    document.createElement("p");
+                    document.createElement(
+                        "p"
+                    );
 
 
                 if (
@@ -843,10 +942,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 const deleteButton =
-                    document.createElement("button");
+                    document.createElement(
+                        "button"
+                    );
+
 
                 deleteButton.type =
                     "button";
+
 
                 deleteButton.textContent =
                     "Delete";
@@ -863,11 +966,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 );
 
 
-                card.appendChild(title);
-                card.appendChild(details);
-                card.appendChild(deleteButton);
+                card.appendChild(
+                    title
+                );
 
-                paymentList.appendChild(card);
+
+                card.appendChild(
+                    details
+                );
+
+
+                card.appendChild(
+                    deleteButton
+                );
+
+
+                paymentList.appendChild(
+                    card
+                );
             }
         );
     }
@@ -883,7 +999,9 @@ document.addEventListener("DOMContentLoaded", function () {
             methods.filter(
                 function (method) {
 
-                    return method.id !== id;
+                    return (
+                        method.id !== id
+                    );
                 }
             );
 
@@ -906,6 +1024,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById(
             "paymentType"
         );
+
 
     const upiField =
         document.getElementById(
@@ -1164,8 +1283,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (orderStatus) {
 
-            orderStatus.textContent =
-                "No Orders Yet";
+            const orders =
+                getLocalStorageArray(
+                    "dailymartOrders"
+                );
+
+
+            if (
+                orders.length === 0
+            ) {
+
+                orderStatus.textContent =
+                    "No Orders Yet";
+
+            } else if (
+                orders.length === 1
+            ) {
+
+                orderStatus.textContent =
+                    "1 Order";
+
+            } else {
+
+                orderStatus.textContent =
+                    orders.length +
+                    " Orders";
+            }
         }
 
 
@@ -1235,7 +1378,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (
-                recentlyViewedItems.length === 0
+                recentlyViewedItems.length ===
+                0
             ) {
 
                 recentlyViewedStatus.textContent =
@@ -2174,7 +2318,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     !selectedAddressExists
                 ) {
 
-                    selectedAddressId = null;
+                    selectedAddressId =
+                        null;
+
 
                     localStorage.removeItem(
                         selectedAddressStorageKey
@@ -2560,27 +2706,571 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function () {
 
-                updatePlaceOrderButton();
+                const cartItems =
+                    getCartItems();
+
+
+                const addresses =
+                    getSavedAddresses();
+
+
+                const paymentMethods =
+                    getSavedPaymentMethods();
+
+
+                const selectedAddressId =
+                    getSelectedAddressId();
+
+
+                const selectedPaymentId =
+                    getSelectedPaymentId();
+
+
+                const selectedAddress =
+                    addresses.find(
+                        function (address) {
+
+                            return (
+                                String(address.id) ===
+                                String(
+                                    selectedAddressId
+                                )
+                            );
+                        }
+                    );
+
+
+                const selectedPayment =
+                    paymentMethods.find(
+                        function (method) {
+
+                            return (
+                                String(method.id) ===
+                                String(
+                                    selectedPaymentId
+                                )
+                            );
+                        }
+                    );
 
 
                 if (
-                    placeOrderButton.disabled
+                    cartItems.length === 0 ||
+                    !selectedAddress ||
+                    !selectedPayment
                 ) {
+
+                    alert(
+                        "Please select cart items, address and payment method."
+                    );
+
                     return;
                 }
 
 
-                /*
-                    Actual order creation will be added
-                    in the next checkout/order part.
-                */
+                let subtotal = 0;
+
+
+                cartItems.forEach(
+                    function (item) {
+
+                        subtotal +=
+                            getItemPrice(item) *
+                            getItemQuantity(item);
+                    }
+                );
+
+
+                const delivery = 0;
+
+                const total =
+                    subtotal + delivery;
+
+
+                const orders =
+                    getLocalStorageArray(
+                        "dailymartOrders"
+                    );
+
+
+                const orderId =
+                    "DM" +
+                    Date.now();
+
+
+                const newOrder = {
+
+                    id: orderId,
+
+                    date:
+                        new Date().toISOString(),
+
+                    status:
+                        "Order Placed",
+
+                    items:
+                        cartItems.map(
+                            function (item) {
+
+                                return {
+                                    ...item
+                                };
+                            }
+                        ),
+
+                    address: {
+                        name:
+                            selectedAddress.name,
+
+                        address:
+                            selectedAddress.address,
+
+                        city:
+                            selectedAddress.city,
+
+                        pincode:
+                            selectedAddress.pincode
+                    },
+
+                    payment: {
+                        type:
+                            selectedPayment.type,
+
+                        upiId:
+                            selectedPayment.upiId ||
+                            ""
+                    },
+
+                    subtotal:
+                        subtotal,
+
+                    delivery:
+                        delivery,
+
+                    total:
+                        total
+                };
+
+
+                orders.unshift(
+                    newOrder
+                );
+
+
+                saveLocalStorageArray(
+                    "dailymartOrders",
+                    orders
+                );
+
+
+                /* Empty cart */
+
+                saveCartItems(
+                    []
+                );
+
+
+                /* Clear checkout selections */
+
+                localStorage.removeItem(
+                    "dailymartSelectedAddress"
+                );
+
+
+                localStorage.removeItem(
+                    "dailymartSelectedPayment"
+                );
+
 
                 alert(
-                    "Order placement will be connected in the next step."
+                    "Order placed successfully!"
+                );
+
+
+                window.location.href =
+                    "orders.html";
+            }
+        );
+    }
+
+
+    /* =========================================================
+       ORDERS PAGE
+    ========================================================= */
+
+    const ordersEmptyState =
+        document.getElementById(
+            "ordersEmptyState"
+        );
+
+
+    const ordersList =
+        document.getElementById(
+            "ordersList"
+        );
+
+
+    function displayOrders() {
+
+        if (
+            !ordersEmptyState &&
+            !ordersList
+        ) {
+            return;
+        }
+
+
+        const orders =
+            getLocalStorageArray(
+                "dailymartOrders"
+            );
+
+
+        if (
+            orders.length === 0
+        ) {
+
+            if (ordersEmptyState) {
+
+                ordersEmptyState.classList.remove(
+                    "hidden"
+                );
+            }
+
+
+            if (ordersList) {
+
+                ordersList.innerHTML =
+                    "";
+            }
+
+
+            return;
+        }
+
+
+        if (ordersEmptyState) {
+
+            ordersEmptyState.classList.add(
+                "hidden"
+            );
+        }
+
+
+        if (!ordersList) {
+            return;
+        }
+
+
+        ordersList.innerHTML =
+            "";
+
+
+        orders.forEach(
+            function (order) {
+
+                const card =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                card.className =
+                    "order-card";
+
+
+                /* Header */
+
+                const header =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                header.className =
+                    "order-header";
+
+
+                const headerInfo =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                const orderTitle =
+                    document.createElement(
+                        "h2"
+                    );
+
+
+                orderTitle.textContent =
+                    "Order #" +
+                    order.id;
+
+
+                const date =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                const orderDate =
+                    new Date(
+                        order.date
+                    );
+
+
+                date.textContent =
+                    "Placed on " +
+                    orderDate.toLocaleString(
+                        "en-IN"
+                    );
+
+
+                date.className =
+                    "order-date";
+
+
+                headerInfo.appendChild(
+                    orderTitle
+                );
+
+
+                headerInfo.appendChild(
+                    date
+                );
+
+
+                const status =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                status.className =
+                    "order-status";
+
+
+                status.textContent =
+                    order.status ||
+                    "Order Placed";
+
+
+                header.appendChild(
+                    headerInfo
+                );
+
+
+                header.appendChild(
+                    status
+                );
+
+
+                card.appendChild(
+                    header
+                );
+
+
+                /* Items */
+
+                const itemsContainer =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                itemsContainer.className =
+                    "order-items";
+
+
+                const items =
+                    Array.isArray(
+                        order.items
+                    )
+                        ? order.items
+                        : [];
+
+
+                items.forEach(
+                    function (item) {
+
+                        const row =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        row.className =
+                            "order-item";
+
+
+                        const itemName =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        itemName.className =
+                            "order-item-name";
+
+
+                        itemName.textContent =
+                            getItemName(
+                                item
+                            );
+
+
+                        const itemDetails =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        itemDetails.className =
+                            "order-item-details";
+
+
+                        itemDetails.textContent =
+                            "Qty: " +
+                            getItemQuantity(
+                                item
+                            );
+
+
+                        const itemPrice =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        itemPrice.className =
+                            "order-item-price";
+
+
+                        itemPrice.textContent =
+                            formatPrice(
+                                getItemPrice(
+                                    item
+                                ) *
+                                getItemQuantity(
+                                    item
+                                )
+                            );
+
+
+                        row.appendChild(
+                            itemName
+                        );
+
+
+                        row.appendChild(
+                            itemDetails
+                        );
+
+
+                        row.appendChild(
+                            itemPrice
+                        );
+
+
+                        itemsContainer.appendChild(
+                            row
+                        );
+                    }
+                );
+
+
+                card.appendChild(
+                    itemsContainer
+                );
+
+
+                /* Details */
+
+                const details =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                details.className =
+                    "order-details";
+
+
+                const addressText =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                addressText.textContent =
+                    "Delivery Address: " +
+                    order.address.name +
+                    ", " +
+                    order.address.address +
+                    ", " +
+                    order.address.city +
+                    " - " +
+                    order.address.pincode;
+
+
+                const paymentText =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                paymentText.textContent =
+                    "Payment: " +
+                    order.payment.type;
+
+
+                const totalText =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                totalText.className =
+                    "order-total";
+
+
+                totalText.textContent =
+                    "Total: " +
+                    formatPrice(
+                        order.total
+                    );
+
+
+                details.appendChild(
+                    addressText
+                );
+
+
+                details.appendChild(
+                    paymentText
+                );
+
+
+                details.appendChild(
+                    totalText
+                );
+
+
+                card.appendChild(
+                    details
+                );
+
+
+                ordersList.appendChild(
+                    card
                 );
             }
         );
     }
+
+
+    displayOrders();
 
 
     /* =========================================================

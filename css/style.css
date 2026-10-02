@@ -1698,3 +1698,155 @@ input {
         padding: 15px;
     }
 }
+
+/* =========================================================
+   DAY 2 - PART 16
+   ORDERS
+========================================================= */
+
+.orders-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.orders-page-header {
+    margin-bottom: 30px;
+}
+
+.orders-page-header h1 {
+    margin-bottom: 8px;
+}
+
+.orders-page-header p {
+    color: #64748b;
+}
+
+.orders-empty-state {
+    text-align: center;
+    padding: 60px 25px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 16px;
+    background: #f8fafc;
+}
+
+.orders-empty-state.hidden {
+    display: none;
+}
+
+.orders-empty-state h2 {
+    margin-bottom: 10px;
+}
+
+.orders-empty-state p {
+    margin-bottom: 22px;
+    color: #64748b;
+}
+
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.order-header h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+}
+
+.order-date {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.order-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #dcfce7;
+    color: #166534;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.order-items {
+    margin-top: 18px;
+}
+
+.order-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 15px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item-name {
+    font-weight: 600;
+}
+
+.order-item-details {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.order-item-price {
+    font-weight: 700;
+}
+
+.order-details {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.order-details p {
+    margin: 7px 0;
+    color: #475569;
+}
+
+.order-total {
+    margin-top: 14px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #111827;
+}
+
+@media (max-width: 700px) {
+
+    .orders-page {
+        padding: 35px 15px;
+    }
+
+    .order-header {
+        flex-direction: column;
+    }
+
+    .order-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+}

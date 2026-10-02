@@ -11,7 +11,7 @@
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- Header -->
     <header class="site-header">
 
         <div class="header-container">
@@ -19,17 +19,19 @@
             <a href="index.html" class="logo-link">
                 <img
                     src="assets/images/dailymart-logo.png"
-                    alt="DailyMart Logo"
+                    alt="DailyMart"
                     class="site-logo"
                 >
             </a>
+
 
             <form class="search-form" id="searchForm">
 
                 <input
                     type="search"
                     id="searchInput"
-                    placeholder="Search for groceries and daily essentials"
+                    placeholder="Search for groceries..."
+                    aria-label="Search for groceries"
                 >
 
                 <button type="submit">
@@ -38,103 +40,104 @@
 
             </form>
 
-            <nav class="main-nav">
 
-                <a href="index.html" class="nav-link">
+            <nav class="main-nav" aria-label="Main Navigation">
+
+                <a href="index.html">
                     Home
                 </a>
 
-                <a href="categories.html" class="nav-link">
+                <a href="categories.html">
                     Categories
                 </a>
 
-                <a href="orders.html" class="nav-link active">
+                <a href="orders.html" class="active">
                     Orders
                 </a>
 
                 <a
                     href="login.html"
-                    class="nav-link auth-login-link"
-                    id="loginNavLink"
+                    id="loginLink"
                 >
                     Login
                 </a>
 
                 <a
                     href="register.html"
-                    class="nav-link auth-register-link"
-                    id="registerNavLink"
+                    id="registerLink"
                 >
                     Register
                 </a>
 
                 <a
                     href="profile.html"
-                    class="nav-link profile-nav-link hidden"
-                    id="profileNavLink"
+                    id="profileLink"
+                    class="hidden"
                 >
                     Profile
                 </a>
 
-            </nav>
+                <a href="cart.html">
+                    Cart
+                </a>
 
-            <a href="cart.html" class="cart-button">
-                Cart
-            </a>
+            </nav>
 
         </div>
 
     </header>
 
 
-    <!-- ================= ORDERS ================= -->
-    <main>
+    <!-- Orders -->
+    <main class="orders-page">
 
-        <section class="orders-section">
+        <div class="orders-page-header">
 
-            <div class="section-heading">
+            <h1>
+                My Orders
+            </h1>
 
-                <p class="section-label">
-                    Shopping History
-                </p>
+            <p>
+                View your DailyMart order history.
+            </p>
 
-                <h1>
-                    My Orders
-                </h1>
-
-                <p class="page-description">
-                    View your DailyMart orders and order details here.
-                </p>
-
-            </div>
+        </div>
 
 
-            <div
-                class="orders-empty-state"
-                id="ordersEmptyState"
+        <!-- Empty State -->
+        <section
+            id="ordersEmptyState"
+            class="orders-empty-state"
+        >
+
+            <h2>
+                No Orders Yet
+            </h2>
+
+            <p>
+                Your completed orders will appear here.
+            </p>
+
+            <a
+                href="index.html"
+                class="primary-button"
             >
-
-                <h2>
-                    No Orders Yet
-                </h2>
-
-                <p>
-                    Your completed orders will appear here after you place
-                    an order.
-                </p>
-
-                <a href="index.html" class="primary-button">
-                    Start Shopping
-                </a>
-
-            </div>
+                Start Shopping
+            </a>
 
         </section>
+
+
+        <!-- Orders List -->
+        <section
+            id="ordersList"
+            class="orders-list"
+        ></section>
 
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- Footer -->
     <footer class="site-footer">
 
         <div class="footer-container">
@@ -143,12 +146,13 @@
 
                 <img
                     src="assets/images/dailymart-logo.png"
-                    alt="DailyMart Logo"
+                    alt="DailyMart"
                     class="footer-logo"
                 >
 
                 <p>
-                    Everything You Need, Every Day.
+                    Fresh groceries and everyday essentials,
+                    delivered to your doorstep.
                 </p>
 
             </div>
@@ -168,12 +172,16 @@
                     Categories
                 </a>
 
-                <a href="login.html">
-                    Login
+                <a href="orders.html">
+                    Orders
                 </a>
 
-                <a href="register.html">
-                    Register
+                <a href="profile.html">
+                    Profile
+                </a>
+
+                <a href="cart.html">
+                    Cart
                 </a>
 
             </div>
@@ -185,27 +193,6 @@
                     Customer Care
                 </h3>
 
-                <a href="#">
-                    Help Center
-                </a>
-
-                <a href="orders.html">
-                    Orders
-                </a>
-
-                <a href="#">
-                    Returns
-                </a>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h3>
-                    Contact Us
-                </h3>
-
                 <p>
                     Email: support@dailymart.example
                 </p>
@@ -214,8 +201,21 @@
                     Phone: +91 00000 00000
                 </p>
 
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Address
+                </h3>
+
                 <p>
-                    Address: DailyMart Store, Gujarat, India
+                    DailyMart Store
+                </p>
+
+                <p>
+                    Gujarat, India
                 </p>
 
             </div>
@@ -226,7 +226,7 @@
         <div class="footer-bottom">
 
             <p>
-                © 2026 DailyMart. All Rights Reserved.
+                © 2026 DailyMart. All rights reserved.
             </p>
 
         </div>
