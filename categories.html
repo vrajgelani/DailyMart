@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Profile - DailyMart</title>
+    <title>Categories - DailyMart</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -44,7 +44,7 @@
                     Home
                 </a>
 
-                <a href="index.html#categories" class="nav-link">
+                <a href="categories.html" class="nav-link active">
                     Categories
                 </a>
 
@@ -52,15 +52,27 @@
                     Orders
                 </a>
 
-                <a href="login.html" class="nav-link auth-login-link" id="loginNavLink">
+                <a
+                    href="login.html"
+                    class="nav-link auth-login-link"
+                    id="loginNavLink"
+                >
                     Login
                 </a>
 
-                <a href="register.html" class="nav-link auth-register-link" id="registerNavLink">
+                <a
+                    href="register.html"
+                    class="nav-link auth-register-link"
+                    id="registerNavLink"
+                >
                     Register
                 </a>
 
-                <a href="profile.html" class="nav-link active profile-nav-link" id="profileNavLink">
+                <a
+                    href="profile.html"
+                    class="nav-link profile-nav-link hidden"
+                    id="profileNavLink"
+                >
                     Profile
                 </a>
 
@@ -75,76 +87,42 @@
     </header>
 
 
-    <!-- ================= PROFILE ================= -->
+    <!-- ================= MAIN ================= -->
     <main>
 
-        <section class="profile-section">
+        <section class="categories-page-section">
 
-            <div class="profile-card">
+            <div class="section-heading">
 
                 <p class="section-label">
-                    My Account
+                    Explore DailyMart
                 </p>
 
                 <h1>
-                    My Profile
+                    All Categories
                 </h1>
 
-                <div class="profile-details">
+                <p class="page-description">
+                    Browse products by category when categories are available.
+                </p>
 
-                    <div class="profile-row">
-
-                        <span>
-                            Name
-                        </span>
-
-                        <strong id="profileName">
-                            User
-                        </strong>
-
-                    </div>
+            </div>
 
 
-                    <div class="profile-row">
+            <div class="categories-empty-state">
 
-                        <span>
-                            Email
-                        </span>
+                <h2>
+                    No Categories Available
+                </h2>
 
-                        <strong id="profileEmail">
-                            user@example.com
-                        </strong>
+                <p>
+                    Categories will appear here when they are added by the
+                    DailyMart administrator.
+                </p>
 
-                    </div>
-
-                </div>
-
-
-                <div class="profile-actions">
-
-                    <a href="#" class="profile-action-button">
-                        My Orders
-                    </a>
-
-                    <a href="#" class="profile-action-button">
-                        Manage Addresses
-                    </a>
-
-                    <a href="#" class="profile-action-button">
-                        Payment Methods
-                    </a>
-
-                    <button
-                        type="button"
-                        id="logoutButton"
-                        class="logout-button"
-                    >
-                        Logout
-                    </button>
-
-                </div>
-
-                <p id="profileMessage" class="form-message"></p>
+                <a href="index.html" class="primary-button">
+                    Back to Home
+                </a>
 
             </div>
 
